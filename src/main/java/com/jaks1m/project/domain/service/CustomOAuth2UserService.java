@@ -44,7 +44,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Optional<User> findUser=userRepository.findByEmail(oAuth2Attribute.getEmail());
         if(findUser.isEmpty()) {
             userRepository.save(createUser(oAuth2Attribute,registrationId));
-        } else if (findUser.get().getWSigned()!=registrationId) {
+        } else if (findUser.get().getHomeGround()!=registrationId) {
             throw new CustomException(ErrorCode.ALREADY_JOIN);
         }
 
@@ -63,7 +63,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .termsOfService(true)
                 .receivePolity(null)
                 .role(Role.USER)
-                .wSigned(registrationId)
+                .homeGround(registrationId)
                 .build();
     }
 }

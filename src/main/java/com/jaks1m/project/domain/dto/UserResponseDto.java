@@ -10,12 +10,15 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
     private String email;
     private String name;
+    private String homeGround;
     private Role role;
 
+
     @Builder
-    public UserResponseDto(String email, String name, Role role) {
+    public UserResponseDto(String email, String name,String homeGround ,Role role) {
         this.email = email;
         this.name = name;
+        this.homeGround=homeGround;
         this.role = role;
     }
 }

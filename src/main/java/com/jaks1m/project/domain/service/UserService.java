@@ -59,6 +59,7 @@ public class UserService{
         return UserResponseDto.builder()
                 .email(user.getEmail())
                 .name(user.getName().getName())
+                .homeGround(user.getHomeGround())
                 .role(user.getRole())
                 .build();
     }
@@ -97,7 +98,7 @@ public class UserService{
                 .receivePolity(request.getReceivePolity())
                 .enabled(true)
                 .role(Role.USER)
-                .wSigned("web")
+                .homeGround("web")
                 .build();
     }
 }

@@ -28,9 +28,10 @@ public class User extends BaseEntity implements UserDetails{
     @Column(length = 10)
     @NotNull
     private Boolean enabled;
+
     @Column(length = 10)
     @NotNull
-    private String wSigned;
+    private String homeGround;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -106,7 +107,7 @@ public class User extends BaseEntity implements UserDetails{
     @Builder
     public User(String email, String password, String name
             , Boolean privacyPolity, Boolean termsOfService, Boolean receivePolity
-            , Boolean enabled ,Role role,String wSigned){
+            , Boolean enabled ,Role role,String homeGround){
         this.email=email;
         this.password=new Password(password);
         this.name=new Name(name);
@@ -115,6 +116,6 @@ public class User extends BaseEntity implements UserDetails{
         this.receivePolity=new ReceivePolity(receivePolity);
         this.enabled=enabled;
         this.role=role;
-        this.wSigned=wSigned;
+        this.homeGround=homeGround;
     }
 }
