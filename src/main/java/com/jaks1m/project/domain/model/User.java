@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -24,16 +25,17 @@ public class User extends BaseEntity implements UserDetails{
     @Column(length = 50)//영문자 50자 이내
     @NotEmpty
     private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role=Role.USER;
     @Column(length = 10)
     @NotNull
     private Boolean enabled;
     @Column(length = 10)
     @NotNull
     private String wSigned;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role=Role.USER;
+
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;
@@ -67,12 +69,17 @@ public class User extends BaseEntity implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> collect=new ArrayList<>();
+        collect.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return role.getKey();
+            }
+        });
+        return collect;
     }
     @Override
-    public String getUsername() {
-        return email;
-    }
+    public String getUsername() {return email;}
 
     @Override
     public String getPassword(){return password.getPassword();}

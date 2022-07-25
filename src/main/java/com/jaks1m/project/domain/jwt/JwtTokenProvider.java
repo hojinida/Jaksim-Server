@@ -1,8 +1,5 @@
 package com.jaks1m.project.domain.jwt;
 
-import com.jaks1m.project.domain.error.ErrorCode;
-import com.jaks1m.project.domain.exception.CustomException;
-import com.jaks1m.project.domain.model.Role;
 import com.jaks1m.project.domain.model.User;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -43,15 +40,15 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public Token createAccessToken(User user) {return createToken(user, accessTokenValidTime,user.getRole());}
+    public Token createAccessToken(User user) {return createToken(user, accessTokenValidTime);}
 
     public Token createRefreshToken(User user) {
-        return createToken(user, refreshTokenValidTime,user.getRole());
+        return createToken(user, refreshTokenValidTime);
     }
 
-    public Token createToken(User user, long tokenValidTime , Role role) {
+    public Token createToken(User user, long tokenValidTime ) {
         Claims claims = Jwts.claims().setSubject(user.getUsername());
-        claims.put("role", role);
+        //claims.put("role", role);
         Date now = new Date();
 
         String token = Jwts.builder()
