@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.dto;
 
-import com.jaks1m.project.domain.jwt.Token;
+import com.jaks1m.project.domain.jwt.RefreshToken;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +12,8 @@ public class UserDto {
     private String refreshToken;
 
     @Builder
-    public UserDto(Token accessToken,Token refreshToken){
-        this.accessToken=accessToken.getValue();
+    public UserDto(String accessToken, RefreshToken refreshToken){
+        this.accessToken=accessToken;
         this.refreshToken=refreshToken.getValue();
     }
 }

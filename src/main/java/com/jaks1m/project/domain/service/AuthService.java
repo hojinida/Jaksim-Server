@@ -6,7 +6,7 @@ import com.jaks1m.project.domain.dto.UserDto;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.jwt.JwtTokenProvider;
-import com.jaks1m.project.domain.jwt.Token;
+import com.jaks1m.project.domain.jwt.RefreshToken;
 import com.jaks1m.project.domain.model.User;
 import com.jaks1m.project.domain.repository.RedisRepository;
 import com.jaks1m.project.domain.repository.UserRepository;
@@ -45,10 +45,8 @@ public class AuthService {
             throw new CustomException(ErrorCode.INCORRECT_PASSWORD);
         }
 
-        Token accessToken = jwtTokenProvider.createAccessToken(user.get());
-        Token refreshToken = jwtTokenProvider.createRefreshToken(user.get());
-
-        jwtTokenProvider.setHeaderAccessToken(response, accessToken.getValue());
+        String accessToken = jwtTokenProvider.createAccessToken(user.get());
+        RefreshToken refreshToken = jwtTokenProvider.createRefreshToken(user.get());
 
         redisRepository.save(refreshToken);
 
@@ -64,7 +62,7 @@ public class AuthService {
             String email=jwtTokenProvider.getUserEmail(token);
 
             // Redis에 저장된 Refresh Token을 찾고 만일 없다면 401 에러를 내려줍니다
-            Optional<Token> refreshToken = redisRepository.findById(email);
+            Optional<RefreshToken> refreshToken = redisRepository.findById(email);
 
             if(refreshToken.isEmpty()){
                 log.info("로그아웃된 유저입니다.");
@@ -80,10 +78,8 @@ public class AuthService {
 
                 if(user.isPresent()) {
                     // Access Token과 Refresh Token을 둘 다 새로 발급하여 Refresh Token은 새로 Redis에 저장
-                    Token newAccessToken = jwtTokenProvider.createAccessToken(user.get());
-                    Token newRefreshToken = jwtTokenProvider.createRefreshToken(user.get());
-
-                    jwtTokenProvider.setHeaderAccessToken(response, newAccessToken.getValue());
+                    String newAccessToken = jwtTokenProvider.createAccessToken(user.get());
+                    RefreshToken newRefreshToken = jwtTokenProvider.createRefreshToken(user.get());
 
                     redisRepository.save(newRefreshToken);
 

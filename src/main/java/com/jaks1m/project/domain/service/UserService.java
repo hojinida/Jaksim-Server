@@ -8,7 +8,7 @@ import com.jaks1m.project.domain.dto.UserResponseDto;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.jwt.JwtTokenProvider;
-import com.jaks1m.project.domain.jwt.Token;
+import com.jaks1m.project.domain.jwt.RefreshToken;
 import com.jaks1m.project.domain.model.Role;
 import com.jaks1m.project.domain.model.User;
 import com.jaks1m.project.domain.repository.RedisRepository;
@@ -40,10 +40,9 @@ public class UserService{
         validateDuplicateUser(request.getEmail());//중복 회원 검증
         User user = createUser(request);//회원 생성
 
-        Token accessToken = jwtTokenProvider.createAccessToken(user);
-        Token refreshToken = jwtTokenProvider.createRefreshToken(user);
+        String accessToken = jwtTokenProvider.createAccessToken(user);
+        RefreshToken refreshToken = jwtTokenProvider.createRefreshToken(user);
 
-        jwtTokenProvider.setHeaderAccessToken(response, accessToken.getValue());
         redisRepository.save(refreshToken);
 
         userRepository.save(user);

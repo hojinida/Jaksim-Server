@@ -1,22 +1,19 @@
 package com.jaks1m.project.domain.handler;
 
 import com.jaks1m.project.domain.dto.SocialUserDto;
-import com.jaks1m.project.domain.dto.UserDto;
 import com.jaks1m.project.domain.jwt.JwtTokenProvider;
-import com.jaks1m.project.domain.jwt.Token;
+import com.jaks1m.project.domain.jwt.RefreshToken;
 import com.jaks1m.project.domain.mapper.UserRequestMapper;
 import com.jaks1m.project.domain.model.User;
 import com.jaks1m.project.domain.repository.RedisRepository;
 import com.jaks1m.project.domain.repository.UserRepository;
-import com.jaks1m.project.domain.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,24 +38,20 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         Optional<User> user = userRepository.findByEmail(socialUserDto.getEmail());
         if(user.isPresent()) {
-            Token accessToken = jwtTokenProvider.createAccessToken(user.get());
-            Token refreshToken=jwtTokenProvider.createRefreshToken(user.get());
+            String accessToken = jwtTokenProvider.createAccessToken(user.get());
+            RefreshToken refreshToken=jwtTokenProvider.createRefreshToken(user.get());
 
             redisRepository.save(refreshToken);
 
-            makeRedirectUrl(UserDto.builder()
-                    .accessToken(accessToken)
-                    .refreshToken(refreshToken)
-                    .build());
+            String uri=makeRedirectUrl(accessToken,refreshToken);
+            response.sendRedirect(uri);
         }
     }
 
-    private ResponseEntity<BaseResponse> makeRedirectUrl (UserDto userDto){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.builder()
-                        .status(200)
-                        .body(userDto)
-                        .build());
+    private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
+        return UriComponentsBuilder.fromUriString("http//:localhost:8080")
+                .queryParam("accessToken",accessToken)
+                .queryParam("refreshToken",refreshToken.getValue())
+                .build().toUriString();
     }
 }

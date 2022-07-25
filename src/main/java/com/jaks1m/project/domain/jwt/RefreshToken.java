@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.index.Indexed;
 @RedisHash("auth")
 @NoArgsConstructor
 @Getter @Setter
-public class Token {
+public class RefreshToken {
     @Id
     @Indexed
     private String key;
@@ -21,7 +21,7 @@ public class Token {
     private Long expiredTime;
 
     @Builder
-    public Token(String key, String value, Long expiredTime) {
+    public RefreshToken(String key, String value, Long expiredTime) {
         this.key = key;
         this.value = value;
         this.expiredTime = expiredTime;

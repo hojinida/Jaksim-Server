@@ -40,28 +40,33 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public Token createAccessToken(User user) {return createToken(user, accessTokenValidTime);}
+    public String createAccessToken(User user) {
+        Claims claims = Jwts.claims().setSubject(user.getUsername());
+        Date now = new Date();
 
-    public Token createRefreshToken(User user) {
-        return createToken(user, refreshTokenValidTime);
+        return Jwts.builder()
+                .setClaims(claims) // 정보
+                .setIssuedAt(now) // 토큰 발행 시간
+                .setExpiration(new Date(now.getTime() + accessTokenValidTime)) // 토큰 만료 시간
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
 
-    public Token createToken(User user, long tokenValidTime ) {
+    public RefreshToken createRefreshToken(User user) {
         Claims claims = Jwts.claims().setSubject(user.getUsername());
-        //claims.put("role", role);
         Date now = new Date();
 
         String token = Jwts.builder()
                 .setClaims(claims) // 정보
                 .setIssuedAt(now) // 토큰 발행 시간
-                .setExpiration(new Date(now.getTime() + tokenValidTime)) // 토큰 만료 시간
+                .setExpiration(new Date(now.getTime() +refreshTokenValidTime)) // 토큰 만료 시간
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
-        return Token.builder()
+        return RefreshToken.builder()
                 .key(user.getUsername())
                 .value(token)
-                .expiredTime(tokenValidTime)
+                .expiredTime(refreshTokenValidTime)
                 .build();
     }
 
@@ -100,8 +105,5 @@ public class JwtTokenProvider {
             log.error("JWT token is invalid");
             return false;
         }
-    }
-    public void setHeaderAccessToken(HttpServletResponse response, String accessToken) {
-        response.setHeader(jwtHeader, accessToken);
     }
 }
