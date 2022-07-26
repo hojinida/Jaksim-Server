@@ -1,4 +1,4 @@
-package com.jaks1m.project.domain.auth;
+package com.jaks1m.project.domain.oauth;
 
 import com.jaks1m.project.domain.dto.LoginUserRequestDto;
 import com.jaks1m.project.domain.dto.UserDto;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-public class AuthController {
+public class OAuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
@@ -44,4 +44,5 @@ public class AuthController {
                         .body(userDto)
                         .build());
     }
+
 }

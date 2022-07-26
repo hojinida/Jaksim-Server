@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -23,8 +22,8 @@ public class UserController {
     private final UserService userService;
     @PostMapping()
     @ApiOperation(value = "사용자 회원가입")
-    public ResponseEntity<BaseResponse<UserDto>> join(@RequestBody @Validated JoinUserRequestDto request, HttpServletResponse response) {
-        UserDto userDto = userService.join(request, response);
+    public ResponseEntity<BaseResponse<UserDto>> join(@RequestBody @Validated JoinUserRequestDto request) {
+        UserDto userDto = userService.join(request);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(BaseResponse.<UserDto>builder()

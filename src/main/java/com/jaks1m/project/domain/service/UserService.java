@@ -36,9 +36,10 @@ public class UserService{
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final RedisRepository redisRepository;
+
     //회원 가입
     @Transactional
-    public UserDto join(JoinUserRequestDto request, HttpServletResponse response){
+    public UserDto join(JoinUserRequestDto request){
         validateDuplicateUser(request.getEmail());//중복 회원 검증
         User user = createUser(request);//회원 생성
 
