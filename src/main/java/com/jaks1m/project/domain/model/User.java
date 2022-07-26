@@ -3,6 +3,7 @@ package com.jaks1m.project.domain.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,8 +16,8 @@ import java.util.Collection;
 
 @Entity @Getter
 @RequiredArgsConstructor
-@SequenceGenerator(name = "USER_SEQ_GENERATOR",
-                    sequenceName = "USER_SEQ")
+@SequenceGenerator(name = "USER_SEQ_GENERATOR", sequenceName = "USER_SEQ")
+@Where(clause = "status='ACTIVE'")
 public class User extends BaseEntity implements UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_SEQ_GENERATOR")
     @Column(name = "USER_ID")
@@ -25,9 +26,6 @@ public class User extends BaseEntity implements UserDetails{
     @Column(length = 50)//영문자 50자 이내
     @NotEmpty
     private String email;
-    @Column(length = 10)
-    @NotNull
-    private Boolean enabled;
 
     @Column(length = 10)
     @NotNull
@@ -36,7 +34,6 @@ public class User extends BaseEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
-
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;
@@ -66,6 +63,16 @@ public class User extends BaseEntity implements UserDetails{
 
     public void updateName(String name){
         this.name.updateName(name);
+    }
+
+    @Override
+    public void updateStatus(Status status){
+        super.updateStatus(status);
+        password.updateStatus(status);
+        name.updateStatus(status);
+        privacyPolity.updateStatus(status);
+        termsOfService.updateStatus(status);
+        receivePolity.updateStatus(status);
     }
 
     @Override
@@ -105,16 +112,14 @@ public class User extends BaseEntity implements UserDetails{
         return true;
     }
     @Builder
-    public User(String email, String password, String name
-            , Boolean privacyPolity, Boolean termsOfService, Boolean receivePolity
-            , Boolean enabled ,Role role,String homeGround){
+    public User(String email, String password, String name, Boolean privacyPolity
+            , Boolean termsOfService, Boolean receivePolity,Role role,String homeGround){
         this.email=email;
         this.password=new Password(password);
         this.name=new Name(name);
         this.privacyPolity=new PrivacyPolity(privacyPolity);
         this.termsOfService=new TermsOfService(termsOfService);
         this.receivePolity=new ReceivePolity(receivePolity);
-        this.enabled=enabled;
         this.role=role;
         this.homeGround=homeGround;
     }

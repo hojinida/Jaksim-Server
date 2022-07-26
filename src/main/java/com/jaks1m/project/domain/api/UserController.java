@@ -59,4 +59,14 @@ public class UserController {
         return "ok";
     }
 
+    @PatchMapping("/me/quit")
+    @ApiOperation(value = "사용자 회원탈퇴")
+    @ResponseBody
+    public String quit(HttpServletRequest request){
+        userService.quit(request);
+        return "ok";
+    }
+
+
+
 }

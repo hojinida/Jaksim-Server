@@ -12,16 +12,8 @@ import java.io.IOException;
 @Slf4j
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
-    public void commence(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException authException
-    ) throws IOException, ServletException {
-        authException.printStackTrace();
-        log.info("Responding with unauthorized error. Message := {}", authException.getMessage());
-        response.sendError(
-                HttpServletResponse.SC_UNAUTHORIZED,
-                authException.getLocalizedMessage()
-        );
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        log.error("가입되지 않은 사용자 접근");
+        response.sendRedirect("/signin");
     }
 }

@@ -1,13 +1,10 @@
 package com.jaks1m.project.domain.auth;
 
-import com.jaks1m.project.domain.dto.JoinUserRequestDto;
 import com.jaks1m.project.domain.dto.LoginUserRequestDto;
 import com.jaks1m.project.domain.dto.UserDto;
 import com.jaks1m.project.domain.response.BaseResponse;
 import com.jaks1m.project.domain.service.AuthService;
-import com.jaks1m.project.domain.service.UserService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

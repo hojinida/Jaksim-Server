@@ -2,14 +2,15 @@ package com.jaks1m.project.domain.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(name = "RECEIVE_POLITY_SEQ_GENERATOR",
-        sequenceName = "RECEIVE_POLITY_SEQ")
+@SequenceGenerator(name = "RECEIVE_POLITY_SEQ_GENERATOR", sequenceName = "RECEIVE_POLITY_SEQ")
+@Where(clause = "status='ACTIVE'")
 public class ReceivePolity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "RECEIVE_POLITY_SEQ_GENERATOR")
     private Long id;

@@ -56,7 +56,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private User createUser(OAuth2Attribute oAuth2Attribute,String registrationId){
         return User.builder()
-                .enabled(true)
                 .email(oAuth2Attribute.getEmail())
                 .name(oAuth2Attribute.getName())
                 .password(oAuth2Attribute.getAttributeKey())

@@ -10,12 +10,12 @@ import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.jwt.JwtTokenProvider;
 import com.jaks1m.project.domain.jwt.RefreshToken;
 import com.jaks1m.project.domain.model.Role;
+import com.jaks1m.project.domain.model.Status;
 import com.jaks1m.project.domain.model.User;
 import com.jaks1m.project.domain.repository.RedisRepository;
 import com.jaks1m.project.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,7 +95,19 @@ public class UserService{
             throw new CustomException(ErrorCode.JWT_UNAUTHORIZED);
         }
     }
+    @Transactional
+    public void quit(HttpServletRequest request){
+        String accessToken=jwtTokenProvider.resolveToken(request);
+        if(StringUtils.hasText(accessToken)&&jwtTokenProvider.validateToken(accessToken)) {
+            User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                    .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+            user.updateStatus(Status.DELETE);
+            redisRepository.deleteById(user.getEmail());
+            addBlacklist(accessToken);
+        }
+    }
     //엑세스 토큰 블랙리스트 추가
+    @Transactional
     public void addBlacklist(String accessToken){
         Date date=new Date();
         redisRepository.save(RefreshToken.builder()
@@ -120,7 +132,6 @@ public class UserService{
                 .privacyPolity(request.getPrivacyPolity())
                 .termsOfService(request.getTermsOfService())
                 .receivePolity(request.getReceivePolity())
-                .enabled(true)
                 .role(Role.USER)
                 .homeGround("web")
                 .build();

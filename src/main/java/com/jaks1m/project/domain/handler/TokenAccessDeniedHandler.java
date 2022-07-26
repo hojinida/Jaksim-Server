@@ -1,7 +1,9 @@
 package com.jaks1m.project.domain.handler;
 
+import com.jaks1m.project.domain.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -14,10 +16,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class TokenAccessDeniedHandler implements AccessDeniedHandler {
-    private final HandlerExceptionResolver handlerExceptionResolver;
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, accessDeniedException.getMessage());
-        handlerExceptionResolver.resolveException(request,response,null,accessDeniedException);
+        response.sendError(HttpServletResponse.SC_FORBIDDEN);
     }
 }
