@@ -1,6 +1,9 @@
 package com.jaks1m.project.domain.jwt;
 
+import com.jaks1m.project.domain.error.ErrorCode;
+import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.model.User;
+import com.jaks1m.project.domain.repository.RedisRepository;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +17,10 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.Date;
-
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -34,6 +36,8 @@ public class JwtTokenProvider {
     private final long accessTokenValidTime = Duration.ofMinutes(30).toMillis(); // 만료시간 30분
     private final long refreshTokenValidTime = Duration.ofDays(14).toMillis(); // 만료시간 2주
     private final UserDetailsService userDetailsService;
+
+    private final RedisRepository redisRepository;
 
     @PostConstruct
     protected void init() {
@@ -90,6 +94,10 @@ public class JwtTokenProvider {
         return null;
     }
 
+    public Date getExpiration(String accessToken){
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(accessToken).getBody().getExpiration();
+    }
+
     // 토큰의 유효 및 만료 확인
     public boolean validateToken(String token) {
         try {
@@ -104,6 +112,12 @@ public class JwtTokenProvider {
         } catch(IllegalArgumentException e) {
             log.error("JWT token is invalid");
             return false;
+        } catch (ExpiredJwtException e){
+            log.error("JWT token is expired");
+            return false;
         }
+    }
+    public Boolean validateBlacklist(String accessToken){
+        return redisRepository.findById(accessToken).isEmpty();
     }
 }

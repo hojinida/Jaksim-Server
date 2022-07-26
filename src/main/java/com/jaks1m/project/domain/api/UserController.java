@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -31,6 +33,13 @@ public class UserController {
                         .build());
     }
 
+    @DeleteMapping("/me/logout")
+    @ApiOperation(value = "사용자 로그아웃")
+    @ResponseBody
+    public String logout(HttpServletRequest request){
+        userService.logoutUser(request);
+        return "ok";
+    }
     @GetMapping("/me")
     @ApiOperation(value = "사용자 정보조회")
     public ResponseEntity<BaseResponse<UserResponseDto>> findUser(){

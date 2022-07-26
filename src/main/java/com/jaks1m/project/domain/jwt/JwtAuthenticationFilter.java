@@ -1,8 +1,5 @@
 package com.jaks1m.project.domain.jwt;
 
-import com.jaks1m.project.domain.error.ErrorCode;
-import com.jaks1m.project.domain.exception.CustomException;
-import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -23,21 +20,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        try {
-            String accessToken = tokenProvider.resolveToken(request);
-            if (StringUtils.hasText(accessToken)&&tokenProvider.validateToken(accessToken)) {
-                this.setAuthentication(accessToken);
-            }
-            filterChain.doFilter(request, response);
-        } catch (ExpiredJwtException e) {
-            log.info("엑세스 토큰 만료.");
-            throw new CustomException(ErrorCode.JWT_ACCESS_TOKEN_EXPIRED);
+        final String accessToken = tokenProvider.resolveToken(request);
+        if (StringUtils.hasText(accessToken)&&tokenProvider.validateToken(accessToken)&&tokenProvider.validateBlacklist(accessToken)) {
+            Authentication authentication = tokenProvider.getAuthentication(accessToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+            filterChain.doFilter(request, response);
     }
 
-    // SecurityContext에 Authentication 저장
-    private void setAuthentication(String token) {
-        Authentication authentication = tokenProvider.getAuthentication(token);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
 }
