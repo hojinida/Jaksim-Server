@@ -1,5 +1,6 @@
 package com.jaks1m.project.domain.api.entity.user;
 
+import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.oauth.model.Role;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity @Getter
@@ -23,15 +25,8 @@ public class User extends BaseEntity implements UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_SEQ_GENERATOR")
     @Column(name = "USER_ID")
     private Long id;
-
-    @Column(length = 50)//영문자 50자 이내
-    @NotEmpty
     private String email;
-
-    @Column(length = 10)
-    @NotNull
     private String homeGround;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
@@ -54,6 +49,9 @@ public class User extends BaseEntity implements UserDetails{
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "RECEIVE_POLITY_ID")
     private ReceivePolity receivePolity;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards=new ArrayList<>();
     public void updatePassword(String password){
         this.password.updatePassword(password);
     }
