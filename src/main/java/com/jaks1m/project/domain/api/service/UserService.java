@@ -76,7 +76,6 @@ public class UserService{
                 .build();
     }
 
-
     @Transactional
     public void patchUser(EditUserDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())

@@ -24,26 +24,18 @@ public class EmailToken {
 
     private LocalDateTime expirationDate;
 
-    private boolean expired;
-
     // 이메일 인증 토큰 생성
     public static EmailToken createEmailToken() {
         return EmailToken.builder()
                 .emailToken(RandomStringUtils.randomAlphanumeric(EMAIL_TOKEN_LENGTH))
                 .expirationDate(LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME_VALUE))
-                .expired(false)
                 .build();
-    }
-    // 토큰 만료
-    public void setTokenToUsed() {
-        this.expired = true;
     }
 
     @Builder
-    public EmailToken(Long id, String emailToken, LocalDateTime expirationDate, boolean expired) {
+    public EmailToken(Long id, String emailToken, LocalDateTime expirationDate) {
         this.id = id;
         this.emailToken = emailToken;
         this.expirationDate = expirationDate;
-        this.expired = expired;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -21,14 +22,14 @@ public class EmailService {
     private final EmailTokenRepository emailTokenRepository;
     private final EmailSenderService emailSenderService;
     @Transactional
-    public Boolean verifyEmail(String token) throws CustomException {
+    public void verifyEmail(String token) throws CustomException {
+        deleteExpiredToken();
         Optional<EmailToken> emailToken = emailTokenRepository
-                .findByEmailTokenAndExpirationDateAfterAndExpired(token, LocalDateTime.now(),false);
+                .findByEmailTokenAndExpirationDateAfter(token, LocalDateTime.now());
 
         // 토큰이 없다면 예외 발생
         emailToken.orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
         emailTokenRepository.delete(emailToken.get());
-        return true;
     }
 
     @Transactional
@@ -43,6 +44,12 @@ public class EmailService {
         mailMessage.setSubject("회원가입 이메일 인증");
         mailMessage.setText("http://localhost:8080/auth/confirm-email?token="+emailToken.getEmailToken());
         emailSenderService.sendEmail(mailMessage);
+    }
+
+    @Transactional
+    public void deleteExpiredToken(){
+        List<EmailToken> emailTokens = emailTokenRepository.findAllByExpirationDateAfter(LocalDateTime.now());
+        emailTokenRepository.deleteAll(emailTokens);
     }
 
 }
