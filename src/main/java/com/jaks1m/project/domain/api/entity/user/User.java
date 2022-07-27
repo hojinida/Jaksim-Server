@@ -54,10 +54,6 @@ public class User extends BaseEntity implements UserDetails{
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "RECEIVE_POLITY_ID")
     private ReceivePolity receivePolity;
-
-    public void updateEmail(String email){
-        this.email=email;
-    }
     public void updatePassword(String password){
         this.password.updatePassword(password);
     }
@@ -65,6 +61,8 @@ public class User extends BaseEntity implements UserDetails{
     public void updateName(String name){
         this.name.updateName(name);
     }
+
+    public void updateReceivePolity(Boolean receivePolity){this.receivePolity.updateTos(receivePolity);}
 
     @Override
     public void updateStatus(Status status){

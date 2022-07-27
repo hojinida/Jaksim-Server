@@ -30,9 +30,9 @@ spring:
           starttls:
             enable: true
             required: true
-          connection-timeout: 600
-          timeout: 600
-          write timeout: 600
+          connection-timeout: 3000
+          timeout: 3000
+          write timeout: 3000
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace

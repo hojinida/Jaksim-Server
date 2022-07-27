@@ -1,8 +1,9 @@
 package com.jaks1m.project.domain.api.service;
 
+
+import com.jaks1m.project.domain.api.dto.edit.EditUserDto;
 import com.jaks1m.project.domain.api.dto.edit.EditUserPasswordDto;
 import com.jaks1m.project.domain.config.security.SecurityUtil;
-import com.jaks1m.project.domain.api.dto.edit.EditUserRequestDto;
 import com.jaks1m.project.domain.api.dto.request.JoinUserRequestDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserResponseDto;
@@ -55,14 +56,13 @@ public class UserService{
                 .build();
     }
     @Transactional
-    public Boolean editPassword(EditUserPasswordDto request){
+    public void editPassword(EditUserPasswordDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         if(!passwordEncoder.matches(request.getBeforePassword(),user.getPassword())){
             throw new CustomException(ErrorCode.NOT_EQUAL_PASSWORD);
         }
         user.updatePassword(passwordEncoder.encode(request.getAfterPassword()));
-        return true;
     }
     public UserResponseDto findUser(){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
@@ -78,18 +78,13 @@ public class UserService{
 
 
     @Transactional
-    public void patchUser(EditUserRequestDto request){
+    public void patchUser(EditUserDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        if(request.getEmail()!=null && validateDuplicateUser(request.getEmail())){
-            user.updateEmail(request.getEmail());
-        }
-        if(request.getPassword()!=null){
-            user.updatePassword(passwordEncoder.encode(request.getPassword()));
-        }
         if(request.getName()!=null){
             user.updateName(request.getName());
         }
+        user.updateReceivePolity(request.getReceivePolity());
     }
     @Transactional
     public void logoutUser(HttpServletRequest request){

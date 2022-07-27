@@ -29,13 +29,4 @@ public class JoinUserRequestDto {
     private Boolean termsOfService;
 
     private Boolean receivePolity;
-    @Builder
-    public JoinUserRequestDto(String email, String password, String name, Boolean privacyPolity, Boolean termsOfService, Boolean receivePolity) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.privacyPolity = privacyPolity;
-        this.termsOfService = termsOfService;
-        this.receivePolity = receivePolity;
-    }
 }

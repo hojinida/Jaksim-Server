@@ -15,9 +15,4 @@ public class LoginUserRequestDto {
 
     @NotEmpty(message = "비밀번호 입력값이 존재하지 않습니다.")
     private String password;
-    @Builder
-    public LoginUserRequestDto(String email,String password){
-        this.email=email;
-        this.password=password;
-    }
 }

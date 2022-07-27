@@ -1,7 +1,7 @@
 package com.jaks1m.project.domain.api.controller.user;
 
+import com.jaks1m.project.domain.api.dto.edit.EditUserDto;
 import com.jaks1m.project.domain.api.dto.edit.EditUserPasswordDto;
-import com.jaks1m.project.domain.api.dto.edit.EditUserRequestDto;
 import com.jaks1m.project.domain.api.dto.request.JoinUserRequestDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserResponseDto;
@@ -55,8 +55,8 @@ public class UserController {
     @PatchMapping("/me")
     @ApiOperation(value = "사용자 정보수정")
     @ResponseBody
-    public String patch(@RequestBody @Validated EditUserRequestDto userRequestDto){
-        userService.patchUser(userRequestDto);
+    public String patch(@RequestBody @Validated EditUserDto request){
+        userService.patchUser(request);
         return "ok";
     }
 
@@ -67,6 +67,7 @@ public class UserController {
         userService.quit(request);
         return "ok";
     }
+
     @GetMapping("/me/password")
     @ApiOperation(value = "사용자 비밀번호 변경")
     @ResponseBody
