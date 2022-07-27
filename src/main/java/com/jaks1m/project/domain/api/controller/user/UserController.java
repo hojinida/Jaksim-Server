@@ -1,9 +1,10 @@
 package com.jaks1m.project.domain.api.controller.user;
 
-import com.jaks1m.project.domain.api.dto.EditUserRequestDto;
-import com.jaks1m.project.domain.api.dto.JoinUserRequestDto;
-import com.jaks1m.project.domain.api.dto.UserDto;
-import com.jaks1m.project.domain.api.dto.UserResponseDto;
+import com.jaks1m.project.domain.api.dto.edit.EditUserPasswordDto;
+import com.jaks1m.project.domain.api.dto.edit.EditUserRequestDto;
+import com.jaks1m.project.domain.api.dto.request.JoinUserRequestDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserResponseDto;
 import com.jaks1m.project.domain.common.BaseResponse;
 import com.jaks1m.project.domain.api.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,7 @@ public class UserController {
         userService.logoutUser(request);
         return "ok";
     }
+
     @GetMapping("/me")
     @ApiOperation(value = "사용자 정보조회")
     public ResponseEntity<BaseResponse<UserResponseDto>> findUser(){
@@ -65,7 +67,11 @@ public class UserController {
         userService.quit(request);
         return "ok";
     }
-
-
-
+    @GetMapping("/me/password")
+    @ApiOperation(value = "사용자 비밀번호 변경")
+    @ResponseBody
+    public Boolean editPassword(@RequestBody @Validated EditUserPasswordDto request){
+        userService.editPassword(request);
+        return true;
+    }
 }

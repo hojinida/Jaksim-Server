@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.api.controller.auth;
 
-import com.jaks1m.project.domain.api.dto.UserEmailRequestDto;
+import com.jaks1m.project.domain.api.dto.request.UserEmailRequestDto;
 import com.jaks1m.project.domain.oauth.service.EmailService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.oauth.mapper;
 
-import com.jaks1m.project.domain.api.dto.SocialUserDto;
+import com.jaks1m.project.domain.api.dto.reponse.SocialUserDto;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 

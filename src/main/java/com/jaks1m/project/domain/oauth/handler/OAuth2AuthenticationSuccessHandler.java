@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.oauth.handler;
 
-import com.jaks1m.project.domain.api.dto.SocialUserDto;
+import com.jaks1m.project.domain.api.dto.reponse.SocialUserDto;
 import com.jaks1m.project.domain.oauth.model.JwtTokenProvider;
 import com.jaks1m.project.domain.oauth.token.RefreshToken;
 import com.jaks1m.project.domain.oauth.mapper.UserRequestMapper;

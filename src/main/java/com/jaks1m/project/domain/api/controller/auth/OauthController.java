@@ -1,7 +1,7 @@
 package com.jaks1m.project.domain.api.controller.auth;
 
-import com.jaks1m.project.domain.api.dto.LoginUserRequestDto;
-import com.jaks1m.project.domain.api.dto.UserDto;
+import com.jaks1m.project.domain.api.dto.request.LoginUserRequestDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserDto;
 import com.jaks1m.project.domain.common.BaseResponse;
 import com.jaks1m.project.domain.api.service.AuthService;
 import io.swagger.annotations.ApiOperation;

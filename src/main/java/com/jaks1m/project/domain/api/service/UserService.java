@@ -1,10 +1,11 @@
 package com.jaks1m.project.domain.api.service;
 
+import com.jaks1m.project.domain.api.dto.edit.EditUserPasswordDto;
 import com.jaks1m.project.domain.config.security.SecurityUtil;
-import com.jaks1m.project.domain.api.dto.EditUserRequestDto;
-import com.jaks1m.project.domain.api.dto.JoinUserRequestDto;
-import com.jaks1m.project.domain.api.dto.UserDto;
-import com.jaks1m.project.domain.api.dto.UserResponseDto;
+import com.jaks1m.project.domain.api.dto.edit.EditUserRequestDto;
+import com.jaks1m.project.domain.api.dto.request.JoinUserRequestDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserResponseDto;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.oauth.model.JwtTokenProvider;
@@ -54,6 +55,15 @@ public class UserService{
                 .build();
     }
     @Transactional
+    public Boolean editPassword(EditUserPasswordDto request){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        if(!passwordEncoder.matches(request.getBeforePassword(),user.getPassword())){
+            throw new CustomException(ErrorCode.NOT_EQUAL_PASSWORD);
+        }
+        user.updatePassword(passwordEncoder.encode(request.getAfterPassword()));
+        return true;
+    }
     public UserResponseDto findUser(){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
@@ -65,6 +75,8 @@ public class UserService{
                 .role(user.getRole())
                 .build();
     }
+
+
     @Transactional
     public void patchUser(EditUserRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())

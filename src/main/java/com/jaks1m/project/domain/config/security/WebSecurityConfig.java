@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.config.security;
 
-import com.jaks1m.project.domain.handler.*;
 import com.jaks1m.project.domain.oauth.filter.JwtAuthenticationFilter;
 import com.jaks1m.project.domain.oauth.model.JwtTokenProvider;
 import com.jaks1m.project.domain.oauth.handler.OAuth2AuthenticationFailureHandler;

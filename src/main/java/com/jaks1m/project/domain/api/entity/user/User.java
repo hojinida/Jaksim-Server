@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.api.entity.user;
 
-import com.jaks1m.project.domain.model.*;
 import com.jaks1m.project.domain.oauth.model.Role;
 import lombok.Builder;
 import lombok.Getter;

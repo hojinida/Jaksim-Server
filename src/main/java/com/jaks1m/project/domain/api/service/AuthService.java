@@ -1,8 +1,8 @@
 package com.jaks1m.project.domain.api.service;
 
 
-import com.jaks1m.project.domain.api.dto.LoginUserRequestDto;
-import com.jaks1m.project.domain.api.dto.UserDto;
+import com.jaks1m.project.domain.api.dto.request.LoginUserRequestDto;
+import com.jaks1m.project.domain.api.dto.reponse.UserDto;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.oauth.model.JwtTokenProvider;

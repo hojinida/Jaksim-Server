@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @SequenceGenerator(name = "EMAIL_SEQ_GENERATOR", sequenceName = "EMAIL_SEQ")
 public class EmailToken {
     private static final long EMAIL_TOKEN_EXPIRATION_TIME_VALUE = 5L;
-    private static final int EMAIL_TOKEN_LENGTH=6;
+    private static final int EMAIL_TOKEN_LENGTH=12;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "EMAIL_SEQ_GENERATOR")
