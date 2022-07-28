@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class BoardController {
-    @GetMapping("boards")
-    @ApiOperation(value = "자유 게시판")
-    public ResponseEntity<BaseResponse<BoardResponse>> show(){
-
-        return ResponseEntity.status(200)
-                .build();
-    }
+//    private final
+//    @GetMapping("/boards")
+//    @ApiOperation(value = "게시판")
+//    public ResponseEntity<BaseResponse<BoardResponse>> show(){
+//
+//        return ResponseEntity.status(200)
+//                .build();
+//    }
 }

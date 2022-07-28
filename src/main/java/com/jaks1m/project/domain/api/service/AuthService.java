@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Optional;
 
-@Service
-@Transactional
-@RequiredArgsConstructor
 @Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AuthService {
     private final UserRepository userRepository;
     private final RedisRepository redisRepository;

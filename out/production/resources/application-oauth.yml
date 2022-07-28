@@ -5,7 +5,8 @@ spring:
         registration:
           kakao:
             client-id: 431e8670b8618bd10b694d1ec5e1fb6c
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://jaks1m.shop:3306/login/oauth2/code/kakao
+            #http://localhost:8080/login/oauth2/code/kakao
             client-authentication-method: POST
             client-secret: jkYAUF99oipotGKpH27QatwZHaOqHTeB
             authorization-grant-type: authorization_code
@@ -16,7 +17,8 @@ spring:
           naver:
             client-id: HqJRICqZye6EyZWC2O5s
             client-secret: RN2bkL4Kmq
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://jaks1m.shop:3306/login/oauth2/code/naver
+            #http://localhost:8080/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope:
               - name

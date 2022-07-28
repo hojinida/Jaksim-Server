@@ -27,11 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Optional;
 
-
-@Service
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
 @Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

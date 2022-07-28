@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ProjectApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ProjectApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.jaks1m.project.html">com.jaks1m.project</a> &gt; ProjectApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.055s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">contextLoads()</td>
+<td class="success">0.055s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>04:25:04.522 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+04:25:04.529 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+04:25:04.546 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.jaks1m.project.ProjectApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+04:25:04.553 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.jaks1m.project.ProjectApplicationTests], using SpringBootContextLoader
+04:25:04.555 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.jaks1m.project.ProjectApplicationTests]: class path resource [com/jaks1m/project/ProjectApplicationTests-context.xml] does not exist
+04:25:04.555 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.jaks1m.project.ProjectApplicationTests]: class path resource [com/jaks1m/project/ProjectApplicationTestsContext.groovy] does not exist
+04:25:04.555 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.jaks1m.project.ProjectApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+04:25:04.556 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.jaks1m.project.ProjectApplicationTests]: ProjectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+04:25:04.584 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.jaks1m.project.ProjectApplicationTests]
+04:25:04.619 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/hojin/Desktop/Study/Jacksim/Jaksim-Server/build/classes/java/main/com/jaks1m/project/ProjectApplication.class]
+04:25:04.620 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.jaks1m.project.ProjectApplication for test class com.jaks1m.project.ProjectApplicationTests
+04:25:04.682 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.jaks1m.project.ProjectApplicationTests]: using defaults.
+04:25:04.682 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+04:25:04.691 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7048f722, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@c074c0c, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@58a55449, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5949eba8, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6e0ff644, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58dea0a5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2a2bb0eb, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3c291aad, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@2d0566ba, org.springframework.test.context.event.EventPublishingTestExecutionListener@733037, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@7728643a, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@320e400, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5167268, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1cfd1875, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@28c0b664, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2c444798, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1af7f54a]
+04:25:04.693 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4d0402b testClass = ProjectApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2fa7ae9 testClass = ProjectApplicationTests, locations = '{}', classes = '{class com.jaks1m.project.ProjectApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@58fe0499, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@75390459, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@57fd91c9, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@674658f7, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@2fc0cc3, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@3cfdd820], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+04:25:04.707 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.3)
+
+2022-07-29 04:25:04.888  INFO 10812 --- [    Test worker] c.j.project.ProjectApplicationTests      : Starting ProjectApplicationTests using Java 11.0.16 on janghojin-ui-MacBookAir.local with PID 10812 (started by hojin in /Users/hojin/Desktop/Study/Jacksim/Jaksim-Server)
+2022-07-29 04:25:04.888  INFO 10812 --- [    Test worker] c.j.project.ProjectApplicationTests      : The following profiles are active: oauth
+2022-07-29 04:25:05.476  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-07-29 04:25:05.477  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-29 04:25:05.567  INFO 10812 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.jaks1m.project.domain.api.repository.RedisRepository. If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: javax.persistence.Entity, javax.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository.
+2022-07-29 04:25:05.581  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 99 ms. Found 2 JPA repository interfaces.
+2022-07-29 04:25:05.587  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-07-29 04:25:05.588  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-07-29 04:25:05.597  INFO 10812 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.jaks1m.project.domain.api.repository.EmailTokenRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-07-29 04:25:05.599  INFO 10812 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.jaks1m.project.domain.api.repository.UserRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-07-29 04:25:05.601  INFO 10812 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 1 Redis repository interfaces.
+2022-07-29 04:25:05.987  INFO 10812 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-29 04:25:06.023  INFO 10812 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2022-07-29 04:25:06.094  INFO 10812 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-29 04:25:06.108 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@e60c5a
+2022-07-29 04:25:06.108 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@e60c5a
+2022-07-29 04:25:06.108 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -&gt; org.hibernate.type.BooleanType@e60c5a
+2022-07-29 04:25:06.108 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -&gt; org.hibernate.type.NumericBooleanType@1425e531
+2022-07-29 04:25:06.108 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -&gt; org.hibernate.type.TrueFalseType@5d22ed6c
+2022-07-29 04:25:06.109 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -&gt; org.hibernate.type.YesNoType@5a9051fd
+2022-07-29 04:25:06.113 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@23e86863
+2022-07-29 04:25:06.113 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@23e86863
+2022-07-29 04:25:06.114 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -&gt; org.hibernate.type.ByteType@23e86863
+2022-07-29 04:25:06.114 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -&gt; org.hibernate.type.CharacterType@5831989d
+2022-07-29 04:25:06.115 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -&gt; org.hibernate.type.CharacterType@5831989d
+2022-07-29 04:25:06.115 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -&gt; org.hibernate.type.CharacterType@5831989d
+2022-07-29 04:25:06.115 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@5100c143
+2022-07-29 04:25:06.115 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@5100c143
+2022-07-29 04:25:06.115 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -&gt; org.hibernate.type.ShortType@5100c143
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -&gt; org.hibernate.type.IntegerType@5ba63110
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -&gt; org.hibernate.type.IntegerType@5ba63110
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -&gt; org.hibernate.type.IntegerType@5ba63110
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@4aa517c3
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@4aa517c3
+2022-07-29 04:25:06.116 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -&gt; org.hibernate.type.LongType@4aa517c3
+2022-07-29 04:25:06.117 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@5f5923ef
+2022-07-29 04:25:06.117 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@5f5923ef
+2022-07-29 04:25:06.117 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -&gt; org.hibernate.type.FloatType@5f5923ef
+2022-07-29 04:25:06.118 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@6aadb092
+2022-07-29 04:25:06.118 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@6aadb092
+2022-07-29 04:25:06.118 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -&gt; org.hibernate.type.DoubleType@6aadb092
+2022-07-29 04:25:06.118 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -&gt; org.hibernate.type.BigDecimalType@2006fdaa
+2022-07-29 04:25:06.118 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -&gt; org.hibernate.type.BigDecimalType@2006fdaa
+2022-07-29 04:25:06.119 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -&gt; org.hibernate.type.BigIntegerType@5ea9373e
+2022-07-29 04:25:06.119 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -&gt; org.hibernate.type.BigIntegerType@5ea9373e
+2022-07-29 04:25:06.119 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -&gt; org.hibernate.type.StringType@aa23f11
+2022-07-29 04:25:06.119 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -&gt; org.hibernate.type.StringType@aa23f11
+2022-07-29 04:25:06.120 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -&gt; org.hibernate.type.StringNVarcharType@6614ecca
+2022-07-29 04:25:06.120 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ncharacter -&gt; org.hibernate.type.CharacterNCharType@6651efa4
+2022-07-29 04:25:06.120 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -&gt; org.hibernate.type.UrlType@40b70f31
+2022-07-29 04:25:06.121 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -&gt; org.hibernate.type.UrlType@40b70f31
+2022-07-29 04:25:06.121 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -&gt; org.hibernate.type.DurationType@437c1a87
+2022-07-29 04:25:06.121 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -&gt; org.hibernate.type.DurationType@437c1a87
+2022-07-29 04:25:06.122 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Instant -&gt; org.hibernate.type.InstantType@4e6280de
+2022-07-29 04:25:06.122 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -&gt; org.hibernate.type.InstantType@4e6280de
+2022-07-29 04:25:06.123 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@1edac3b4
+2022-07-29 04:25:06.123 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@1edac3b4
+2022-07-29 04:25:06.123 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -&gt; org.hibernate.type.LocalDateType@3d9c8c3c
+2022-07-29 04:25:06.123 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -&gt; org.hibernate.type.LocalDateType@3d9c8c3c
+2022-07-29 04:25:06.124 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -&gt; org.hibernate.type.LocalTimeType@24842b8e
+2022-07-29 04:25:06.124 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -&gt; org.hibernate.type.LocalTimeType@24842b8e
+2022-07-29 04:25:06.124 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@59b853aa
+2022-07-29 04:25:06.124 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@59b853aa
+2022-07-29 04:25:06.125 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -&gt; org.hibernate.type.OffsetTimeType@56d5460f
+2022-07-29 04:25:06.125 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -&gt; org.hibernate.type.OffsetTimeType@56d5460f
+2022-07-29 04:25:06.125 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@30b9728f
+2022-07-29 04:25:06.125 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@30b9728f
+2022-07-29 04:25:06.126 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -&gt; org.hibernate.type.DateType@6c49ea0c
+2022-07-29 04:25:06.126 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -&gt; org.hibernate.type.DateType@6c49ea0c
+2022-07-29 04:25:06.126 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -&gt; org.hibernate.type.TimeType@33399052
+2022-07-29 04:25:06.127 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -&gt; org.hibernate.type.TimeType@33399052
+2022-07-29 04:25:06.127 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -&gt; org.hibernate.type.TimestampType@57f1a1de
+2022-07-29 04:25:06.127 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -&gt; org.hibernate.type.TimestampType@57f1a1de
+2022-07-29 04:25:06.127 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -&gt; org.hibernate.type.TimestampType@57f1a1de
+2022-07-29 04:25:06.129 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration dbtimestamp -&gt; org.hibernate.type.DbTimestampType@3b8d2abe
+2022-07-29 04:25:06.129 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -&gt; org.hibernate.type.CalendarType@7d80e1b3
+2022-07-29 04:25:06.129 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -&gt; org.hibernate.type.CalendarType@7d80e1b3
+2022-07-29 04:25:06.129 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -&gt; org.hibernate.type.CalendarType@7d80e1b3
+2022-07-29 04:25:06.130 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -&gt; org.hibernate.type.CalendarDateType@61be6051
+2022-07-29 04:25:06.130 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -&gt; org.hibernate.type.CalendarTimeType@37e64e37
+2022-07-29 04:25:06.131 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -&gt; org.hibernate.type.LocaleType@2919aff3
+2022-07-29 04:25:06.131 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -&gt; org.hibernate.type.LocaleType@2919aff3
+2022-07-29 04:25:06.131 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -&gt; org.hibernate.type.CurrencyType@740ad32e
+2022-07-29 04:25:06.131 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -&gt; org.hibernate.type.CurrencyType@740ad32e
+2022-07-29 04:25:06.132 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -&gt; org.hibernate.type.TimeZoneType@1feb76b9
+2022-07-29 04:25:06.132 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -&gt; org.hibernate.type.TimeZoneType@1feb76b9
+2022-07-29 04:25:06.132 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -&gt; org.hibernate.type.ClassType@2cacd55e
+2022-07-29 04:25:06.132 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -&gt; org.hibernate.type.ClassType@2cacd55e
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -&gt; org.hibernate.type.UUIDBinaryType@121dce2
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -&gt; org.hibernate.type.UUIDBinaryType@121dce2
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -&gt; org.hibernate.type.UUIDCharType@425f94d7
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -&gt; org.hibernate.type.BinaryType@bd28c86
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -&gt; org.hibernate.type.BinaryType@bd28c86
+2022-07-29 04:25:06.133 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -&gt; org.hibernate.type.BinaryType@bd28c86
+2022-07-29 04:25:06.134 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -&gt; org.hibernate.type.WrapperBinaryType@5ca86715
+2022-07-29 04:25:06.134 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Byte[] -&gt; org.hibernate.type.WrapperBinaryType@5ca86715
+2022-07-29 04:25:06.134 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Byte; -&gt; org.hibernate.type.WrapperBinaryType@5ca86715
+2022-07-29 04:25:06.134 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -&gt; org.hibernate.type.RowVersionType@7b7cf475
+2022-07-29 04:25:06.134 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -&gt; org.hibernate.type.ImageType@ec3944
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -&gt; org.hibernate.type.CharArrayType@3c62f69a
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -&gt; org.hibernate.type.CharArrayType@3c62f69a
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -&gt; org.hibernate.type.CharArrayType@3c62f69a
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -&gt; org.hibernate.type.CharacterArrayType@595184d8
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Character; -&gt; org.hibernate.type.CharacterArrayType@595184d8
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Character[] -&gt; org.hibernate.type.CharacterArrayType@595184d8
+2022-07-29 04:25:06.135 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -&gt; org.hibernate.type.TextType@560d6d2
+2022-07-29 04:25:06.136 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -&gt; org.hibernate.type.NTextType@16a499d1
+2022-07-29 04:25:06.136 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -&gt; org.hibernate.type.BlobType@7c88d04f
+2022-07-29 04:25:06.136 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -&gt; org.hibernate.type.BlobType@7c88d04f
+2022-07-29 04:25:06.136 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -&gt; org.hibernate.type.MaterializedBlobType@58b03029
+2022-07-29 04:25:06.137 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -&gt; org.hibernate.type.ClobType@5d2e65bd
+2022-07-29 04:25:06.137 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -&gt; org.hibernate.type.ClobType@5d2e65bd
+2022-07-29 04:25:06.138 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -&gt; org.hibernate.type.NClobType@7aa63f50
+2022-07-29 04:25:06.138 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -&gt; org.hibernate.type.NClobType@7aa63f50
+2022-07-29 04:25:06.139 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -&gt; org.hibernate.type.MaterializedClobType@6eab92f3
+2022-07-29 04:25:06.139 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -&gt; org.hibernate.type.MaterializedNClobType@55b74e6b
+2022-07-29 04:25:06.139 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -&gt; org.hibernate.type.SerializableType@66716959
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -&gt; org.hibernate.type.ObjectType@306c9b2c
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -&gt; org.hibernate.type.ObjectType@306c9b2c
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -&gt; org.hibernate.type.AdaptedImmutableType@30b1c5d5
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -&gt; org.hibernate.type.AdaptedImmutableType@3e2d65e1
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -&gt; org.hibernate.type.AdaptedImmutableType@1174676f
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_dbtimestamp -&gt; org.hibernate.type.AdaptedImmutableType@71f8ce0e
+2022-07-29 04:25:06.141 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -&gt; org.hibernate.type.AdaptedImmutableType@4fd92289
+2022-07-29 04:25:06.142 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -&gt; org.hibernate.type.AdaptedImmutableType@1a8e44fe
+2022-07-29 04:25:06.142 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -&gt; org.hibernate.type.AdaptedImmutableType@287317df
+2022-07-29 04:25:06.142 DEBUG 10812 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -&gt; org.hibernate.type.AdaptedImmutableType@1fcc3461
+2022-07-29 04:25:06.170  INFO 10812 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-29 04:25:06.390  INFO 10812 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-29 04:25:06.406  INFO 10812 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2022-07-29 04:25:06.454 DEBUG 10812 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@18c60d81] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@602aeb87]
+2022-07-29 04:25:06.614 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.oauth.model.Role
+2022-07-29 04:25:06.615 DEBUG 10812 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.jaks1m.project.domain.api.entity.user.Status
+2022-07-29 04:25:06.616 DEBUG 10812 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@18c60d81] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@59d29065]
+2022-07-29 04:25:06.815 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       drop 
+       foreign key if exists FK8rnruj5hoj6iui6bhpul0f90b
+Hibernate: 
+    
+    alter table user 
+       drop 
+       foreign key if exists FK8rnruj5hoj6iui6bhpul0f90b
+2022-07-29 04:25:06.838  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306838 | took 22ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       drop 
+       foreign key if exists FK8rnruj5hoj6iui6bhpul0f90b
+
+    alter table user 
+       drop 
+       foreign key if exists FK8rnruj5hoj6iui6bhpul0f90b;
+2022-07-29 04:25:06.838 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKft5dfigb2a58a09wxu4cke37x
+Hibernate: 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKft5dfigb2a58a09wxu4cke37x
+2022-07-29 04:25:06.864  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306864 | took 25ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       drop 
+       foreign key if exists FKft5dfigb2a58a09wxu4cke37x
+
+    alter table user 
+       drop 
+       foreign key if exists FKft5dfigb2a58a09wxu4cke37x;
+2022-07-29 04:25:06.865 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKont4phb1g40ahg4nnfunqxk3g
+Hibernate: 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKont4phb1g40ahg4nnfunqxk3g
+2022-07-29 04:25:06.883  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306883 | took 17ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       drop 
+       foreign key if exists FKont4phb1g40ahg4nnfunqxk3g
+
+    alter table user 
+       drop 
+       foreign key if exists FKont4phb1g40ahg4nnfunqxk3g;
+2022-07-29 04:25:06.883 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       drop 
+       foreign key if exists FK6ot1yuu8muag1q348rqhohq06
+Hibernate: 
+    
+    alter table user 
+       drop 
+       foreign key if exists FK6ot1yuu8muag1q348rqhohq06
+2022-07-29 04:25:06.902  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306902 | took 19ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       drop 
+       foreign key if exists FK6ot1yuu8muag1q348rqhohq06
+
+    alter table user 
+       drop 
+       foreign key if exists FK6ot1yuu8muag1q348rqhohq06;
+2022-07-29 04:25:06.903 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKpbe8506dbqbtqkoq5rsuujntb
+Hibernate: 
+    
+    alter table user 
+       drop 
+       foreign key if exists FKpbe8506dbqbtqkoq5rsuujntb
+2022-07-29 04:25:06.922  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306922 | took 19ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       drop 
+       foreign key if exists FKpbe8506dbqbtqkoq5rsuujntb
+
+    alter table user 
+       drop 
+       foreign key if exists FKpbe8506dbqbtqkoq5rsuujntb;
+2022-07-29 04:25:06.922 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists email_token
+Hibernate: 
+    
+    drop table if exists email_token
+2022-07-29 04:25:06.940  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306940 | took 17ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists email_token
+
+    drop table if exists email_token;
+2022-07-29 04:25:06.940 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists name
+Hibernate: 
+    
+    drop table if exists name
+2022-07-29 04:25:06.958  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306958 | took 18ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists name
+
+    drop table if exists name;
+2022-07-29 04:25:06.959 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists password
+Hibernate: 
+    
+    drop table if exists password
+2022-07-29 04:25:06.976  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306976 | took 17ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists password
+
+    drop table if exists password;
+2022-07-29 04:25:06.977 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists privacy_polity
+Hibernate: 
+    
+    drop table if exists privacy_polity
+2022-07-29 04:25:06.994  INFO 10812 --- [    Test worker] p6spy                                    : #1659036306994 | took 17ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists privacy_polity
+
+    drop table if exists privacy_polity;
+2022-07-29 04:25:06.995 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists receive_polity
+Hibernate: 
+    
+    drop table if exists receive_polity
+2022-07-29 04:25:07.011  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307011 | took 15ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists receive_polity
+
+    drop table if exists receive_polity;
+2022-07-29 04:25:07.011 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists terms_of_service
+Hibernate: 
+    
+    drop table if exists terms_of_service
+2022-07-29 04:25:07.027  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307027 | took 16ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists terms_of_service
+
+    drop table if exists terms_of_service;
+2022-07-29 04:25:07.028 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists user
+Hibernate: 
+    
+    drop table if exists user
+2022-07-29 04:25:07.055  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307055 | took 27ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop table if exists user
+
+    drop table if exists user;
+2022-07-29 04:25:07.055 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence email_seq
+Hibernate: 
+    
+    drop sequence email_seq
+2022-07-29 04:25:07.071  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307071 | took 15ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence email_seq
+
+    drop sequence email_seq;
+2022-07-29 04:25:07.071 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence name_seq
+Hibernate: 
+    
+    drop sequence name_seq
+2022-07-29 04:25:07.092  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307092 | took 20ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence name_seq
+
+    drop sequence name_seq;
+2022-07-29 04:25:07.092 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence password_seq
+Hibernate: 
+    
+    drop sequence password_seq
+2022-07-29 04:25:07.110  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307110 | took 17ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence password_seq
+
+    drop sequence password_seq;
+2022-07-29 04:25:07.111 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence privacy_polity_seq
+Hibernate: 
+    
+    drop sequence privacy_polity_seq
+2022-07-29 04:25:07.128  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307128 | took 16ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence privacy_polity_seq
+
+    drop sequence privacy_polity_seq;
+2022-07-29 04:25:07.129 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence receive_polity_seq
+Hibernate: 
+    
+    drop sequence receive_polity_seq
+2022-07-29 04:25:07.149  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307149 | took 19ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence receive_polity_seq
+
+    drop sequence receive_polity_seq;
+2022-07-29 04:25:07.149 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence terms_of_service_seq
+Hibernate: 
+    
+    drop sequence terms_of_service_seq
+2022-07-29 04:25:07.165  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307165 | took 15ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence terms_of_service_seq
+
+    drop sequence terms_of_service_seq;
+2022-07-29 04:25:07.166 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop sequence user_seq
+Hibernate: 
+    
+    drop sequence user_seq
+2022-07-29 04:25:07.183  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307183 | took 16ms | statement | connection 1| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    drop sequence user_seq
+
+    drop sequence user_seq;
+2022-07-29 04:25:07.191 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence email_seq start with 1 increment by 50
+Hibernate: create sequence email_seq start with 1 increment by 50
+2022-07-29 04:25:07.214  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307214 | took 22ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence email_seq start with 1 increment by 50
+create sequence email_seq start with 1 increment by 50;
+2022-07-29 04:25:07.214 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence name_seq start with 1 increment by 50
+Hibernate: create sequence name_seq start with 1 increment by 50
+2022-07-29 04:25:07.233  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307233 | took 17ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence name_seq start with 1 increment by 50
+create sequence name_seq start with 1 increment by 50;
+2022-07-29 04:25:07.233 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence password_seq start with 1 increment by 50
+Hibernate: create sequence password_seq start with 1 increment by 50
+2022-07-29 04:25:07.251  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307251 | took 17ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence password_seq start with 1 increment by 50
+create sequence password_seq start with 1 increment by 50;
+2022-07-29 04:25:07.251 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence privacy_polity_seq start with 1 increment by 50
+Hibernate: create sequence privacy_polity_seq start with 1 increment by 50
+2022-07-29 04:25:07.274  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307274 | took 21ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence privacy_polity_seq start with 1 increment by 50
+create sequence privacy_polity_seq start with 1 increment by 50;
+2022-07-29 04:25:07.274 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence receive_polity_seq start with 1 increment by 50
+Hibernate: create sequence receive_polity_seq start with 1 increment by 50
+2022-07-29 04:25:07.296  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307296 | took 21ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence receive_polity_seq start with 1 increment by 50
+create sequence receive_polity_seq start with 1 increment by 50;
+2022-07-29 04:25:07.296 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence terms_of_service_seq start with 1 increment by 50
+Hibernate: create sequence terms_of_service_seq start with 1 increment by 50
+2022-07-29 04:25:07.315  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307315 | took 17ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence terms_of_service_seq start with 1 increment by 50
+create sequence terms_of_service_seq start with 1 increment by 50;
+2022-07-29 04:25:07.315 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : create sequence user_seq start with 1 increment by 50
+Hibernate: create sequence user_seq start with 1 increment by 50
+2022-07-29 04:25:07.333  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307333 | took 17ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+create sequence user_seq start with 1 increment by 50
+create sequence user_seq start with 1 increment by 50;
+2022-07-29 04:25:07.335 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table email_token (
+       id bigint not null,
+        email_token varchar(255),
+        expiration_date datetime(6),
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table email_token (
+       id bigint not null,
+        email_token varchar(255),
+        expiration_date datetime(6),
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.356  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307356 | took 19ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table email_token (
+       id bigint not null,
+        email_token varchar(255),
+        expiration_date datetime(6),
+        primary key (id)
+    ) engine=InnoDB
+
+    create table email_token (
+       id bigint not null,
+        email_token varchar(255),
+        expiration_date datetime(6),
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.358 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table name (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        name varchar(30),
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table name (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        name varchar(30),
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.380  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307380 | took 21ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table name (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        name varchar(30),
+        primary key (id)
+    ) engine=InnoDB
+
+    create table name (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        name varchar(30),
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.382 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table password (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        password varchar(100),
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table password (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        password varchar(100),
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.401  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307401 | took 18ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table password (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        password varchar(100),
+        primary key (id)
+    ) engine=InnoDB
+
+    create table password (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        password varchar(100),
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.401 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table privacy_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        privacy_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table privacy_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        privacy_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.425  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307425 | took 23ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table privacy_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        privacy_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+
+    create table privacy_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        privacy_polity bit,
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.425 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table receive_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        receive_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table receive_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        receive_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.446  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307446 | took 20ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table receive_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        receive_polity bit,
+        primary key (id)
+    ) engine=InnoDB
+
+    create table receive_polity (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        receive_polity bit,
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.447 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table terms_of_service (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        terms_of_service bit,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table terms_of_service (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        terms_of_service bit,
+        primary key (id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.468  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307468 | took 21ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table terms_of_service (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        terms_of_service bit,
+        primary key (id)
+    ) engine=InnoDB
+
+    create table terms_of_service (
+       id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        terms_of_service bit,
+        primary key (id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.469 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table user (
+       user_id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        email varchar(255),
+        home_ground varchar(255),
+        role varchar(255) not null,
+        name_id bigint,
+        password_id bigint,
+        privacy_polity_id bigint,
+        receive_polity_id bigint,
+        terms_of_service_id bigint,
+        primary key (user_id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table user (
+       user_id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        email varchar(255),
+        home_ground varchar(255),
+        role varchar(255) not null,
+        name_id bigint,
+        password_id bigint,
+        privacy_polity_id bigint,
+        receive_polity_id bigint,
+        terms_of_service_id bigint,
+        primary key (user_id)
+    ) engine=InnoDB
+2022-07-29 04:25:07.491  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307491 | took 21ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    create table user (
+       user_id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        email varchar(255),
+        home_ground varchar(255),
+        role varchar(255) not null,
+        name_id bigint,
+        password_id bigint,
+        privacy_polity_id bigint,
+        receive_polity_id bigint,
+        terms_of_service_id bigint,
+        primary key (user_id)
+    ) engine=InnoDB
+
+    create table user (
+       user_id bigint not null,
+        created_data datetime(6),
+        last_modified_date datetime(6),
+        status varchar(10) default 'ACTIVE',
+        email varchar(255),
+        home_ground varchar(255),
+        role varchar(255) not null,
+        name_id bigint,
+        password_id bigint,
+        privacy_polity_id bigint,
+        receive_polity_id bigint,
+        terms_of_service_id bigint,
+        primary key (user_id)
+    ) engine=InnoDB;
+2022-07-29 04:25:07.492 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       add constraint FK8rnruj5hoj6iui6bhpul0f90b 
+       foreign key (name_id) 
+       references name (id)
+Hibernate: 
+    
+    alter table user 
+       add constraint FK8rnruj5hoj6iui6bhpul0f90b 
+       foreign key (name_id) 
+       references name (id)
+2022-07-29 04:25:07.521  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307521 | took 28ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       add constraint FK8rnruj5hoj6iui6bhpul0f90b 
+       foreign key (name_id) 
+       references name (id)
+
+    alter table user 
+       add constraint FK8rnruj5hoj6iui6bhpul0f90b 
+       foreign key (name_id) 
+       references name (id);
+2022-07-29 04:25:07.522 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       add constraint FKft5dfigb2a58a09wxu4cke37x 
+       foreign key (password_id) 
+       references password (id)
+Hibernate: 
+    
+    alter table user 
+       add constraint FKft5dfigb2a58a09wxu4cke37x 
+       foreign key (password_id) 
+       references password (id)
+2022-07-29 04:25:07.557  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307557 | took 34ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       add constraint FKft5dfigb2a58a09wxu4cke37x 
+       foreign key (password_id) 
+       references password (id)
+
+    alter table user 
+       add constraint FKft5dfigb2a58a09wxu4cke37x 
+       foreign key (password_id) 
+       references password (id);
+2022-07-29 04:25:07.558 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       add constraint FKont4phb1g40ahg4nnfunqxk3g 
+       foreign key (privacy_polity_id) 
+       references privacy_polity (id)
+Hibernate: 
+    
+    alter table user 
+       add constraint FKont4phb1g40ahg4nnfunqxk3g 
+       foreign key (privacy_polity_id) 
+       references privacy_polity (id)
+2022-07-29 04:25:07.617  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307616 | took 58ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       add constraint FKont4phb1g40ahg4nnfunqxk3g 
+       foreign key (privacy_polity_id) 
+       references privacy_polity (id)
+
+    alter table user 
+       add constraint FKont4phb1g40ahg4nnfunqxk3g 
+       foreign key (privacy_polity_id) 
+       references privacy_polity (id);
+2022-07-29 04:25:07.617 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       add constraint FK6ot1yuu8muag1q348rqhohq06 
+       foreign key (receive_polity_id) 
+       references receive_polity (id)
+Hibernate: 
+    
+    alter table user 
+       add constraint FK6ot1yuu8muag1q348rqhohq06 
+       foreign key (receive_polity_id) 
+       references receive_polity (id)
+2022-07-29 04:25:07.661  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307661 | took 43ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       add constraint FK6ot1yuu8muag1q348rqhohq06 
+       foreign key (receive_polity_id) 
+       references receive_polity (id)
+
+    alter table user 
+       add constraint FK6ot1yuu8muag1q348rqhohq06 
+       foreign key (receive_polity_id) 
+       references receive_polity (id);
+2022-07-29 04:25:07.661 DEBUG 10812 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user 
+       add constraint FKpbe8506dbqbtqkoq5rsuujntb 
+       foreign key (terms_of_service_id) 
+       references terms_of_service (id)
+Hibernate: 
+    
+    alter table user 
+       add constraint FKpbe8506dbqbtqkoq5rsuujntb 
+       foreign key (terms_of_service_id) 
+       references terms_of_service (id)
+2022-07-29 04:25:07.725  INFO 10812 --- [    Test worker] p6spy                                    : #1659036307725 | took 63ms | statement | connection 2| url jdbc:mariadb://jaksim.cuazjhwugow7.ap-northeast-2.rds.amazonaws.com:3306/dev?autoReconnect=true
+
+    alter table user 
+       add constraint FKpbe8506dbqbtqkoq5rsuujntb 
+       foreign key (terms_of_service_id) 
+       references terms_of_service (id)
+
+    alter table user 
+       add constraint FKpbe8506dbqbtqkoq5rsuujntb 
+       foreign key (terms_of_service_id) 
+       references terms_of_service (id);
+2022-07-29 04:25:07.729  INFO 10812 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-29 04:25:07.742 TRACE 10812 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@59d29065] for TypeConfiguration
+2022-07-29 04:25:07.746  INFO 10812 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 04:25:08.530  INFO 10812 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/'] with []
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/configuration/**'] with []
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**'] with []
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/swagger*'] with []
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/swagger*/**'] with []
+2022-07-29 04:25:08.601  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/v2/api-docs'] with []
+2022-07-29 04:25:08.655  INFO 10812 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76b9056d, org.springframework.security.web.context.SecurityContextPersistenceFilter@20a3118, org.springframework.security.web.header.HeaderWriterFilter@1f6af096, org.springframework.security.web.authentication.logout.LogoutFilter@16908f89, com.jaks1m.project.domain.oauth.filter.JwtAuthenticationFilter@2a9e261d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1aa21319, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2e940dd0, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4228a2f6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4bcfa08b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@751636da, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@45cd5c56, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e90939f, org.springframework.security.web.session.SessionManagementFilter@4823f3b8, org.springframework.security.web.access.ExceptionTranslationFilter@45accb5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5cb3c9e6]
+2022-07-29 04:25:08.799  INFO 10812 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-07-29 04:25:08.970  INFO 10812 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-07-29 04:25:08.980  INFO 10812 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-07-29 04:25:08.991  INFO 10812 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-07-29 04:25:09.076  INFO 10812 --- [    Test worker] c.j.project.ProjectApplicationTests      : Started ProjectApplicationTests in 4.365 seconds (JVM running for 5.053)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4.1</a> at 2022. 7. 29. 오전 4:25:09</p>
+</div>
+</div>
+</body>
+</html>
