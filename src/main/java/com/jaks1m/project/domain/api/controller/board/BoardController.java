@@ -24,8 +24,8 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
     @GetMapping("/boards")
-    @ApiOperation(value = "게시판")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> boardList(@PageableDefault(size = 5) Pageable pageable){
+    @ApiOperation(value = "게시판 목록")
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> listBoard(@PageableDefault(size = 5) Pageable pageable){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()
                         .status(200)
@@ -33,9 +33,20 @@ public class BoardController {
                         .build());
     }
 
+    @PostMapping("/boards")
+    @ApiOperation(value = "게시판")
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoard(@PageableDefault(size = 5) Pageable pageable
+            ,@RequestParam @Validated BoardType boardType){
+        return ResponseEntity.status(200)
+                .body(BaseResponse.<List<BoardResponse>>builder()
+                        .status(200)
+                        .body(boardService.getBoard(boardType,pageable))
+                        .build());
+    }
+
     @PostMapping("/boards/post")
     @ApiOperation(value = "게시글 등록")
-    public Boolean boardPost(@RequestBody @Validated BoardPostRequestDto request){
+    public Boolean postBoard(@RequestBody @Validated BoardPostRequestDto request){
         boardService.postBoard(request);
         return true;
     }
