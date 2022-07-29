@@ -41,8 +41,8 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	//Etc
-	implementation 'org.projectlombok:lombok'
-	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+	runtimeOnly 'org.projectlombok:lombok'
+	//implementation 'com.google.code.findbugs:jsr305:3.0.2'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"

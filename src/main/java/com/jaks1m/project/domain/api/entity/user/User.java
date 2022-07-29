@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.api.entity.user;
 
-//import com.jaks1m.project.domain.api.entity.board.Board;
+import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.oauth.model.Role;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,8 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,8 +48,8 @@ public class User extends BaseEntity implements UserDetails{
     @JoinColumn(name = "RECEIVE_POLITY_ID")
     private ReceivePolity receivePolity;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Board> boards=new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards=new ArrayList<>();
     public void updatePassword(String password){
         this.password.updatePassword(password);
     }

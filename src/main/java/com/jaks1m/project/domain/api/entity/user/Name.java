@@ -11,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Getter
 @NoArgsConstructor
-
 @SequenceGenerator(name = "NAME_SEQ_GENERATOR", sequenceName = "NAME_SEQ")
 @Where(clause = "status='ACTIVE'")
 public class Name extends BaseEntity {
