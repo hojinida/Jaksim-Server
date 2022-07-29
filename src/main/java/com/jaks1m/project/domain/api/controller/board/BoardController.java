@@ -3,8 +3,10 @@ package com.jaks1m.project.domain.api.controller.board;
 import com.jaks1m.project.domain.api.dto.board.BoardPostRequestDto;
 import com.jaks1m.project.domain.api.dto.board.BoardResponse;
 import com.jaks1m.project.domain.api.entity.board.BoardType;
+import com.jaks1m.project.domain.api.entity.user.BaseEntity;
 import com.jaks1m.project.domain.api.service.BoardService;
 import com.jaks1m.project.domain.common.BaseResponse;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,7 @@ public class BoardController {
     private final BoardService boardService;
     @GetMapping("/boards")
     @ApiOperation(value = "게시판 목록")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> listBoard(@PageableDefault(size = 5) Pageable pageable){
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5) Pageable pageable){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()
                         .status(200)
@@ -35,12 +37,21 @@ public class BoardController {
 
     @PostMapping("/boards")
     @ApiOperation(value = "게시판")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoard(@PageableDefault(size = 5) Pageable pageable
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoards(@PageableDefault(size = 5) Pageable pageable
             ,@RequestParam @Validated BoardType boardType){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()
                         .status(200)
-                        .body(boardService.getBoard(boardType,pageable))
+                        .body(boardService.getBoards(boardType,pageable))
+                        .build());
+    }
+
+    @GetMapping("/boards/{id}")
+    @ApiOperation(value = "게시판 상세")
+    public ResponseEntity<BaseResponse<BoardResponse>> getBoard(@PathVariable Long id){
+        return ResponseEntity.status(200)
+                .body(BaseResponse.<BoardResponse>builder()
+                        .body(boardService.getBoard(id))
                         .build());
     }
 

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,14 +40,32 @@ public class BoardService {
                 .countVisit(0L).build());
     }
 
+    @Transactional
+    public BoardResponse getBoard(Long id){
+        Optional<Board> board = boardRepository.findById(id);
+        if(board.isEmpty()){
+            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
+        }
+        board.get().updateVisit();
+        return BoardResponse.builder()
+                .boardId(board.get().getId())
+                .title(board.get().getTitle())
+                .content(board.get().getContent())
+                .visit(board.get().getCountVisit())
+                .userName(board.get().getUser().getName().getName())
+                .createdData(board.get().getCreatedData())
+                .lastModifiedDate(board.get().getLastModifiedDate())
+                .build();
+    }
+
     public List<BoardResponse> getList(Pageable pageable){
         List<BoardResponse> responses=new ArrayList<>();
-        responses.addAll(getBoard(BoardType.FREE,pageable));
-        responses.addAll(getBoard(BoardType.GROUP,pageable));
-        responses.addAll(getBoard(BoardType.QNA,pageable));
+        responses.addAll(getBoards(BoardType.FREE,pageable));
+        responses.addAll(getBoards(BoardType.GROUP,pageable));
+        responses.addAll(getBoards(BoardType.QNA,pageable));
         return responses;
     }
-    public List<BoardResponse> getBoard(BoardType boardType, Pageable pageable){
+    public List<BoardResponse> getBoards(BoardType boardType, Pageable pageable){
         List<Board> boards=boardRepository.findAllByBoardTypeOrderByIdDesc(boardType,pageable);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
@@ -56,6 +74,8 @@ public class BoardService {
                     .title(board.getTitle())
                     .content(board.getContent())
                     .userName(board.getUser().getName().getName())
+                    .createdData(board.getCreatedData())
+                    .lastModifiedDate(board.getLastModifiedDate())
                     .visit(board.getCountVisit()).build());
         }
         return response;
