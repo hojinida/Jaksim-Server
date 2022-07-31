@@ -3,14 +3,11 @@ package com.jaks1m.project.domain.api.controller.board;
 import com.jaks1m.project.domain.api.dto.board.BoardPostRequestDto;
 import com.jaks1m.project.domain.api.dto.board.BoardResponse;
 import com.jaks1m.project.domain.api.entity.board.BoardType;
-import com.jaks1m.project.domain.api.entity.user.BaseEntity;
 import com.jaks1m.project.domain.api.service.BoardService;
 import com.jaks1m.project.domain.common.BaseResponse;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +51,9 @@ public class BoardController {
                         .body(boardService.getBoard(id))
                         .build());
     }
+
+//    @PostMapping("/board/{id}")
+//    @ApiOperation(value = "")
 
     @PostMapping("/boards/post")
     @ApiOperation(value = "게시글 등록")

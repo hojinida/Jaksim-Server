@@ -47,7 +47,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             response.sendRedirect(uri);
         }
     }
-
     private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
         return UriComponentsBuilder.fromUriString("http//:localhost:8080")
                 .queryParam("accessToken",accessToken)
