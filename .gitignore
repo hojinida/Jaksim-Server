@@ -7,7 +7,7 @@ build/
 
 src/main/resources/application-oauth.yml
 src/main/resources/application.yml
-.github/workflows/deploy.yml
+#.github/workflows/deploy.yml
 
 
 ### IntelliJ IDEA ###
