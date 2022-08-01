@@ -11,6 +11,6 @@ permissions:
     group: ubuntu
 hooks:
   ApplicationStart:
-    - location: /opt/codedeploy-agent/deployment-root/9970eec0-9a21-470c-bdc4-d63c035dd893/d-CWNPUBC4I
+    - location: /
       timeout: 60
       runas: ubuntu
