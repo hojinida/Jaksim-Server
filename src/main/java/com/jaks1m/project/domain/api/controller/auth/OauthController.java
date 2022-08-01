@@ -4,6 +4,7 @@ import com.jaks1m.project.domain.api.dto.request.LoginUserRequestDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserDto;
 import com.jaks1m.project.domain.common.BaseResponse;
 import com.jaks1m.project.domain.api.service.AuthService;
+import com.jaks1m.project.domain.oauth.token.RefreshToken;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,8 @@ public class OauthController {
                         .status(200)
                         .body(UserDto.builder()
                                 .accessToken(accessToken)
+                                .refreshToken(RefreshToken.builder()
+                                        .value(refreshToken).build())
                                 .build())
                         .build());
     }

@@ -12,8 +12,8 @@ public class UserDto {
     private String refreshToken;
 
     @Builder
-    public UserDto(String accessToken, RefreshToken refreshToken){
-        this.accessToken=accessToken;
-        this.refreshToken=refreshToken.getValue();
+    public UserDto(String accessToken, RefreshToken refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken.getValue();
     }
 }
