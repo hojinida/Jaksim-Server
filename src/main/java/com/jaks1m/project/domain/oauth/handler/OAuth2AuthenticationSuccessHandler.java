@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             redisRepository.save(refreshToken);
 
             String uri=makeRedirectUrl(accessToken,refreshToken);
-            response.sendRedirect(uri);
+            response.setStatus(200);
         }
     }
     private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
