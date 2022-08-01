@@ -45,4 +45,16 @@ public class OauthController {
                         .build());
     }
 
+    @GetMapping("/me")
+    @ApiOperation(value = "로그인 성공")
+    public ResponseEntity<BaseResponse<UserDto>> loginSuccess(@RequestParam String accessToken,@RequestParam String refreshToken){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(BaseResponse.<UserDto>builder()
+                        .status(200)
+                        .body(UserDto.builder()
+                                .accessToken(accessToken)
+                                .build())
+                        .build());
+    }
 }

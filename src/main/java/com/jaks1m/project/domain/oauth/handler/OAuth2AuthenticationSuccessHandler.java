@@ -44,12 +44,11 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             redisRepository.save(refreshToken);
 
             String uri=makeRedirectUrl(accessToken,refreshToken);
-            response.setStatus(400);
-            response.setHeader("Authorization",accessToken);
+            response.sendRedirect(uri);
         }
     }
     private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
-        return UriComponentsBuilder.fromUriString("http//:localhost:8080")
+        return UriComponentsBuilder.fromUriString("/auth/me")
                 .queryParam("accessToken",accessToken)
                 .queryParam("refreshToken",refreshToken.getValue())
                 .build().toUriString();
