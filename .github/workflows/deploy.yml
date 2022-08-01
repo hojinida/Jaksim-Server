@@ -33,7 +33,7 @@ jobs:
           spring.redis.host: ${{secrets.REDIS_HOST}}
           spring.jpa.hibernate.ddl-auto: create
           spring.mail.password: ${{secrets.MAIL_PASSWORD}}
-          jwt.secret.key: ${{secrets.JWT_SECRET_KEY}}
+          jwt.security.key: ${{secrets.JWT_SECRET_KEY}}
 
       - name: Set oauth.yml file
         uses: microsoft/variable-substitution@v1
