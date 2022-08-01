@@ -31,9 +31,9 @@ jobs:
           spring.datasource.url: ${{secrets.RDS_URL}}
           spring.datasource.password: ${{secrets.RDS_PASSWORD}}
           spring.redis.host: ${{secrets.REDIS_HOST}}
-          spring.jpa.hibernate.ddl-auto: update
+          spring.jpa.hibernate.ddl-auto: create
           spring.mail.password: ${{secrets.MAIL_PASSWORD}}
-          jwt.secret: ${{secrets.JWT_SECRET_KEY}}
+          jwt.secret.key: ${{secrets.JWT_SECRET_KEY}}
 
       - name: Set oauth.yml file
         uses: microsoft/variable-substitution@v1
