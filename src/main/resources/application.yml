@@ -36,8 +36,7 @@ logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
 jwt:
-  security:
-    key:
+  secret:
   response:
     header:
       Authorization
