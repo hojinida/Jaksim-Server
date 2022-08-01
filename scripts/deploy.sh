@@ -1,15 +1,14 @@
 #!/bin/bash
 
 REPOSITORY=/home/ubuntu/app/test
-PROJECT_NAME=jaksim
 
 echo "> Build 파일 복사"
 
-cp $REPOSITORY/build/libs/*.jar $REPOSITORY/ /&PROJECT_NAME
+cp $REPOSITORY/build/libs/*.jar $REPOSITORY/
 
 echo "> 현재 구동 중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -fl jaksim | grep jar | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl project-0.0.1-SNAPSHOT| grep jar | awk '{print $1}')
 
 echo "현재 구동 중인 애플리케이션 pid : $CURRENT_PID"
 
