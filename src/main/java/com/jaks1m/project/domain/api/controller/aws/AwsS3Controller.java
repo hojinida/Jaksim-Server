@@ -22,7 +22,7 @@ public class AwsS3Controller {
 
     @PostMapping("/image")
     @ApiOperation(value = "이미지 저장")
-    public String saveImage(@RequestPart("image") MultipartFile multipartFile, @RequestParam Category category) throws IOException {
+    public String saveImage(@RequestPart("file") MultipartFile multipartFile, @RequestParam Category category) throws IOException {
         return awsS3Service.upload(multipartFile,"upload",category);
     }
 
