@@ -38,15 +38,15 @@ jobs:
       - name: Set aws.yml file
         uses: microsoft/variable-substitution@v1
         with:
-          files: 'src/main/resources/application-aws.yml'
+          files: src/main/resources/application-aws.yml
         env:
-          cloud.aws.credentials.accessKey: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          cloud.aws.credentials.secretKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Set oauth.yml file
         uses: microsoft/variable-substitution@v1
         with:
-          files: 'src/main/resources/application-oauth.yml'
+          files: src/main/resources/application-oauth.yml
         env:
           spring.security.oauth2.client.registration.google.client-id: ${{secrets.GOOGLE_CLIENT_ID}}
           spring.security.oauth2.client.registration.google.client-secret: ${{secrets.GOOGLE_CLIENT_SECRET}}
