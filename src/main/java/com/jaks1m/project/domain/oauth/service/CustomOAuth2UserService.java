@@ -46,7 +46,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if(findUser.isEmpty()) {
             userRepository.save(createUser(oAuth2Attribute,registrationId));
         } else if(registrationId.equals("WEB")){
-
+            throw new CustomException(ErrorCode.ALREADY_WEB_JOIN);
         } else if (!Objects.equals(findUser.get().getHomeGround(), registrationId)) {
             throw new CustomException(ErrorCode.ALREADY_JOIN);
         }

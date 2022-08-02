@@ -25,6 +25,8 @@ public class User extends BaseEntity implements UserDetails{
     private Long id;
     private String email;
     private String homeGround;
+
+    private String image;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
@@ -59,6 +61,8 @@ public class User extends BaseEntity implements UserDetails{
     }
 
     public void updateReceivePolity(Boolean receivePolity){this.receivePolity.updateTos(receivePolity);}
+
+    public void updateImage(String image){this.image=image;}
 
     @Override
     public void updateStatus(Status status){
