@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AwsS3Service {
     private final AmazonS3Client amazonS3Client;
     private final UserRepository userRepository;
@@ -40,13 +42,14 @@ public class AwsS3Service {
         }
     }
 
+    @Transactional
     public String upload(MultipartFile multipartFile, String dirName, Category category) throws IOException {
         File file = convertMultipartFileToFile(multipartFile)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_CONVERT_FILE));
 
         return upload(file, dirName,category);
     }
-
+    @Transactional
     public void remove(Category category) {
         String url;
         if(category==Category.USER){
@@ -80,7 +83,8 @@ public class AwsS3Service {
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
-    private String upload(File file, String dirName,Category category) {
+
+    private String upload(File file, String dirName, Category category) {
         String key = randomFileName(file, dirName);
         String path = putS3(file, key);
         if(category==Category.USER){

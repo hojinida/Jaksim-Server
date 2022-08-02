@@ -33,9 +33,15 @@ jobs:
           spring.redis.host: ${{secrets.REDIS_HOST}}
           spring.jpa.hibernate.ddl-auto: create
           spring.mail.password: ${{secrets.MAIL_PASSWORD}}
-          cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           jwt.secret: ${{secrets.JWT_SECRET_KEY}}
+
+      - name: Set aws.yml file
+          uses: microsoft/variable-substitution@v1
+          with:
+            files: 'src/main/resources/application-aws.yml'
+          env:
+            cloud.aws.credentials.accessKey: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            cloud.aws.credentials.secretKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Set oauth.yml file
         uses: microsoft/variable-substitution@v1
