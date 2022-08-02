@@ -36,12 +36,12 @@ jobs:
           jwt.secret: ${{secrets.JWT_SECRET_KEY}}
 
       - name: Set aws.yml file
-          uses: microsoft/variable-substitution@v1
-          with:
-            files: 'src/main/resources/application-aws.yml'
-          env:
-            cloud.aws.credentials.accessKey: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            cloud.aws.credentials.secretKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: 'src/main/resources/application-aws.yml'
+        env:
+          cloud.aws.credentials.accessKey: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          cloud.aws.credentials.secretKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Set oauth.yml file
         uses: microsoft/variable-substitution@v1
