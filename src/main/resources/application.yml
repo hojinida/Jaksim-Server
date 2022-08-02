@@ -1,8 +1,6 @@
 spring:
   profiles:
-    include:
-      -oauth
-      -aws
+    include: oauth, aws
   datasource:
     url:
     username: opqrs1107
