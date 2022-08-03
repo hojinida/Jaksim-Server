@@ -36,7 +36,7 @@ public class AwsS3Service {
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-            return user.getImage();
+            return user.getImage().getPath();
         }else{
             return "d";
         }
@@ -51,18 +51,18 @@ public class AwsS3Service {
     }
     @Transactional
     public void remove(Category category) {
-        String url;
+        String key;
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-            url=user.getImage();
+            key=user.getImage().getKey();
         }else{
-            url="1";
+            key="1";
         }
-        if (!amazonS3.doesObjectExist(bucket, url)) {
+        if (!amazonS3.doesObjectExist(bucket,key)) {
             throw new CustomException(ErrorCode.IMAGE_NOT_FOUND);
         }
-        amazonS3.deleteObject(bucket, url);
+        amazonS3.deleteObject(bucket,key);
     }
 
     private void removeFile(File file) {
@@ -72,6 +72,7 @@ public class AwsS3Service {
             log.info("파일이 삭제되지 않았습니다.");
         }
     }
+
     private String upload(File file, String dirName, Category category) {
         String key = randomFileName(file, dirName);
         String path = putS3(file, key);
@@ -81,7 +82,7 @@ public class AwsS3Service {
             if(user.getImage()!=null){
                 remove(Category.USER);
             }
-            user.updateImage(path);
+            user.updateImage(key,path);
         }
         removeFile(file);
 

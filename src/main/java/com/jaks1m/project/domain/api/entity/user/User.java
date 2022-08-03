@@ -1,5 +1,6 @@
 package com.jaks1m.project.domain.api.entity.user;
 
+import com.jaks1m.project.domain.api.entity.aws.Image;
 import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.oauth.model.Role;
 import lombok.Builder;
@@ -25,11 +26,12 @@ public class User extends BaseEntity implements UserDetails{
     private Long id;
     private String email;
     private String homeGround;
-
-    private String image;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "IMAGE_ID")
+    private Image image;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;
@@ -62,7 +64,10 @@ public class User extends BaseEntity implements UserDetails{
 
     public void updateReceivePolity(Boolean receivePolity){this.receivePolity.updateTos(receivePolity);}
 
-    public void updateImage(String image){this.image=image;}
+    public void updateImage(String key,String path){
+        this.image.updateKey(key);
+        this.image.updatePath(path);
+    }
 
     @Override
     public void updateStatus(Status status){
@@ -111,11 +116,12 @@ public class User extends BaseEntity implements UserDetails{
         return true;
     }
     @Builder
-    public User(String email, String password, String name, Boolean privacyPolity
+    public User(String email, String password, String name,Image image, Boolean privacyPolity
             , Boolean termsOfService, Boolean receivePolity,Role role,String homeGround){
         this.email=email;
         this.password=new Password(password);
         this.name=new Name(name);
+        this.image=image;
         this.privacyPolity=new PrivacyPolity(privacyPolity);
         this.termsOfService=new TermsOfService(termsOfService);
         this.receivePolity=new ReceivePolity(receivePolity);
