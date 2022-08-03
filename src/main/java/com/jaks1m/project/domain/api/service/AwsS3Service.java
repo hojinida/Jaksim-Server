@@ -36,7 +36,7 @@ public class AwsS3Service {
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-            return user.getImage().getPath();
+            return user.getS3Image().getImagePath();
         }else{
             return "d";
         }
@@ -55,7 +55,7 @@ public class AwsS3Service {
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-            key=user.getImage().getKey();
+            key=user.getS3Image().getImageKey();
         }else{
             key="1";
         }
@@ -79,7 +79,7 @@ public class AwsS3Service {
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-            if(user.getImage()!=null){
+            if(user.getS3Image().getImagePath()!=null){
                 remove(Category.USER);
             }
             user.updateImage(key,path);

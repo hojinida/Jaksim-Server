@@ -20,11 +20,11 @@ public class S3Image extends BaseEntity {
     private String imageKey;
     @Nullable
     private String imagePath;
-    public void updateKey(String key){
-        this.imageKey=key;
+    public void updateKey(String imageKey){
+        this.imageKey=imageKey;
     }
-    public void updatePath(String path){
-        this.imagePath=path;
+    public void updatePath(String imagePath){
+        this.imagePath=imagePath;
     }
     @Builder
     public S3Image(@Nullable String imageKey, @Nullable String imagePath) {

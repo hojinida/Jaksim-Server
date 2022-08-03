@@ -140,7 +140,7 @@ public class UserService{
                 .receivePolity(request.getReceivePolity())
                 .role(Role.USER)
                 .homeGround("web")
-                .image(new S3Image())
+                .s3Image(new S3Image())
                 .build();
     }
 }
