@@ -3,6 +3,7 @@ cloud:
     credentials:
       access-key:
       secret-key:
+      #profile-path:
     s3:
       bucket:
     region:
