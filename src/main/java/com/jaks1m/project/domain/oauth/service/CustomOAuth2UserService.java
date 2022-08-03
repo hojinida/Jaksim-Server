@@ -67,7 +67,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .receivePolity(null)
                 .role(Role.USER)
                 .homeGround(registrationId)
-                .image(new S3Image())
+                .s3Image(new S3Image())
                 .build();
     }
 }
