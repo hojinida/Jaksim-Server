@@ -31,7 +31,7 @@ public class User extends BaseEntity implements UserDetails{
     private Role role=Role.USER;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
-    private S3Image S3Image;
+    private S3Image s3Image;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;
@@ -65,8 +65,8 @@ public class User extends BaseEntity implements UserDetails{
     public void updateReceivePolity(Boolean receivePolity){this.receivePolity.updateTos(receivePolity);}
 
     public void updateImage(String key,String path){
-        this.image.updateKey(key);
-        this.image.updatePath(path);
+        this.s3Image.updateKey(key);
+        this.s3Image.updatePath(path);
     }
 
     @Override
@@ -116,12 +116,12 @@ public class User extends BaseEntity implements UserDetails{
         return true;
     }
     @Builder
-    public User(String email, String password, String name,S3Image image, Boolean privacyPolity
+    public User(String email, String password, String name,S3Image s3Image, Boolean privacyPolity
             , Boolean termsOfService, Boolean receivePolity,Role role,String homeGround){
         this.email=email;
         this.password=new Password(password);
         this.name=new Name(name);
-        this.image=image;
+        this.s3Image=s3Image;
         this.privacyPolity=new PrivacyPolity(privacyPolity);
         this.termsOfService=new TermsOfService(termsOfService);
         this.receivePolity=new ReceivePolity(receivePolity);
