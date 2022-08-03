@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.api.entity.user;
 
-import com.jaks1m.project.domain.api.entity.aws.Image;
+import com.jaks1m.project.domain.api.entity.aws.S3Image;
 import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.oauth.model.Role;
 import lombok.Builder;
@@ -30,8 +30,8 @@ public class User extends BaseEntity implements UserDetails{
     @Column(nullable = false)
     private Role role=Role.USER;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "IMAGE_ID")
-    private Image image;
+    @JoinColumn(name = "S3_IMAGE_ID")
+    private S3Image image;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;
@@ -116,7 +116,7 @@ public class User extends BaseEntity implements UserDetails{
         return true;
     }
     @Builder
-    public User(String email, String password, String name,Image image, Boolean privacyPolity
+    public User(String email, String password, String name,S3Image image, Boolean privacyPolity
             , Boolean termsOfService, Boolean receivePolity,Role role,String homeGround){
         this.email=email;
         this.password=new Password(password);

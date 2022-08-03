@@ -1,5 +1,6 @@
 package com.jaks1m.project.domain.oauth.service;
 
+import com.jaks1m.project.domain.api.entity.aws.S3Image;
 import com.jaks1m.project.domain.oauth.info.OAuth2Attribute;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
@@ -66,6 +67,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .receivePolity(null)
                 .role(Role.USER)
                 .homeGround(registrationId)
+                .image(new S3Image())
                 .build();
     }
 }

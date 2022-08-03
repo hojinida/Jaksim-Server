@@ -3,7 +3,7 @@ package com.jaks1m.project.domain.api.service;
 
 import com.jaks1m.project.domain.api.dto.edit.EditUserDto;
 import com.jaks1m.project.domain.api.dto.edit.EditUserPasswordDto;
-import com.jaks1m.project.domain.api.entity.aws.Image;
+import com.jaks1m.project.domain.api.entity.aws.S3Image;
 import com.jaks1m.project.domain.config.security.SecurityUtil;
 import com.jaks1m.project.domain.api.dto.request.JoinUserRequestDto;
 import com.jaks1m.project.domain.api.dto.reponse.UserDto;
@@ -140,7 +140,7 @@ public class UserService{
                 .receivePolity(request.getReceivePolity())
                 .role(Role.USER)
                 .homeGround("web")
-                .image(new Image())
+                .image(new S3Image())
                 .build();
     }
 }
