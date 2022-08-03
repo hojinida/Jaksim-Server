@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.api.service;
 
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jaks1m.project.domain.api.entity.aws.Category;
@@ -27,7 +27,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AwsS3Service {
-    private final AmazonS3Client amazonS3;
+    private final AmazonS3 amazonS3;
     private final UserRepository userRepository;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
