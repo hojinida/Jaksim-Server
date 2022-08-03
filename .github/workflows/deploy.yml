@@ -2,7 +2,7 @@ name: jaksim
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
