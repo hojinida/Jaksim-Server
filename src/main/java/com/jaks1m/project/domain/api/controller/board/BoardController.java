@@ -27,7 +27,7 @@ public class BoardController {
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()
                         .status(200)
-                        .body(boardService.getList(pageable))
+                        .body(boardService.getBoardList(pageable))
                         .build());
     }
 
@@ -66,5 +66,12 @@ public class BoardController {
                         .body(boardService.editBoard(request,id))
                         .build());
     }
-    
+
+    @PatchMapping("/list/{id}")
+    @ApiOperation(value = "게시글 삭제")
+    public Boolean deleteBoard(@PathVariable Long id){
+        boardService.deleteBoard(id);
+        return true;
+    }
+
 }

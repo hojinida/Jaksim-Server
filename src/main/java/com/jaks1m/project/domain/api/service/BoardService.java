@@ -4,6 +4,7 @@ import com.jaks1m.project.domain.api.dto.board.BoardPostRequestDto;
 import com.jaks1m.project.domain.api.dto.board.BoardResponse;
 import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.api.entity.board.BoardType;
+import com.jaks1m.project.domain.api.entity.user.Status;
 import com.jaks1m.project.domain.api.entity.user.User;
 import com.jaks1m.project.domain.api.repository.BoardRepository;
 import com.jaks1m.project.domain.api.repository.UserRepository;
@@ -60,7 +61,16 @@ public class BoardService {
         return boardResponseBuilder(board.get());
     }
 
-    public List<BoardResponse> getList(Pageable pageable){
+    @Transactional
+    public void deleteBoard(Long id){
+        Optional<Board> board = boardRepository.findById(id);
+        if(board.isEmpty()) {
+            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
+        }
+        board.get().updateStatus(Status.DELETE);
+    }
+
+    public List<BoardResponse> getBoardList(Pageable pageable){
         List<BoardResponse> responses=new ArrayList<>();
         responses.addAll(getBoards(BoardType.FREE,pageable));
         responses.addAll(getBoards(BoardType.GROUP,pageable));

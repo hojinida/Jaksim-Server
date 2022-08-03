@@ -1,15 +1,19 @@
 package com.jaks1m.project.domain.api.entity.board;
 
 import com.jaks1m.project.domain.api.entity.user.BaseEntity;
+import com.jaks1m.project.domain.api.entity.user.Status;
 import com.jaks1m.project.domain.api.entity.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity @Getter
 @RequiredArgsConstructor
 @SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "BOARD_SEQ")
+//@Where(clause = "status='ACTIVE'")
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "BOARD_SEQ_GENERATOR")
@@ -32,6 +36,10 @@ public class Board extends BaseEntity {
         this.title = title;
         this.content = content;
         this.boardType = boardType;
+    }
+
+    public void updateStatus(Status status){
+        super.updateStatus(status);
     }
 
     public void updateVisit(){

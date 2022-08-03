@@ -72,6 +72,7 @@ public class User extends BaseEntity implements UserDetails{
     @Override
     public void updateStatus(Status status){
         super.updateStatus(status);
+        s3Image.updateStatus(status);
         password.updateStatus(status);
         name.updateStatus(status);
         privacyPolity.updateStatus(status);
