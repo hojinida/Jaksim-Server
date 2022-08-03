@@ -72,18 +72,6 @@ public class AwsS3Service {
             log.info("파일이 삭제되지 않았습니다.");
         }
     }
-
-    private String randomFileName(File file, String dirName) {
-        return dirName + "/" + UUID.randomUUID() + file.getName();
-    }
-
-    private String putS3(File uploadFile, String fileName) {
-        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3Client.getUrl(bucket, fileName).toString();
-    }
-
-
     private String upload(File file, String dirName, Category category) {
         String key = randomFileName(file, dirName);
         String path = putS3(file, key);
@@ -98,6 +86,15 @@ public class AwsS3Service {
         removeFile(file);
 
         return path;
+    }
+    private String randomFileName(File file, String dirName) {
+        return dirName + "/" + UUID.randomUUID() + file.getName();
+    }
+
+    private String putS3(File uploadFile, String fileName) {
+        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
+        return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
     public Optional<File> convertMultipartFileToFile(MultipartFile multipartFile) throws IOException {
