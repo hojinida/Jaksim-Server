@@ -47,15 +47,17 @@ public class BoardService {
             throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
         }
         board.get().updateVisit();
-        return BoardResponse.builder()
-                .boardId(board.get().getId())
-                .title(board.get().getTitle())
-                .content(board.get().getContent())
-                .visit(board.get().getCountVisit())
-                .userName(board.get().getUser().getName().getName())
-                .createdData(board.get().getCreatedData())
-                .lastModifiedDate(board.get().getLastModifiedDate())
-                .build();
+        return boardResponseBuilder(board.get());
+    }
+    @Transactional
+    public BoardResponse editBoard(BoardPostRequestDto request,Long id){
+        Optional<Board> board = boardRepository.findById(id);
+        if(board.isEmpty()){
+            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
+        }
+        board.get().updateBoard(request.getTitle(), request.getContent(), request.getBoardType());
+
+        return boardResponseBuilder(board.get());
     }
 
     public List<BoardResponse> getList(Pageable pageable){
@@ -69,15 +71,19 @@ public class BoardService {
         List<Board> boards=boardRepository.findAllByBoardTypeOrderByIdDesc(boardType,pageable);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
-            response.add(BoardResponse.builder()
-                    .boardId(board.getId())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .userName(board.getUser().getName().getName())
-                    .createdData(board.getCreatedData())
-                    .lastModifiedDate(board.getLastModifiedDate())
-                    .visit(board.getCountVisit()).build());
+            response.add(boardResponseBuilder(board));
         }
         return response;
+    }
+
+    private BoardResponse boardResponseBuilder(Board board){
+        return BoardResponse.builder()
+                .boardId(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .userName(board.getUser().getName().getName())
+                .createdData(board.getCreatedData())
+                .lastModifiedDate(board.getLastModifiedDate())
+                .visit(board.getCountVisit()).build();
     }
 }

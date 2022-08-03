@@ -50,11 +50,21 @@ public class BoardController {
     }
 
     @GetMapping("/list/{id}")
-    @ApiOperation(value = "게시판 상세")
+    @ApiOperation(value = "게시글 상세")
     public ResponseEntity<BaseResponse<BoardResponse>> getBoard(@PathVariable Long id){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
                         .body(boardService.getBoard(id))
                         .build());
     }
+
+    @PutMapping("/list/{id}")
+    @ApiOperation(value = "게시글 수정")
+    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestBody @Validated BoardPostRequestDto request,@PathVariable Long id){
+        return ResponseEntity.status(200)
+                .body(BaseResponse.<BoardResponse>builder()
+                        .body(boardService.editBoard(request,id))
+                        .build());
+    }
+    
 }
