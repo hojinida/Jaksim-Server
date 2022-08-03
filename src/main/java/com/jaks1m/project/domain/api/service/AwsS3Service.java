@@ -74,7 +74,10 @@ public class AwsS3Service {
     }
     private String upload(File file, String dirName, Category category) {
         String key = randomFileName(file, dirName);
+        System.out.println("###############################################");
+        System.out.println(key);
         String path = putS3(file, key);
+        System.out.println(path);
         if(category==Category.USER){
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                     .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
