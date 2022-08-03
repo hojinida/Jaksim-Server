@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.api.service;
 
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jaks1m.project.domain.api.entity.aws.Category;
@@ -27,7 +27,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AwsS3Service {
-    private final AmazonS3Client amazonS3Client;
+    private final AmazonS3 amazonS3;
     private final UserRepository userRepository;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -59,10 +59,10 @@ public class AwsS3Service {
         }else{
             url="1";
         }
-        if (!amazonS3Client.doesObjectExist(bucket, url)) {
+        if (!amazonS3.doesObjectExist(bucket, url)) {
             throw new CustomException(ErrorCode.IMAGE_NOT_FOUND);
         }
-        amazonS3Client.deleteObject(bucket, url);
+        amazonS3.deleteObject(bucket, url);
     }
 
     private void removeFile(File file) {
@@ -92,9 +92,9 @@ public class AwsS3Service {
     }
 
     private String putS3(File uploadFile, String fileName) {
-        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile)
+        amazonS3.putObject(new PutObjectRequest(bucket, fileName, uploadFile)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3Client.getUrl(bucket, fileName).toString();
+        return amazonS3.getUrl(bucket, fileName).toString();
     }
 
     public Optional<File> convertMultipartFileToFile(MultipartFile multipartFile) throws IOException {
