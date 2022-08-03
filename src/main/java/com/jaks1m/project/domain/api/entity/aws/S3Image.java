@@ -18,18 +18,18 @@ public class S3Image extends BaseEntity {
     @Column(name = "S3_IMAGE_ID")
     private Long id;
     @Nullable
-    private String key;
+    private String imageKey;
     @Nullable
-    private String path;
+    private String imagePath;
     public void updateKey(String key){
-        this.key=key;
+        this.imageKey=key;
     }
     public void updatePath(String path){
-        this.path=path;
+        this.imagePath=path;
     }
     @Builder
-    public S3Image(@Nullable String key, @Nullable String path) {
-        this.key = key;
-        this.path = path;
+    public S3Image(@Nullable String imageKey, @Nullable String imagePath) {
+        this.imageKey = imageKey;
+        this.imagePath = imagePath;
     }
 }
