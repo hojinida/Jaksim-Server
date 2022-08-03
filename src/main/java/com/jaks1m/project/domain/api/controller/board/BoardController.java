@@ -32,7 +32,7 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    @ApiOperation(value = "게시판")
+    @ApiOperation(value = "게시판 상세")
     public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoards(@PageableDefault(size = 5) Pageable pageable
             ,@RequestParam @Validated BoardType boardType){
         return ResponseEntity.status(200)
