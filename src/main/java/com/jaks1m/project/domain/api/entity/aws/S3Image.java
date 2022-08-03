@@ -15,7 +15,6 @@ import javax.persistence.*;
 public class S3Image extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S3_IMAGE_SEQ_GENERATOR")
-    @Column(name = "S3_IMAGE_ID")
     private Long id;
     @Nullable
     private String imageKey;

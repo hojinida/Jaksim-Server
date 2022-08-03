@@ -31,7 +31,7 @@ public class User extends BaseEntity implements UserDetails{
     private Role role=Role.USER;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
-    private S3Image image;
+    private S3Image S3Image;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "PASSWORD_ID")
     private Password password;

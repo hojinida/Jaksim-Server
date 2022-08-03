@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.api.entity.user;
 
-import com.jaks1m.project.domain.api.entity.user.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
