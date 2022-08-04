@@ -79,11 +79,4 @@ public class BoardController {
         boardService.deleteBoard(id);
         return true;
     }
-
-    @GetMapping("/test")
-    public Boolean testC(){
-        List<Board> boards = boardRepository.findAllByStatusAndLastModifiedDateBefore(Status.ACTIVE, LocalDateTime.now());
-        return boards.isEmpty();
-    }
-
 }

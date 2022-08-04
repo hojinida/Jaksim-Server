@@ -17,15 +17,15 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class Schedule {
-//    private final UserRepository userRepository;
-//    private final BoardRepository boardRepository;
-//    @Scheduled(cron = "0 1 9 0 * ?")//매월 1일 9시 0분에 실행
-//    public void deleteUser(){
-//        log.info("Schedule User Delete Run");
-//        List<User> users = userRepository.findAllByStatusAndLastModifiedDateBefore(Status.DELETE, LocalDateTime.now().minusYears(5));
-//        userRepository.deleteAll(users);
-//        log.info("Schedule Board Delete Run");
-//        List<Board> boards=boardRepository.findAllByStatusAndLastModifiedDateBefore(Status.DELETE,LocalDateTime.now().minusYears(5));
-//        boardRepository.deleteAll(boards);
-//    }
+    private final UserRepository userRepository;
+    private final BoardRepository boardRepository;
+    @Scheduled(cron = "0 1 9 0 * ?")//매월 1일 9시 0분에 실행
+    public void deleteUser(){
+        log.info("Schedule User Delete Run");
+        List<User> users = userRepository.findAllByStatusAndLastModifiedDateAfter(Status.DELETE, LocalDateTime.now().minusYears(5));
+        userRepository.deleteAll(users);
+        log.info("Schedule Board Delete Run");
+        List<Board> boards=boardRepository.findAllByStatusAndLastModifiedDateAfter(Status.DELETE,LocalDateTime.now().minusYears(5));
+        boardRepository.deleteAll(boards);
+    }
 }

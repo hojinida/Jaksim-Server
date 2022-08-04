@@ -13,5 +13,5 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<Board,Long> {
     List<Board> findAllByBoardTypeOrderByIdDesc(BoardType boardType,Pageable pageable);
-    List<Board> findAllByStatusAndLastModifiedDateBefore(Status status, LocalDateTime localDateTime);
+    List<Board> findAllByStatusAndLastModifiedDateAfter(Status status, LocalDateTime localDateTime);
 }
