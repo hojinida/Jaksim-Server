@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Schedule {
     //@Scheduled(cron = "0 1 9 0 * ?")
-    @Async
     @Scheduled(fixedRate = 1000)
     public void deleteUser(){
         System.out.println("schedule start");
