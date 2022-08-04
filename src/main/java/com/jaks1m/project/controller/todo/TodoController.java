@@ -6,6 +6,7 @@ import com.jaks1m.project.service.func.TodoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class TodoController {
 
     @GetMapping
     @ApiOperation(value = "todo 조회")
-    public ResponseEntity<BaseResponse<List<TodoDto>>> getTodo(@RequestParam @Validated LocalDate localDate){
+    public ResponseEntity<BaseResponse<List<TodoDto>>> getTodo(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate localDate){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<TodoDto>>builder()
                         .status(200)
