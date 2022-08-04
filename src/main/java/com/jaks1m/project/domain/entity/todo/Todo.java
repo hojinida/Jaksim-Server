@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @SequenceGenerator(name = "TODO_SEQ_GENERATOR", sequenceName = "TODO_SEQ")
 public class Todo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "TODO_SEQ_GENERATOR")
     private Long id;
 
     private LocalDate createDate;
