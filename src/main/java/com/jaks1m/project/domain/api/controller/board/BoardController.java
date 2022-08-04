@@ -2,7 +2,10 @@ package com.jaks1m.project.domain.api.controller.board;
 
 import com.jaks1m.project.domain.api.dto.board.BoardPostRequestDto;
 import com.jaks1m.project.domain.api.dto.board.BoardResponse;
+import com.jaks1m.project.domain.api.entity.board.Board;
 import com.jaks1m.project.domain.api.entity.board.BoardType;
+import com.jaks1m.project.domain.api.entity.user.Status;
+import com.jaks1m.project.domain.api.repository.BoardRepository;
 import com.jaks1m.project.domain.api.service.BoardService;
 import com.jaks1m.project.domain.common.BaseResponse;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +16,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1//boards")
 public class BoardController {
+    private final BoardRepository boardRepository;
     private final BoardService boardService;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
@@ -73,5 +79,4 @@ public class BoardController {
         boardService.deleteBoard(id);
         return true;
     }
-
 }
