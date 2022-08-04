@@ -11,6 +11,7 @@ spring:
             authorization-grant-type: authorization_code
             scope:
               - profile_nickname
+              - profile_image
               - account_email
             client_name: kakao
           naver:
@@ -21,6 +22,7 @@ spring:
             scope:
               - name
               - email
+              - profile_image
           google:
             client-id:
             client-secret:

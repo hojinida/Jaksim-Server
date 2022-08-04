@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.api.dto.request;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,11 +21,11 @@ public class JoinUserRequestDto {
     @NotEmpty(message = "이름 입력값이 존재하지 않습니다.")
     private String name;
 
-    @AssertTrue(message = "개인정보 이용 동의가 거부되었습니다.")
-    private Boolean privacyPolity;
-
     @AssertTrue(message = "서비스 이용약관 동의가 거부되었습니다.")
     private Boolean termsOfService;
+
+    @AssertTrue(message = "개인정보 이용 동의가 거부되었습니다.")
+    private Boolean privacyPolity;
 
     private Boolean receivePolity;
 }
