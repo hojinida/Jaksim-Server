@@ -81,8 +81,9 @@ public class BoardController {
     }
 
     @GetMapping("/test")
-    public List<Board> testC(){
-        return boardRepository.findAllByStatusAndLastModifiedDateBefore(Status.ACTIVE, LocalDateTime.now());
+    public Boolean testC(){
+        List<Board> boards = boardRepository.findAllByStatusAndLastModifiedDateBefore(Status.ACTIVE, LocalDateTime.now());
+        return boards.isEmpty();
     }
 
 }
