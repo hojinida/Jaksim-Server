@@ -6,6 +6,7 @@ import com.jaks1m.project.domain.entity.todo.Todo;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
+import com.jaks1m.project.dto.todo.EditTodoCompletedRequestDto;
 import com.jaks1m.project.dto.todo.EditTodoTitleRequestDto;
 import com.jaks1m.project.dto.todo.AddTodoRequestDto;
 import com.jaks1m.project.dto.todo.GetTodoResponseDto;
@@ -50,7 +51,23 @@ public class TodoService {
         return result;
     }
     @Transactional
-    public void editTodo(EditTodoTitleRequestDto request, Long id){
+    public void editTodoTitle(EditTodoTitleRequestDto request, Long id){
+        Todo todo =checkUnauthorizedAccess(id);
+        todo.updateTitle(request.getTitle());
+    }
+
+    @Transactional
+    public void editTodoCompleted(EditTodoCompletedRequestDto request, Long id){
+        Todo todo=checkUnauthorizedAccess(id);
+        todo.updateCompleted(request.getCompleted());
+    }
+    @Transactional
+    public void deleteTodo(Long id){
+        Todo todo=checkUnauthorizedAccess(id);
+        todoRepository.delete(todo);
+    }
+
+    private Todo checkUnauthorizedAccess(Long id) {
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Optional<Todo> todo = todoRepository.findById(id);
@@ -60,6 +77,6 @@ public class TodoService {
         if(user!=todo.get().getUser()){//다른 회원이 수정 시도했을 떄
             throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
         }
-        todo.get().updateTitle(request.getTitle());
+        return todo.get();
     }
 }

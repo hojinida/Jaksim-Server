@@ -1,6 +1,7 @@
 package com.jaks1m.project.controller.todo;
 
 import com.jaks1m.project.domain.common.response.BaseResponse;
+import com.jaks1m.project.dto.todo.EditTodoCompletedRequestDto;
 import com.jaks1m.project.dto.todo.EditTodoTitleRequestDto;
 import com.jaks1m.project.dto.todo.AddTodoRequestDto;
 import com.jaks1m.project.dto.todo.GetTodoResponseDto;
@@ -42,7 +43,21 @@ public class TodoController {
     @PatchMapping("/{id}/title")
     @ApiOperation(value = "todo 내용 수정")
     public ResponseEntity<String> editTodoTitle(@RequestBody @Validated EditTodoTitleRequestDto request, @PathVariable Long id){
-        todoService.editTodo(request,id);
-        return ResponseEntity.status(200).body("Todo 수정 성공");
+        todoService.editTodoTitle(request,id);
+        return ResponseEntity.status(200).body("Todo 내용 수정 성공");
+    }
+
+    @PatchMapping("/{id}/completed")
+    @ApiOperation(value = "todo 체크박스 수정")
+    public ResponseEntity<String> editTodoCompleted(@RequestBody @Validated EditTodoCompletedRequestDto request, @PathVariable Long id){
+        todoService.editTodoCompleted(request,id);
+        return ResponseEntity.status(200).body("Todo 체크박스 수정 성공");
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "todo 체크박스 수정")
+    public ResponseEntity<String> deleteTodoCompleted(@PathVariable Long id){
+        todoService.deleteTodo(id);
+        return ResponseEntity.status(200).body("Todo 삭제 성공");
     }
 }
