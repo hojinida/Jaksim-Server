@@ -14,6 +14,6 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class ProjectApplication {
 	@PostConstruct
-	public void started() {TimeZone.setDefault(TimeZone.getTimeZone("KST"));}
+	public void started() {TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));}
 	public static void main(String[] args) {SpringApplication.run(ProjectApplication.class, args);}
 }
