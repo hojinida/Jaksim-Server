@@ -1,4 +1,4 @@
-package com.jaks1m.project.dto.board.response;
+package com.jaks1m.project.dto.community.response;
 
 import lombok.Builder;
 import lombok.Getter;

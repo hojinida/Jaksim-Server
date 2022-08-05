@@ -1,9 +1,9 @@
 package com.jaks1m.project.service.func;
 
-import com.jaks1m.project.dto.board.request.BoardPostRequestDto;
-import com.jaks1m.project.dto.board.response.BoardResponse;
-import com.jaks1m.project.domain.entity.board.Board;
-import com.jaks1m.project.domain.entity.board.BoardType;
+import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
+import com.jaks1m.project.dto.community.response.BoardResponse;
+import com.jaks1m.project.domain.entity.community.Board;
+import com.jaks1m.project.domain.entity.community.BoardType;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.repository.func.BoardRepository;

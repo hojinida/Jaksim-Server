@@ -1,6 +1,6 @@
 package com.jaks1m.project.domain.common;
 
-import com.jaks1m.project.domain.entity.board.Board;
+import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.repository.func.BoardRepository;

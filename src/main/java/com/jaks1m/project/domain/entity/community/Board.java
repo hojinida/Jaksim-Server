@@ -1,4 +1,4 @@
-package com.jaks1m.project.domain.entity.board;
+package com.jaks1m.project.domain.entity.community;
 
 import com.jaks1m.project.domain.entity.user.BaseEntity;
 import com.jaks1m.project.domain.entity.user.Status;

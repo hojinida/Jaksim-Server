@@ -1,7 +1,7 @@
 package com.jaks1m.project.domain.entity.user;
 
 import com.jaks1m.project.domain.entity.aws.S3Image;
-import com.jaks1m.project.domain.entity.board.Board;
+import com.jaks1m.project.domain.entity.community.Board;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
