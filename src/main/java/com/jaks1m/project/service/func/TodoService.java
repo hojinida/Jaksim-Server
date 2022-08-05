@@ -6,6 +6,7 @@ import com.jaks1m.project.domain.entity.todo.Todo;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
+import com.jaks1m.project.dto.todo.EditTodoTitleRequestDto;
 import com.jaks1m.project.dto.todo.TodoDto;
 import com.jaks1m.project.repository.func.TodoRepository;
 import com.jaks1m.project.repository.user.UserRepository;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -37,14 +39,17 @@ public class TodoService {
                 .build());
     }
 
-    public List<TodoDto> getTodo(LocalDate localDate){
+    public List<Todo> getTodo(LocalDate localDate){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        List<Todo> todos = todoRepository.findAllByUserAndCreateDateOrderByIdDesc(user, localDate);
-        List<TodoDto> dto= new ArrayList<>();
-        for(Todo todo:todos){
-            dto.add(TodoDto.builder().title(todo.getTitle()).completed(todo.getCompleted()).build());
+        return todoRepository.findAllByUserAndCreateDateOrderByIdAsc(user, localDate);
+    }
+    @Transactional
+    public void editTodo(EditTodoTitleRequestDto request, Long id){
+        Optional<Todo> todo = todoRepository.findById(id);
+        if(todo.isEmpty()){
+            throw new CustomException(ErrorCode.NOT_FOUND_TODO);
         }
-        return dto;
+        todo.get().updateTitle(request.getTitle());
     }
 }

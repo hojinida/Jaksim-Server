@@ -8,16 +8,13 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor
-@Builder
 public class BaseResponse<T>{
     private int status;
-    private String code;
     private String message;
     private T body;
-
-    public BaseResponse(int status, String message, String code,T body){
+    @Builder
+    public BaseResponse(int status, String message,T body){
         this.message=message;
-        this.code=code;
         this.status=status;
         this.body=body;
     }
