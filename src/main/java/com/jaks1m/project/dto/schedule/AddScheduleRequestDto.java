@@ -11,10 +11,8 @@ import java.time.LocalTime;
 @Getter
 public class AddScheduleRequestDto {
     @NotNull
-    @DateTimeFormat(pattern = "HH-mm")
     private LocalTime start;
     @NotNull
-    @DateTimeFormat(pattern = "HH-mm")
     private LocalTime end;
     @NotEmpty
     private String content;
