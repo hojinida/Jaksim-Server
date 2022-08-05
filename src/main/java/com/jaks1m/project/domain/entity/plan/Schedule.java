@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
@@ -26,16 +27,19 @@ public class Schedule {
     private LocalTime end;
     @NotEmpty
     private String content;
+    @NotNull
+    private LocalDate createDate;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder
-    public Schedule(LocalTime start, LocalTime end, String content, User user) {
+    public Schedule(LocalTime start, LocalTime end, String content, User user,LocalDate createDate) {
         this.start = start;
         this.end = end;
         this.content = content;
         this.user = user;
+        this.createDate=createDate;
     }
 }
