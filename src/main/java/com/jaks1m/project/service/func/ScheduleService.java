@@ -41,7 +41,7 @@ public class ScheduleService{
     public List<GetScheduleResponseDto> getSchedule(LocalDate localDate){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        List<Schedule> schedules= scheduleRepository.findAllByUserAndCreateDateOrderByIdAsc(user,localDate);
+        List<Schedule> schedules= scheduleRepository.findAllByUserAndCreateDateOrderByStartAsc(user,localDate);
         List<GetScheduleResponseDto> result=new ArrayList<>();
         schedules.forEach(schedule -> result.add(GetScheduleResponseDto.builder()
                 .id(schedule.getId()).content(schedule.getContent()).start(schedule.getStart()).end(schedule.getEnd()).build()));
