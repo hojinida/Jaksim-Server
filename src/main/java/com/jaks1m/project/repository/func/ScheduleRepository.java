@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule,Long>{
-    List<Schedule> findAllByUserAndCreateDateOrderByIdAsc(User user, LocalDate localDate);
+    List<Schedule> findAllByUserAndCreateDateOrderByStartAsc(User user, LocalDate localDate);
 }
