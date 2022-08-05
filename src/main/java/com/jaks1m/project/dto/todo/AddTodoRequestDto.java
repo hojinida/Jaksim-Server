@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-public class TodoDto {
+public class AddTodoRequestDto {
 
     @Column(nullable = false,length = 100)
     private String title;
@@ -17,7 +17,7 @@ public class TodoDto {
     private Boolean completed;
 
     @Builder
-    public TodoDto(String title, Boolean completed) {
+    public AddTodoRequestDto(String title, Boolean completed) {
         this.title = title;
         this.completed = completed;
     }

@@ -7,7 +7,8 @@ import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.dto.todo.EditTodoTitleRequestDto;
-import com.jaks1m.project.dto.todo.TodoDto;
+import com.jaks1m.project.dto.todo.AddTodoRequestDto;
+import com.jaks1m.project.dto.todo.GetTodoResponseDto;
 import com.jaks1m.project.repository.func.TodoRepository;
 import com.jaks1m.project.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class TodoService {
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
     @Transactional
-    public void addTodo(TodoDto request){
+    public void addTodo(AddTodoRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         todoRepository.save(Todo.builder()
@@ -39,10 +40,14 @@ public class TodoService {
                 .build());
     }
 
-    public List<Todo> getTodo(LocalDate localDate){
+    public List<GetTodoResponseDto> getTodo(LocalDate localDate){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        return todoRepository.findAllByUserAndCreateDateOrderByIdAsc(user, localDate);
+        List<Todo> todoList= todoRepository.findAllByUserAndCreateDateOrderByIdAsc(user, localDate);
+        List<GetTodoResponseDto> result=new ArrayList<>();
+        todoList.forEach(todo -> result.add(GetTodoResponseDto.builder()
+                .id(todo.getId()).title(todo.getTitle()).completed(todo.getCompleted()).build()));
+        return result;
     }
     @Transactional
     public void editTodo(EditTodoTitleRequestDto request, Long id){
