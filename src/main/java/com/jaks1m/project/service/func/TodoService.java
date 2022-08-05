@@ -51,9 +51,14 @@ public class TodoService {
     }
     @Transactional
     public void editTodo(EditTodoTitleRequestDto request, Long id){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Optional<Todo> todo = todoRepository.findById(id);
         if(todo.isEmpty()){
             throw new CustomException(ErrorCode.NOT_FOUND_TODO);
+        }
+        if(user!=todo.get().getUser()){//다른 회원이 수정 시도했을 떄
+            throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
         }
         todo.get().updateTitle(request.getTitle());
     }
