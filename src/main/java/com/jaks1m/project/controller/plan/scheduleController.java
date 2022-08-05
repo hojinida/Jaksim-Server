@@ -21,7 +21,7 @@ public class scheduleController {
     private final ScheduleService scheduleService;
     @PostMapping
     @ApiOperation(value = "schedule 등록")
-    public ResponseEntity<String> addTodo(@RequestBody @DateTimeFormat(pattern = "HH-mm") @Validated AddScheduleRequestDto request){
+    public ResponseEntity<String> addTodo(@RequestBody @Validated AddScheduleRequestDto request){
         scheduleService.addSchedule(request);
         return ResponseEntity.status(200).body("schedule 등록 성공");
     }
