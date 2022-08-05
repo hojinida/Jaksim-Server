@@ -37,6 +37,10 @@ public class Todo {
         this.completed=completed;
     }
 
+    public void deleteUser(){
+        this.user=null;
+    }
+
     @Builder
     public Todo(LocalDate createDate, String title, Boolean completed, User user) {
         this.createDate = createDate;
