@@ -1,4 +1,4 @@
-package com.jaks1m.project.domain.entity.todo;
+package com.jaks1m.project.domain.entity.plan;
 
 import com.jaks1m.project.domain.entity.user.User;
 import lombok.Builder;

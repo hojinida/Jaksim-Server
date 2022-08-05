@@ -1,4 +1,4 @@
-package com.jaks1m.project.controller.todo;
+package com.jaks1m.project.controller.plan;
 
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import com.jaks1m.project.dto.todo.EditTodoCompletedRequestDto;
@@ -55,7 +55,7 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "todo 체크박스 수정")
+    @ApiOperation(value = "todo 삭제")
     public ResponseEntity<String> deleteTodoCompleted(@PathVariable Long id){
         todoService.deleteTodo(id);
         return ResponseEntity.status(200).body("Todo 삭제 성공");

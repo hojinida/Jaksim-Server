@@ -2,7 +2,7 @@ package com.jaks1m.project.service.func;
 
 
 import com.jaks1m.project.config.security.SecurityUtil;
-import com.jaks1m.project.domain.entity.todo.Todo;
+import com.jaks1m.project.domain.entity.plan.Todo;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;

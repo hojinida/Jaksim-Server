@@ -1,7 +1,7 @@
-package com.jaks1m.project.dto.board.request;
+package com.jaks1m.project.dto.community.request;
 
-import com.jaks1m.project.domain.entity.board.BoardOrderType;
-import com.jaks1m.project.domain.entity.board.BoardType;
+import com.jaks1m.project.domain.entity.community.BoardOrderType;
+import com.jaks1m.project.domain.entity.community.BoardType;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
