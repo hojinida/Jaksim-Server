@@ -4,6 +4,7 @@ import com.jaks1m.project.domain.entity.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -19,6 +20,7 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SCHEDULE_SEQ_GENERATOR")
     private Long id;
     @NotNull
+    @DateTimeFormat(pattern = "HH-mm")
     private LocalTime start;
     @NotNull
     private LocalTime end;
