@@ -7,6 +7,7 @@ import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.dto.schedule.AddScheduleRequestDto;
+import com.jaks1m.project.dto.schedule.EditScheduleContentRequestDto;
 import com.jaks1m.project.dto.schedule.EditScheduleTimeRequestDto;
 import com.jaks1m.project.dto.schedule.GetScheduleResponseDto;
 import com.jaks1m.project.repository.func.ScheduleRepository;
@@ -54,6 +55,19 @@ public class ScheduleService{
     public void editScheduleTime(EditScheduleTimeRequestDto request, Long id){
         Schedule schedule=checkUnauthorizedAccess(id);
         schedule.updateTime(request.getStart(),request.getEnd());
+    }
+
+    @Transactional
+    public void editScheduleContent(EditScheduleContentRequestDto request, Long id){
+        Schedule schedule=checkUnauthorizedAccess(id);
+        schedule.updateContent(request.getContent());
+    }
+
+    @Transactional
+    public void deleteScheduleContent(Long id){
+        Schedule schedule=checkUnauthorizedAccess(id);
+        schedule.deleteUser();
+        scheduleRepository.delete(schedule);
     }
 
     private Schedule checkUnauthorizedAccess(Long id) {
