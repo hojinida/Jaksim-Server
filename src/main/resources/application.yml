@@ -48,4 +48,8 @@ jwt:
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
+  com:
+    amazons:
+      util:
+        com.amazons.util.EC2MetadataUtils: error
 
