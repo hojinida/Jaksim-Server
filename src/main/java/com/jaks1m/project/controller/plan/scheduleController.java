@@ -2,6 +2,7 @@ package com.jaks1m.project.controller.plan;
 
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import com.jaks1m.project.dto.schedule.AddScheduleRequestDto;
+import com.jaks1m.project.dto.schedule.EditScheduleTimeRequestDto;
 import com.jaks1m.project.dto.schedule.GetScheduleResponseDto;
 import com.jaks1m.project.service.func.ScheduleService;
 import io.swagger.annotations.ApiOperation;
@@ -35,5 +36,12 @@ public class scheduleController {
                 body(BaseResponse.<List<GetScheduleResponseDto>>builder()
                         .message("schedule 조회 성공")
                         .body(scheduleService.getSchedule(localDate)).build());
+    }
+
+    @PatchMapping("/{id}")
+    @ApiOperation(value = "schedule 시간 수정")
+    public ResponseEntity<String> editTodoTime(@RequestBody @Validated EditScheduleTimeRequestDto request, @PathVariable Long id){
+        scheduleService.editScheduleTime(request,id);
+        return ResponseEntity.status(200).body("schedule 시간 수정 성공");
     }
 }

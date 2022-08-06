@@ -34,6 +34,11 @@ public class Schedule {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    public void updateTime(LocalTime start, LocalTime end){
+        this.start=start;
+        this.end=end;
+    }
+
     @Builder
     public Schedule(LocalTime start, LocalTime end, String content, User user,LocalDate createDate) {
         this.start = start;
