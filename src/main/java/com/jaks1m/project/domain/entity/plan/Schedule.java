@@ -39,6 +39,14 @@ public class Schedule {
         this.end=end;
     }
 
+    public void updateContent(String content){
+        this.content=content;
+    }
+
+    public void deleteUser(){
+        this.user=null;
+    }
+
     @Builder
     public Schedule(LocalTime start, LocalTime end, String content, User user,LocalDate createDate) {
         this.start = start;
