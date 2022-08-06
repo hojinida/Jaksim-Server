@@ -6,7 +6,7 @@ spring:
           kakao:
             client-id:
             client-secret:
-            redirect-uri: http://15.165.196.158:8080/login/oauth2/code/kakao
+            redirect-uri: https://jaks1m.shop/login/oauth2/code/kakao
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope:
@@ -17,7 +17,7 @@ spring:
           naver:
             client-id:
             client-secret:
-            redirect-uri: http://15.165.196.158:8080/login/oauth2/code/naver
+            redirect-uri: https://jaks1m.shop/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope:
               - name
