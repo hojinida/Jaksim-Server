@@ -7,6 +7,7 @@ import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.dto.schedule.AddScheduleRequestDto;
+import com.jaks1m.project.dto.schedule.EditScheduleTimeRequestDto;
 import com.jaks1m.project.dto.schedule.GetScheduleResponseDto;
 import com.jaks1m.project.repository.func.ScheduleRepository;
 import com.jaks1m.project.repository.user.UserRepository;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -46,5 +48,24 @@ public class ScheduleService{
         schedules.forEach(schedule -> result.add(GetScheduleResponseDto.builder()
                 .id(schedule.getId()).content(schedule.getContent()).start(schedule.getStart()).end(schedule.getEnd()).build()));
         return result;
+    }
+
+    @Transactional
+    public void editScheduleTime(EditScheduleTimeRequestDto request, Long id){
+        Schedule schedule=checkUnauthorizedAccess(id);
+        schedule.updateTime(request.getStart(),request.getEnd());
+    }
+
+    private Schedule checkUnauthorizedAccess(Long id) {
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Optional<Schedule> schedule = scheduleRepository.findById(id);
+        if(schedule.isEmpty()){
+            throw new CustomException(ErrorCode.NOT_FOUND_SCHEDULE);
+        }
+        if(user!=schedule.get().getUser()){//다른 회원이 수정 시도했을 떄
+            throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
+        }
+        return schedule.get();
     }
 }
