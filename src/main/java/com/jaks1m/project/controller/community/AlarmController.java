@@ -16,5 +16,6 @@ public class AlarmController {
     @MessageMapping("/{id}")
     public void message(@DestinationVariable("id") Long id) {
         messagingTemplate.convertAndSend("/sub/" + id, "alarm socket connection completed.");
+        log.info(id+"소켓 연결 성공");
     }
 }

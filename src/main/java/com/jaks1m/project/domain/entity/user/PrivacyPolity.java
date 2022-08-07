@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @SequenceGenerator(name = "USER_INFORMATION_SEQ_GENERATOR",
-        sequenceName = "PRIVACY_POLITY_SEQ")
+        sequenceName = "USER_INFORMATION_SEQ")
 public class PrivacyPolity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_INFORMATION_SEQ_GENERATOR")

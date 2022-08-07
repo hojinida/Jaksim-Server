@@ -25,13 +25,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/sub");
-        registry.setApplicationDestinationPrefixes("/send");
+        registry.setApplicationDestinationPrefixes("/pub");
     }
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(stompHandler); // 핸들러 등록
     }
-
-
 }
