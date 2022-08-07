@@ -9,10 +9,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(name = "RECEIVE_POLITY_SEQ_GENERATOR", sequenceName = "RECEIVE_POLITY_SEQ")
+@SequenceGenerator(name = "USER_INFORMATION_SEQ_GENERATOR", sequenceName = "USER_INFORMATION_SEQ")
 @Where(clause = "status='ACTIVE'")
 public class ReceivePolity extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "RECEIVE_POLITY_SEQ_GENERATOR")
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_INFORMATION_SEQ_GENERATOR")
     private Long id;
     private Boolean receivePolity;//선택
 

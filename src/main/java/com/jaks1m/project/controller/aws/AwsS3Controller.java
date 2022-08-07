@@ -10,17 +10,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/s3")
+@RequestMapping("/api/v1/s3/image")
 @RequiredArgsConstructor
 public class AwsS3Controller {
     private final AwsS3Service awsS3Service;
-    @GetMapping("/image")
+    @GetMapping
     @ApiOperation(value = "이미지 불러오기")
     public String loadImage(@RequestParam Category category){
         return awsS3Service.getImages(category);
     }
 
-    @PostMapping("/image")
+    @PostMapping
     @ApiOperation(value = "이미지 저장")
     public String saveImage(@RequestPart("file") MultipartFile multipartFile, @RequestParam Category category) throws IOException {
         return awsS3Service.upload(multipartFile,"upload",category);

@@ -26,6 +26,7 @@ spring:
           google:
             client-id:
             client-secret:
+            redirect-uri: https://jaks1m.shop/login/oauth2/code/google
             scope:
               - profile
               - email

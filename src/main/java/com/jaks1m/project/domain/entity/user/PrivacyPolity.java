@@ -8,11 +8,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(name = "PRIVACY_POLITY_SEQ_GENERATOR",
+@SequenceGenerator(name = "USER_INFORMATION_SEQ_GENERATOR",
         sequenceName = "PRIVACY_POLITY_SEQ")
 public class PrivacyPolity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "PRIVACY_POLITY_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_INFORMATION_SEQ_GENERATOR")
     private Long id;
     private Boolean privacyPolity;//필수
 
