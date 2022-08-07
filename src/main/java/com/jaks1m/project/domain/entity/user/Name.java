@@ -10,11 +10,11 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(name = "NAME_SEQ_GENERATOR", sequenceName = "NAME_SEQ")
+@SequenceGenerator(name = "USER_INFORMATION_SEQ_GENERATOR", sequenceName = "USER_INFORMATION_SEQ")
 @Where(clause = "status='ACTIVE'")
 public class Name extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "NAME_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_INFORMATION_SEQ_GENERATOR")
     private Long id;
     @Column(length = 30)//한글 10자 이내
     @NotEmpty

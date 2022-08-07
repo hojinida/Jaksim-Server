@@ -1,4 +1,4 @@
-package com.jaks1m.project.service.func;
+package com.jaks1m.project.service.community;
 
 import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;

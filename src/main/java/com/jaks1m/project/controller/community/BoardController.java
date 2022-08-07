@@ -4,7 +4,7 @@ import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
 import com.jaks1m.project.repository.func.BoardRepository;
-import com.jaks1m.project.service.func.BoardService;
+import com.jaks1m.project.service.community.BoardService;
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,14 +25,12 @@ public class OauthController {
 
     @PostMapping("/login")
     @ApiOperation(value = "사용자 로그인")
-    public ResponseEntity<BaseResponse<UserDto>> login(@RequestBody @Validated LoginUserRequestDto request, HttpServletResponse response) throws Exception {
-        UserDto userDto=authService.login(request,response);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.<UserDto>builder()
-                        .status(200)
-                        .body(userDto)
-                        .build());
+    public void login(@RequestBody @Validated LoginUserRequestDto request, HttpServletResponse response) throws Exception {
+        UserDto userDto=authService.login(request);
+        response.sendRedirect(UriComponentsBuilder.fromUriString("/auth/me")
+                .queryParam("accessToken",userDto.getAccessToken())
+                .queryParam("refreshToken",userDto.getRefreshToken())
+                .build().toUriString());
     }
 
     @PostMapping("/reissue")
