@@ -28,6 +28,10 @@ public class User extends BaseEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "FRIENDS_ID")
+    private List<Friends> friends=new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
     private S3Image s3Image;
@@ -66,6 +70,10 @@ public class User extends BaseEntity implements UserDetails{
     public void updateImage(String key,String path){
         this.s3Image.updateKey(key);
         this.s3Image.updatePath(path);
+    }
+
+    public void addFriends(Friends friends){
+        this.friends.add(friends);
     }
 
     @Override
