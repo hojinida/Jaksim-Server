@@ -30,4 +30,11 @@ public class FriendController {
     public ResponseEntity<List<FriendResponseDto>> addFriend(){
         return ResponseEntity.status(200).body(friendService.getFriends());
     }
+
+    @DeleteMapping
+    @ApiOperation("친구 삭제")
+    public ResponseEntity<String> deleteFriend(@RequestParam @Validated Long id){
+
+        return ResponseEntity.status(200).body("친구 삭제 성공");
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -29,9 +30,14 @@ public class FriendService {
         User receiveUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         User sendUser=userRepository.findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Friends friend=Friends.builder().friendId(sendUser.getId()).build();
-        friendsRepository.save(friend);
-        receiveUser.addFriends(friend);
+        Optional<Friends> findFriend = friendsRepository.findByFriendId(id);
+        if(findFriend.isPresent()){
+            receiveUser.addFriends(findFriend.get());
+        }else {
+            Friends friend = Friends.builder().friendId(sendUser.getId()).build();
+            friendsRepository.save(friend);
+            receiveUser.addFriends(friend);
+        }
     }
 
     public List<FriendResponseDto> getFriends(){
@@ -41,5 +47,13 @@ public class FriendService {
         List<FriendResponseDto> result=new ArrayList<>();
         friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).build()));
         return result;
+    }
+
+    @Transactional
+    public void deleteFriend(Long id){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Optional<Friends> friend = friendsRepository.findByFriendId(id);
+
     }
 }
