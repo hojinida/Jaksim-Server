@@ -7,14 +7,14 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Friends {
+@SequenceGenerator(name = "FRIENDS_SEQ_GENERATOR", sequenceName = "FRIENDS_INFORMATION_SEQ")
+public class Friends extends BaseEntity{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FRIENDS_INFORMATION_SEQ_GENERATOR")
     private Long id;
-
-    private String name;
+    private Long friendId;
     @Builder
-    public Friends(Long id,String name) {
-        this.id = id;
-        this.name=name;
+    public Friends(Long friendId) {
+        this.friendId = friendId;
     }
 }
