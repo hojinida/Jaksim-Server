@@ -30,8 +30,8 @@ public class FriendService {
         User receiveUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         User sendUser=userRepository.findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        addFriend(receiveUser);
-        addFriend(sendUser);
+        addFriend(receiveUser,sendUser);
+        addFriend(sendUser,receiveUser);
     }
 
     public List<FriendResponseDto> getFriends(){
@@ -42,14 +42,14 @@ public class FriendService {
         friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).name(friend.getName()).build()));
         return result;
     }
-    private void addFriend(User user){
-        Optional<Friends> friends = friendsRepository.findById(user.getId());
+    private void addFriend(User receiveUser,User sendUser){
+        Optional<Friends> friends = friendsRepository.findById(receiveUser.getId());
         if(friends.isEmpty()){
-            Friends friend=Friends.builder().id(user.getId()).name(user.getName().getName()).build();
+            Friends friend=Friends.builder().id(receiveUser.getId()).name(receiveUser.getName().getName()).build();
             friendsRepository.save(friend);
-            user.addFriends(friend);
+            sendUser.addFriends(friend);
         }else{
-            user.addFriends(friends.get());
+            sendUser.addFriends(friends.get());
         }
     }
 }
