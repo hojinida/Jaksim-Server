@@ -75,6 +75,7 @@ public class User extends BaseEntity implements UserDetails{
     public void addFriends(Friends friends){
         this.friends.add(friends);
     }
+    public void deleteFriends(Friends friends){this.friends.remove(friends);}
 
     @Override
     public void updateStatus(Status status){
