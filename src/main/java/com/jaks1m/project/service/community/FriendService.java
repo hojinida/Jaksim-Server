@@ -30,8 +30,14 @@ public class FriendService {
         User receiveUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         User sendUser=userRepository.findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        addFriend(receiveUser,sendUser);
-        addFriend(sendUser,receiveUser);
+        Optional<Friends> friends = friendsRepository.findById(sendUser.getId());
+        if(friends.isEmpty()){
+            Friends friend=Friends.builder().id(sendUser.getId()).name(sendUser.getName().getName()).build();
+            friendsRepository.save(friend);
+            receiveUser.addFriends(friend);
+        }else{
+            receiveUser.addFriends(friends.get());
+        }
     }
 
     public List<FriendResponseDto> getFriends(){
@@ -41,15 +47,5 @@ public class FriendService {
         List<FriendResponseDto> result=new ArrayList<>();
         friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).name(friend.getName()).build()));
         return result;
-    }
-    private void addFriend(User receiveUser,User sendUser){
-        Optional<Friends> friends = friendsRepository.findById(receiveUser.getId());
-        if(friends.isEmpty()){
-            Friends friend=Friends.builder().id(receiveUser.getId()).name(receiveUser.getName().getName()).build();
-            friendsRepository.save(friend);
-            sendUser.addFriends(friend);
-        }else{
-            sendUser.addFriends(friends.get());
-        }
     }
 }
