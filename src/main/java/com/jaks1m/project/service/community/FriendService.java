@@ -27,17 +27,17 @@ public class FriendService {
     private final FriendsRepository friendsRepository;
     @Transactional
     public void addFriend(Long id){
-        User receiveUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        User sendUser=userRepository.findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Optional<Friends> findFriend = friendsRepository.findByFriendId(id);
-        if(findFriend.isPresent()){
-            receiveUser.addFriends(findFriend.get());
-        }else {
-            Friends friend = Friends.builder().friendId(sendUser.getId()).build();
-            friendsRepository.save(friend);
-            receiveUser.addFriends(friend);
+        Friends findFriend = friendsRepository.findByFriendId(id);
+        if(findFriend==null) {
+            findFriend = Friends.builder().friendId(id).build();
+            friendsRepository.save(findFriend);
         }
+        if(user.getFriends().contains(findFriend)){
+            throw new CustomException(ErrorCode.ALREADY_FRIEND);
+        }
+        user.addFriends(findFriend);
     }
 
     public List<FriendResponseDto> getFriends(){
@@ -45,7 +45,7 @@ public class FriendService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         List<Friends> friends = user.getFriends();
         List<FriendResponseDto> result=new ArrayList<>();
-        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).build()));
+        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getFriendId()).build()));
         return result;
     }
 
@@ -53,7 +53,10 @@ public class FriendService {
     public void deleteFriend(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Optional<Friends> friend = friendsRepository.findByFriendId(id);
-
+        Friends friend = friendsRepository.findByFriendId(id);
+        if(friend==null){
+            throw new CustomException(ErrorCode.NOT_FOUND_FRIEND);
+        }
+        user.deleteFriends(friend);
     }
 }
