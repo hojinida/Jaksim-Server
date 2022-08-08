@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -30,14 +29,9 @@ public class FriendService {
         User receiveUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         User sendUser=userRepository.findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Optional<Friends> friends = friendsRepository.findById(sendUser.getId());
-        if(friends.isEmpty()){
-            Friends friend=Friends.builder().id(sendUser.getId()).name(sendUser.getName().getName()).build();
-            friendsRepository.save(friend);
-            receiveUser.addFriends(friend);
-        }else{
-            receiveUser.addFriends(friends.get());
-        }
+        Friends friend=Friends.builder().friendId(sendUser.getId()).build();
+        friendsRepository.save(friend);
+        receiveUser.addFriends(friend);
     }
 
     public List<FriendResponseDto> getFriends(){
@@ -45,7 +39,7 @@ public class FriendService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         List<Friends> friends = user.getFriends();
         List<FriendResponseDto> result=new ArrayList<>();
-        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).name(friend.getName()).build()));
+        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getId()).build()));
         return result;
     }
 }

@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FriendResponseDto {
     private Long id;
-    private String name;
 
     @Builder
-    public FriendResponseDto(Long id, String name) {
+    public FriendResponseDto(Long id) {
         this.id = id;
-        this.name = name;
     }
 }
