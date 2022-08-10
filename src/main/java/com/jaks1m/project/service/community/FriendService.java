@@ -2,7 +2,7 @@ package com.jaks1m.project.service.community;
 
 
 import com.jaks1m.project.config.security.SecurityUtil;
-import com.jaks1m.project.domain.entity.user.Friends;
+import com.jaks1m.project.domain.entity.user.Friend;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
@@ -29,9 +29,11 @@ public class FriendService {
     public void addFriend(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Friends findFriend = friendsRepository.findByFriendId(id);
+        User findUser=userRepository.findById(id)
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Friend findFriend = friendsRepository.findByFriend(findUser);
         if(findFriend==null) {
-            findFriend = Friends.builder().friendId(id).build();
+            findFriend = Friend.builder().friend(findUser).build();
             friendsRepository.save(findFriend);
         }
         if(user.getFriends().contains(findFriend)){
@@ -43,9 +45,10 @@ public class FriendService {
     public List<FriendResponseDto> getFriends(){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        List<Friends> friends = user.getFriends();
+        List<Friend> friends = user.getFriends();
         List<FriendResponseDto> result=new ArrayList<>();
-        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getFriendId()).build()));
+        friends.forEach(friend -> result.add(FriendResponseDto.builder().id(friend.getFriend().getId())
+                .name(friend.getFriend().getName().getName()).image(friend.getFriend().getS3Image().getImagePath()).build()));
         return result;
     }
 
@@ -53,7 +56,9 @@ public class FriendService {
     public void deleteFriend(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Friends friend = friendsRepository.findByFriendId(id);
+        User findUser = userRepository.findById(id)
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Friend friend = friendsRepository.findByFriend(findUser);
         if(friend==null){
             throw new CustomException(ErrorCode.NOT_FOUND_FRIEND);
         }
