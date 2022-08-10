@@ -2,6 +2,7 @@ package com.jaks1m.project.domain.entity.user;
 
 import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.domain.entity.community.Board;
+import com.jaks1m.project.domain.entity.notification.Notification;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +29,11 @@ public class User extends BaseEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Friend> friends=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "FRIENDS_ID")
-    private List<Friends> friends=new ArrayList<>();
+    private List<Notification> notifications=new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
     private S3Image s3Image;
@@ -72,10 +74,10 @@ public class User extends BaseEntity implements UserDetails{
         this.s3Image.updatePath(path);
     }
 
-    public void addFriends(Friends friends){
-        this.friends.add(friends);
+    public void addFriends(Friend friend){
+        this.friends.add(friend);
     }
-    public void deleteFriends(Friends friends){this.friends.remove(friends);}
+    public void deleteFriends(Friend friend){this.friends.remove(friend);}
 
     @Override
     public void updateStatus(Status status){

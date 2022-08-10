@@ -1,10 +1,9 @@
 package com.jaks1m.project.repository.user;
 
-import com.jaks1m.project.domain.entity.user.Friends;
+import com.jaks1m.project.domain.entity.user.Friend;
+import com.jaks1m.project.domain.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface FriendsRepository extends JpaRepository<Friends,Long> {
-    Friends findByFriendId(Long friendId);
+public interface FriendsRepository extends JpaRepository<Friend,Long> {
+    Friend findByFriend(User friend);
 }

@@ -8,13 +8,16 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @SequenceGenerator(name = "FRIENDS_SEQ_GENERATOR", sequenceName = "FRIENDS_INFORMATION_SEQ")
-public class Friends extends BaseEntity{
+public class Friend extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FRIENDS_INFORMATION_SEQ_GENERATOR")
     private Long id;
-    private Long friendId;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    private User friend;
     @Builder
-    public Friends(Long friendId) {
-        this.friendId = friendId;
+    public Friend(User friend) {
+        this.friend=friend;
     }
 }
