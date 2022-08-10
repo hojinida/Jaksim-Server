@@ -29,10 +29,10 @@ public class User extends BaseEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role=Role.USER;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "friend")
     private List<Friend> friends=new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Notification> notifications=new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
