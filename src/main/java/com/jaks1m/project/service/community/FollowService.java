@@ -33,8 +33,12 @@ public class FollowService {
             throw new CustomException(ErrorCode.ALREADY_FOLLOW);
         }
         Follow follow=Follow.builder().fromUser(fromUser).toUser(toUser).build();
-        toUser.getFollowers().add(follow);
         fromUser.getFollows().add(follow);
+        toUser.getFollowers().add(follow);
+        System.out.println(fromUser.getFollows());
+        System.out.println(fromUser.getFollowers());
+        System.out.println(toUser.getFollows());
+        System.out.println(toUser.getFollowers());
         followRepository.save(follow);
     }
 
@@ -43,8 +47,8 @@ public class FollowService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         List<Follow> followers = user.getFollowers();
         List<FriendResponseDto> result=new ArrayList<>();
-        followers.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getToUser().getId())
-                .name(follower.getToUser().getName().getName()).image(follower.getToUser().getS3Image().getImagePath()).build()));
+        followers.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getFromUser().getId())
+                .name(follower.getFromUser().getName().getName()).image(follower.getFromUser().getS3Image().getImagePath()).build()));
         return result;
     }
 
@@ -53,8 +57,8 @@ public class FollowService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         List<Follow> follows = user.getFollows();
         List<FriendResponseDto> result=new ArrayList<>();
-        follows.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getFromUser().getId())
-                .name(follower.getFromUser().getName().getName()).image(follower.getFromUser().getS3Image().getImagePath()).build()));
+        follows.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getToUser().getId())
+                .name(follower.getToUser().getName().getName()).image(follower.getToUser().getS3Image().getImagePath()).build()));
         return result;
     }
 

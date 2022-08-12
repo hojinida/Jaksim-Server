@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class FollowController {
     private final FollowService followService;
-
     @PostMapping("/follow")
     @ApiOperation("follow 신청")
     public ResponseEntity<String> addFollow(@RequestParam @Validated Long id){
