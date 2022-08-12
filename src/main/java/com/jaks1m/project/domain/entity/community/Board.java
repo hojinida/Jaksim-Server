@@ -45,17 +45,12 @@ public class Board extends BaseEntity {
         this.countVisit+=1;
     }
 
-    public void updateUser(User user){
-        this.user=user;
-        this.user.getBoards().add(this);
-    }
-
     @Builder
     public Board(String title, String content, Long countVisit, BoardType boardType, User user) {
         this.title = title;
         this.content = content;
         this.countVisit = countVisit;
         this.boardType = boardType;
-        updateUser(user);
+        this.user=user;
     }
 }

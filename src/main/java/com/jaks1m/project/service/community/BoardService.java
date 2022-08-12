@@ -30,7 +30,7 @@ public class BoardService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void postBoard(BoardPostRequestDto request){
+    public void addBoard(BoardPostRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         boardRepository.save(Board.builder()

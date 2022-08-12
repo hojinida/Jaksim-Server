@@ -33,12 +33,6 @@ public class FollowService {
             throw new CustomException(ErrorCode.ALREADY_FOLLOW);
         }
         Follow follow=Follow.builder().fromUser(fromUser).toUser(toUser).build();
-        fromUser.getFollows().add(follow);
-        toUser.getFollowers().add(follow);
-        System.out.println(fromUser.getFollows());
-        System.out.println(fromUser.getFollowers());
-        System.out.println(toUser.getFollows());
-        System.out.println(toUser.getFollowers());
         followRepository.save(follow);
     }
 
@@ -82,7 +76,6 @@ public class FollowService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Follow follow = followRepository.findByFromUserAndToUser(fromUser, toUser)
                 .orElseThrow(()->new CustomException(ErrorCode.NOT_FOUND_FOLLOW));
-        toUser.getFollowers().remove(follow);
-        fromUser.getFollows().remove(follow);
+        followRepository.delete(follow);
     }
 }
