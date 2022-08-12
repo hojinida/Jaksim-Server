@@ -32,10 +32,10 @@ public class User extends BaseEntity implements UserDetails{
     private Role role=Role.USER;
 
     @OneToMany(mappedBy = "fromUser",cascade = CascadeType.ALL)
-    private List<Follow> followers =new ArrayList<>();
+    private List<Follow> follows =new ArrayList<>();
 
     @OneToMany(mappedBy = "toUser",cascade = CascadeType.ALL)
-    private List<Follow> follows =new ArrayList<>();
+    private List<Follow> followers =new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications=new ArrayList<>();

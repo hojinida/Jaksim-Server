@@ -33,17 +33,8 @@ public class FollowService {
             throw new CustomException(ErrorCode.ALREADY_FOLLOW);
         }
         Follow follow=Follow.builder().fromUser(fromUser).toUser(toUser).build();
-        fromUser.getFollows().add(follow);
-        toUser.getFollowers().add(follow);
-        System.out.println("#######");
-        System.out.println(fromUser.getFollows());
-        System.out.println("#######");
-        System.out.println(fromUser.getFollowers());
-        System.out.println("#######");
-        System.out.println(toUser.getFollows());
-        System.out.println("#######");
-        System.out.println(toUser.getFollowers());
-        System.out.println("#######");
+        //fromUser.getFollows().add(follow);
+        //toUser.getFollowers().add(follow);
         followRepository.save(follow);
     }
 
