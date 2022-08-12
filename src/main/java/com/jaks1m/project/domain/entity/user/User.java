@@ -125,6 +125,7 @@ public class User extends BaseEntity implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
     @Builder
     public User(String email, String password, String name,S3Image s3Image, Boolean privacyPolity
             , Boolean termsOfService, Boolean receivePolity,Role role,String homeGround){
@@ -138,4 +139,5 @@ public class User extends BaseEntity implements UserDetails{
         this.role=role;
         this.homeGround=homeGround;
     }
+
 }

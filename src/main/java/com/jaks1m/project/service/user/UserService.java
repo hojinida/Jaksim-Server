@@ -5,6 +5,7 @@ import com.jaks1m.project.dto.user.edit.EditUserDto;
 import com.jaks1m.project.dto.user.edit.EditUserPasswordDto;
 import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.config.security.SecurityUtil;
+import com.jaks1m.project.dto.user.edit.FindUserPasswordDto;
 import com.jaks1m.project.dto.user.request.JoinUserRequestDto;
 import com.jaks1m.project.dto.user.response.UserDto;
 import com.jaks1m.project.dto.user.response.UserResponseDto;
@@ -40,7 +41,7 @@ public class UserService{
 
     //회원 가입
     @Transactional
-    public UserDto join(JoinUserRequestDto request){
+    public UserDto joinUser(JoinUserRequestDto request){
         validateDuplicateUser(request.getEmail());//중복 회원 검증
         User user = createUser(request);//회원 생성
 
@@ -102,7 +103,13 @@ public class UserService{
         }
     }
     @Transactional
-    public void quit(HttpServletRequest request){
+    public void findPassword(FindUserPasswordDto request){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        user.updatePassword(passwordEncoder.encode(request.getPassword()));
+    }
+    @Transactional
+    public void quitUser(HttpServletRequest request){
         String accessToken=jwtTokenProvider.resolveToken(request);
         if(StringUtils.hasText(accessToken)&&jwtTokenProvider.validateToken(accessToken)) {
             User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
