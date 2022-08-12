@@ -38,6 +38,9 @@ public class User extends BaseEntity implements UserDetails{
     private List<Follow> followers =new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    private List<Board> boards=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
     private List<Notification> notifications=new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "S3_IMAGE_ID")
@@ -61,9 +64,6 @@ public class User extends BaseEntity implements UserDetails{
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "RECEIVE_POLITY_ID")
     private ReceivePolity receivePolity;
-
-    @OneToMany(mappedBy = "user")
-    private List<Board> boards=new ArrayList<>();
     public void updatePassword(String password){
         this.password.updatePassword(password);
     }
