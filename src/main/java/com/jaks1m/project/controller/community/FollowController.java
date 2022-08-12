@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Slf4j
@@ -50,4 +49,5 @@ public class FollowController {
         followService.deleteFollower(id);
         return ResponseEntity.status(200).body("follower 삭제 성공");
     }
+
 }
