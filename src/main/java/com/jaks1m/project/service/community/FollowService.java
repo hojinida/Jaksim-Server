@@ -53,8 +53,8 @@ public class FollowService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         List<Follow> follows = user.getFollows();
         List<FriendResponseDto> result=new ArrayList<>();
-        follows.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getToUser().getId())
-                .name(follower.getToUser().getName().getName()).image(follower.getToUser().getS3Image().getImagePath()).build()));
+        follows.forEach(follower -> result.add(FriendResponseDto.builder().id(follower.getFromUser().getId())
+                .name(follower.getFromUser().getName().getName()).image(follower.getFromUser().getS3Image().getImagePath()).build()));
         return result;
     }
 
