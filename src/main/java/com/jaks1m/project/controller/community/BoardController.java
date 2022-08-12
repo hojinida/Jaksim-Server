@@ -21,7 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/boards")
 public class BoardController {
-    private final BoardRepository boardRepository;
     private final BoardService boardService;
     @GetMapping
     @ApiOperation(value = "게시판 목록")

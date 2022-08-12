@@ -4,6 +4,7 @@ import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.service.aws.AwsS3Service;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,8 +29,8 @@ public class AwsS3Controller {
 
     @DeleteMapping("/image")
     @ApiOperation(value = "이미지 삭제")
-    public Boolean deleteImage(@RequestParam Category category){
+    public ResponseEntity<String> deleteImage(@RequestParam Category category){
         awsS3Service.remove(category);
-        return true;
+        return ResponseEntity.status(200).body("이미지 삭제 성공");
     }
 }

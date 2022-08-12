@@ -5,6 +5,7 @@ import com.jaks1m.project.service.auth.EmailService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,8 @@ public class EmailController {
 
     @ApiOperation(value = "이메일 인증 검증")
     @GetMapping("/confirm-email")
-    public String authEmail(@RequestParam @Validated String token) {
+    public ResponseEntity<String> authEmail(@RequestParam @Validated String token) {
         emailService.verifyEmail(token);
-        return "ok";
+        return ResponseEntity.status(200).body("이메일 인증 성공");
     }
 }
