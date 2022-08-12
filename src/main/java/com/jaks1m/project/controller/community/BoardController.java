@@ -46,8 +46,8 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public Boolean postBoard(@RequestBody @Validated BoardPostRequestDto request){
-        boardService.postBoard(request);
+    public Boolean addBoard(@RequestBody @Validated BoardPostRequestDto request){
+        boardService.addBoard(request);
         return true;
     }
 
