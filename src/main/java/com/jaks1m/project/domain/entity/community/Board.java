@@ -26,7 +26,7 @@ public class Board extends BaseEntity {
     @Lob
     private String content;
 
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
+    @Transient
     private List<S3Image> s3Images=new ArrayList<>();
     private Long countVisit;
     @Enumerated(EnumType.STRING)

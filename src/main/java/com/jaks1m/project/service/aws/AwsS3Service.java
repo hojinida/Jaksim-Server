@@ -3,7 +3,6 @@ package com.jaks1m.project.service.aws;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.user.User;

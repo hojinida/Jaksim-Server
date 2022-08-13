@@ -23,7 +23,7 @@ public class S3Image extends BaseEntity {
     private String imagePath;
 
     @Nullable
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "BOARD_ID")
     private Board board;
     public void updateKey(String imageKey){
