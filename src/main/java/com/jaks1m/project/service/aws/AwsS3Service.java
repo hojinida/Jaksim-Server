@@ -87,7 +87,7 @@ public class AwsS3Service {
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         if(user.getS3Image().getImagePath()!=null){
-            remove(Category.USER);
+            remove();
         }
         user.updateImage(key,path);
         removeFile(file);
