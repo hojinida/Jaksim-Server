@@ -72,8 +72,11 @@ public class UserService{
         return UserResponseDto.builder()
                 .email(user.getEmail())
                 .name(user.getName().getName())
-                .homeGround(user.getHomeGround())
+                .image(user.getS3Image().getImagePath())
                 .role(user.getRole())
+                .privacyPolity(user.getPrivacyPolity().getPrivacyPolity())
+                .termsOfService(user.getTermsOfService().getTermsOfService())
+                .receivePolity(user.getReceivePolity().getReceivePolity())
                 .build();
     }
 

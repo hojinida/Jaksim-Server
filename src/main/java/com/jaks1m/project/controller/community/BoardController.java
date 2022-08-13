@@ -3,7 +3,6 @@ package com.jaks1m.project.controller.community;
 import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
-import com.jaks1m.project.repository.func.BoardRepository;
 import com.jaks1m.project.service.community.BoardService;
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +13,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -45,8 +47,9 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public Boolean addBoard(@RequestBody @Validated BoardPostRequestDto request){
-        boardService.addBoard(request);
+    public Boolean addBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart @Validated BoardPostRequestDto request) throws IOException {
+        boardService.addBoard(multipartFiles,request);
         return true;
     }
 
@@ -61,10 +64,11 @@ public class BoardController {
 
     @PutMapping("/list/{id}")
     @ApiOperation(value = "게시글 수정")
-    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestBody @Validated BoardPostRequestDto request,@PathVariable Long id){
+    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart @Validated BoardPostRequestDto request,@PathVariable Long id){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.editBoard(request,id))
+                        .body(boardService.editBoard(multipartFiles,request,id))
                         .build());
     }
 

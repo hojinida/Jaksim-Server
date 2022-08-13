@@ -1,5 +1,6 @@
 package com.jaks1m.project.controller.user;
 
+import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.dto.user.edit.EditUserDto;
 import com.jaks1m.project.dto.user.edit.EditUserPasswordDto;
 import com.jaks1m.project.dto.user.edit.FindUserPasswordDto;
@@ -7,6 +8,7 @@ import com.jaks1m.project.dto.user.request.JoinUserRequestDto;
 import com.jaks1m.project.dto.user.response.UserDto;
 import com.jaks1m.project.dto.user.response.UserResponseDto;
 import com.jaks1m.project.domain.common.response.BaseResponse;
+import com.jaks1m.project.service.aws.AwsS3Service;
 import com.jaks1m.project.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +16,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AwsS3Service awsS3Service;
     @PostMapping()
     @ApiOperation(value = "사용자 회원가입")
     public ResponseEntity<BaseResponse<UserDto>> join(@RequestBody @Validated JoinUserRequestDto request) {
@@ -36,7 +40,6 @@ public class UserController {
 
     @DeleteMapping("/me/logout")
     @ApiOperation(value = "사용자 로그아웃")
-    @ResponseBody
     public ResponseEntity<String> logout(HttpServletRequest request){
         userService.logoutUser(request);
         return ResponseEntity.status(200).body("사용자 로그아웃 성공");
@@ -55,15 +58,27 @@ public class UserController {
 
     @PatchMapping("/me")
     @ApiOperation(value = "사용자 정보수정")
-    @ResponseBody
-    public ResponseEntity<String> patch(@RequestBody @Validated EditUserDto request){
+    public ResponseEntity<String> editUser(@RequestBody @Validated EditUserDto request){
         userService.patchUser(request);
         return ResponseEntity.status(200).body("사용자 정보수정 성공");
     }
 
+    @PostMapping("/me/image")
+    @ApiOperation(value = "사용자 프로필 등록")
+    public ResponseEntity<String> deleteImage(@RequestPart("file") MultipartFile multipartFile) throws IOException {
+        awsS3Service.upload(multipartFile,"upload");
+        return ResponseEntity.status(200).body("사용자 프로필 등록 성공");
+    }
+
+    @DeleteMapping("/me/image")
+    @ApiOperation(value = "사용자 프로필 삭제")
+    public ResponseEntity<String> deleteImage(){
+        awsS3Service.remove();
+        return ResponseEntity.status(200).body("사용자 프로필 삭제 성공");
+    }
+
     @PatchMapping("/me/quit")
     @ApiOperation(value = "사용자 회원탈퇴")
-    @ResponseBody
     public ResponseEntity<String> quitUser(HttpServletRequest request){
         userService.quitUser(request);
         return ResponseEntity.status(200).body("사용자 회원탈퇴 성공");
@@ -71,7 +86,6 @@ public class UserController {
 
     @PatchMapping("/password")
     @ApiOperation(value = "사용자 비밀번호 찾기")
-    @ResponseBody
     public ResponseEntity<String> findPassword(FindUserPasswordDto request){
         userService.findPassword(request);
         return ResponseEntity.status(200).body("사용자 비밀번호 찾기 성공");
