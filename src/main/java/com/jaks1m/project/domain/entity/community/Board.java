@@ -65,7 +65,7 @@ public class Board extends BaseEntity {
     public List<CommentResponseDto> getComments(){
         List<CommentResponseDto> commentDto=new ArrayList<>();
         for(Comment comment:comments){
-            commentDto.add(CommentResponseDto.builder().comment(comment.getComment()).name(comment.getUser().getName().getName())
+            commentDto.add(CommentResponseDto.builder().id(comment.getId()).comment(comment.getComment()).name(comment.getUser().getName().getName())
                     .image(comment.getUser().getS3Image().getImagePath()).createdData(comment.getCreatedData()).lastModifiedDate(comment.getLastModifiedDate()).build());
         }
         return commentDto;
