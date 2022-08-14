@@ -52,7 +52,9 @@ public class Board extends BaseEntity {
 
     public List<String> getImages(){
         List<String> images=new ArrayList<>();
-        s3Images.forEach(s3Image -> images.add(s3Image.getImagePath()));
+        for(S3Image image:s3Images){
+            images.add(image.getImagePath());
+        }
         return images;
     }
     public List<String> getKeys(){
@@ -78,7 +80,7 @@ public class Board extends BaseEntity {
                 .userName(user.getName().getName())
                 .visit(countVisit)
                 .images(getImages())
-                .createdData(this.getCreatedData())
-                .lastModifiedDate(this.getLastModifiedDate()).build();
+                .createdData(getCreatedData())
+                .lastModifiedDate(getLastModifiedDate()).build();
     }
 }

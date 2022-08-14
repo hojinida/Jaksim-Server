@@ -4,7 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jaks1m.project.dto.community.response.ImageDto;
-import com.jaks1m.project.repository.user.UserRepository;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ import java.util.*;
 @Transactional(readOnly = true)
 public class AwsS3Service {
     private final AmazonS3 amazonS3;
-    private final UserRepository userRepository;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
     @Transactional

@@ -1,6 +1,5 @@
 package com.jaks1m.project.controller.community;
-
-import com.jaks1m.project.domain.entity.aws.Category;
+;
 import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
@@ -27,7 +26,6 @@ import java.util.List;
 @RequestMapping("/api/v1/boards")
 public class BoardController {
     private final BoardService boardService;
-
     private final AwsS3Service awsS3Service;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
