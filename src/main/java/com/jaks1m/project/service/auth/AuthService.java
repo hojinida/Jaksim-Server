@@ -30,7 +30,7 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDto login(LoginUserRequestDto request) throws Exception{
+    public UserDto login(LoginUserRequestDto request){
         Optional<User> user = userRepository.findByEmail(request.getEmail());
 
         if(user.isEmpty()){
