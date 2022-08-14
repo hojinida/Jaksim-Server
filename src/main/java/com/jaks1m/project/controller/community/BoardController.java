@@ -49,13 +49,11 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public ResponseEntity<BaseResponse<BoardResponse>> addBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+    public ResponseEntity<String> addBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
             @RequestPart(value = "boardAddRequestDto") @Validated BoardAddRequestDto request) throws IOException {
         List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
-        return ResponseEntity.status(200)
-                .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.addBoard(images,request))
-                        .build());
+        boardService.addBoard(images,request);
+        return ResponseEntity.status(200).body("게시글 등록 성공");
     }
 
     @GetMapping("/list/{id}")

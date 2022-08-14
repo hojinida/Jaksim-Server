@@ -32,15 +32,13 @@ public class BoardService {
     private final UserRepository userRepository;
     private final S3ImageRepository s3ImageRepository;
     @Transactional
-    public BoardResponse addBoard(List<ImageDto> imageDto, BoardAddRequestDto request){
+    public void addBoard(List<ImageDto> imageDto, BoardAddRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Board board=Board.builder().user(user).boardType(request.getBoardType()).content(request.getContent())
                 .title(request.getTitle()).countVisit(0L).build();
         boardRepository.save(board);
         saveS3Image(imageDto,board);
-
-        return createBoardResponse(board);
     }
     @Transactional
     public BoardResponse getBoard(Long id){

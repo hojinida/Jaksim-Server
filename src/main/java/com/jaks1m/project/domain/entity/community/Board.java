@@ -4,7 +4,6 @@ import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.domain.entity.user.BaseEntity;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
-import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.dto.community.response.CommentResponseDto;
 import lombok.Builder;
 import lombok.Getter;
