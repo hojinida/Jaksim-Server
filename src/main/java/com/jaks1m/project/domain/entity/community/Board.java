@@ -55,7 +55,6 @@ public class Board extends BaseEntity {
         s3Images.forEach(s3Image -> images.add(s3Image.getImagePath()));
         return images;
     }
-
     public List<String> getKeys(){
         List<String> keys=new ArrayList<>();
         s3Images.forEach(s3Image -> keys.add(s3Image.getImageKey()));

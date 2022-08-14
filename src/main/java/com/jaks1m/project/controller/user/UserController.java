@@ -1,6 +1,7 @@
 package com.jaks1m.project.controller.user;
 
 import com.jaks1m.project.domain.entity.aws.Category;
+import com.jaks1m.project.dto.community.response.ImageDto;
 import com.jaks1m.project.dto.user.edit.EditUserDto;
 import com.jaks1m.project.dto.user.edit.EditUserPasswordDto;
 import com.jaks1m.project.dto.user.edit.FindUserPasswordDto;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -65,15 +67,16 @@ public class UserController {
 
     @PostMapping("/me/image")
     @ApiOperation(value = "사용자 프로필 등록")
-    public ResponseEntity<String> deleteImage(@RequestPart("file") MultipartFile multipartFile) throws IOException {
-        awsS3Service.upload(multipartFile,"upload");
+    public ResponseEntity<String> deleteImage(@RequestPart("file") List<MultipartFile> multipartFiles) throws IOException {
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
+        userService.addImage(images);
         return ResponseEntity.status(200).body("사용자 프로필 등록 성공");
     }
 
     @DeleteMapping("/me/image")
     @ApiOperation(value = "사용자 프로필 삭제")
     public ResponseEntity<String> deleteImage(){
-        awsS3Service.remove();
+        userService.deleteImage();
         return ResponseEntity.status(200).body("사용자 프로필 삭제 성공");
     }
 

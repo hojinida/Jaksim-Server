@@ -54,7 +54,7 @@ public class BoardController {
     @ApiOperation(value = "게시글 등록")
     public ResponseEntity<BaseResponse<BoardResponse>> addBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
             @RequestPart @Validated BoardPostRequestDto request) throws IOException {
-        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload", Category.BOARD);
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
                         .body(boardService.addBoard(images,request))
@@ -74,7 +74,7 @@ public class BoardController {
     @ApiOperation(value = "게시글 수정")
     public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
             @RequestPart @Validated BoardPostRequestDto request,@PathVariable Long id) throws IOException {
-        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload", Category.BOARD);
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
                         .body(boardService.editBoard(images,request,id))
