@@ -64,7 +64,6 @@ public class AwsS3Service {
 
     public Optional<File> convertMultipartFileToFile(MultipartFile multipartFile) throws IOException {
         File file = new File(System.getProperty("user.dir") + "/" + multipartFile.getOriginalFilename());
-
         if (file.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(file)){
                 fos.write(multipartFile.getBytes());
