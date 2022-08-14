@@ -47,7 +47,7 @@ public class BoardService {
             throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
         }
         board.get().updateVisit();
-        return board.get().toBoardResponse();
+        return createBoardResponse(board.get());
     }
     @Transactional
     public BoardResponse editBoard(List<ImageDto> imageDto, BoardAddRequestDto request, Long id){
@@ -57,9 +57,9 @@ public class BoardService {
         }
         board.get().updateBoard(request.getTitle(), request.getContent(), request.getBoardType());
         s3ImageRepository.deleteAll(board.get().getS3Images());
-
         saveS3Image(imageDto,board.get());
-        return board.get().toBoardResponse();
+        
+        return createBoardResponse(board.get());
     }
 
     @Transactional
@@ -95,5 +95,17 @@ public class BoardService {
             }
             s3ImageRepository.saveAll(s3Images);
         }
+    }
+
+    private BoardResponse createBoardResponse(Board board){
+        return BoardResponse.builder()
+                .boardId(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .userName(board.getUser().getName().getName())
+                .visit(board.getCountVisit())
+                .images(board.getImages())
+                .createdData(board.getCreatedData())
+                .lastModifiedDate(board.getLastModifiedDate()).build();
     }
 }
