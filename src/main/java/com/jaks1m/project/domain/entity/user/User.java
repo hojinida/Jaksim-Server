@@ -2,6 +2,7 @@ package com.jaks1m.project.domain.entity.user;
 
 import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.domain.entity.community.Board;
+import com.jaks1m.project.domain.entity.community.Comment;
 import com.jaks1m.project.domain.entity.follow.Follow;
 import com.jaks1m.project.domain.entity.notification.Notification;
 import lombok.Builder;
@@ -37,8 +38,11 @@ public class User extends BaseEntity implements UserDetails{
     @OneToMany(mappedBy = "toUser",cascade = CascadeType.ALL)
     private List<Follow> followers =new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Board> boards=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Comment> comments=new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications=new ArrayList<>();

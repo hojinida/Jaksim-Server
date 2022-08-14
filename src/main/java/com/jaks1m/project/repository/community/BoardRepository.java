@@ -1,4 +1,4 @@
-package com.jaks1m.project.repository.func;
+package com.jaks1m.project.repository.community;
 
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.community.BoardType;

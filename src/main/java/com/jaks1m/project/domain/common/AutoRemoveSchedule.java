@@ -3,7 +3,7 @@ package com.jaks1m.project.domain.common;
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
-import com.jaks1m.project.repository.func.BoardRepository;
+import com.jaks1m.project.repository.community.BoardRepository;
 import com.jaks1m.project.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

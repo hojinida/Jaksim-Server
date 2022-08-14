@@ -5,6 +5,7 @@ import com.jaks1m.project.domain.entity.user.BaseEntity;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.dto.community.response.BoardResponse;
+import com.jaks1m.project.dto.community.response.CommentResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,11 @@ import java.util.List;
 
 @Entity @Getter
 @RequiredArgsConstructor
-@SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "BOARD_SEQ")
+@SequenceGenerator(name = "COMMUNITY_SEQ_GENERATOR", sequenceName = "COMMUNITY_SEQ")
 @Where(clause = "status='ACTIVE'")
 public class Board extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "BOARD_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "COMMUNITY_SEQ_GENERATOR")
     @Column(name = "BOARD_ID")
     private Long id;
     private String title;
@@ -29,11 +30,14 @@ public class Board extends BaseEntity {
 
     @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<S3Image> s3Images=new ArrayList<>();
+
+    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
+    private List<Comment> comments=new ArrayList<>();
     private Long countVisit;
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
@@ -58,10 +62,14 @@ public class Board extends BaseEntity {
         }
         return images;
     }
-    public List<String> getKeys(){
-        List<String> keys=new ArrayList<>();
-        s3Images.forEach(s3Image -> keys.add(s3Image.getImageKey()));
-        return keys;
+
+    public List<CommentResponseDto> getComments(){
+        List<CommentResponseDto> commentDto=new ArrayList<>();
+        for(Comment comment:comments){
+            commentDto.add(CommentResponseDto.builder().comment(comment.getComment()).name(comment.getUser().getName().getName())
+                    .image(comment.getUser().getS3Image().getImagePath()).createdData(comment.getCreatedData()).lastModifiedDate(comment.getLastModifiedDate()).build());
+        }
+        return commentDto;
     }
     @Builder
     public Board(String title, String content, List<S3Image> s3Images, Long countVisit, BoardType boardType, User user) {
@@ -71,17 +79,5 @@ public class Board extends BaseEntity {
         this.countVisit = countVisit;
         this.boardType = boardType;
         this.user = user;
-    }
-
-    public BoardResponse toBoardResponse(){
-        return BoardResponse.builder()
-                .boardId(id)
-                .title(title)
-                .content(content)
-                .userName(user.getName().getName())
-                .visit(countVisit)
-                .images(getImages())
-                .createdData(getCreatedData())
-                .lastModifiedDate(getLastModifiedDate()).build();
     }
 }

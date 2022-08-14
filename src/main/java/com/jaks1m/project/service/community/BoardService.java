@@ -8,7 +8,7 @@ import com.jaks1m.project.domain.entity.community.BoardType;
 import com.jaks1m.project.domain.entity.user.Status;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.dto.community.response.ImageDto;
-import com.jaks1m.project.repository.func.BoardRepository;
+import com.jaks1m.project.repository.community.BoardRepository;
 import com.jaks1m.project.repository.func.S3ImageRepository;
 import com.jaks1m.project.repository.user.UserRepository;
 import com.jaks1m.project.config.security.SecurityUtil;
@@ -32,13 +32,15 @@ public class BoardService {
     private final UserRepository userRepository;
     private final S3ImageRepository s3ImageRepository;
     @Transactional
-    public void addBoard(List<ImageDto> imageDto, BoardAddRequestDto request){
+    public BoardResponse addBoard(List<ImageDto> imageDto, BoardAddRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Board board=Board.builder().user(user).boardType(request.getBoardType()).content(request.getContent())
                 .title(request.getTitle()).countVisit(0L).build();
         boardRepository.save(board);
         saveS3Image(imageDto,board);
+
+        return createBoardResponse(board);
     }
     @Transactional
     public BoardResponse getBoard(Long id){
@@ -51,24 +53,18 @@ public class BoardService {
     }
     @Transactional
     public BoardResponse editBoard(List<ImageDto> imageDto, BoardAddRequestDto request, Long id){
-        Optional<Board> board = boardRepository.findById(id);
-        if(board.isEmpty()){
-            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
-        }
-        board.get().updateBoard(request.getTitle(), request.getContent(), request.getBoardType());
-        s3ImageRepository.deleteAll(board.get().getS3Images());
-        saveS3Image(imageDto,board.get());
-        
-        return createBoardResponse(board.get());
+        Board board = checkUnauthorizedAccess(id);
+        board.updateBoard(request.getTitle(), request.getContent(), request.getBoardType());
+        s3ImageRepository.deleteAll(board.getS3Images());
+        saveS3Image(imageDto,board);
+
+        return createBoardResponse(board);
     }
 
     @Transactional
     public void deleteBoard(Long id){
-        Optional<Board> board = boardRepository.findById(id);
-        if(board.isEmpty()) {
-            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
-        }
-        board.get().updateStatus(Status.DELETE);
+        Board board=checkUnauthorizedAccess(id);
+        board.updateStatus(Status.DELETE);
     }
 
     public List<BoardResponse> getBoardList(Pageable pageable){
@@ -82,7 +78,7 @@ public class BoardService {
         List<Board> boards=boardRepository.findAllByBoardTypeOrderByIdDesc(boardType,pageable);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
-            response.add(board.toBoardResponse());
+            response.add(createBoardResponse(board));
         }
         return response;
     }
@@ -105,7 +101,21 @@ public class BoardService {
                 .userName(board.getUser().getName().getName())
                 .visit(board.getCountVisit())
                 .images(board.getImages())
+                .comments(board.getComments())
                 .createdData(board.getCreatedData())
                 .lastModifiedDate(board.getLastModifiedDate()).build();
+    }
+
+    private Board checkUnauthorizedAccess(Long id){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Optional<Board> board = boardRepository.findById(id);
+        if(board.isEmpty()){
+            throw new CustomException(ErrorCode.NOT_FOUND_BOARD);
+        }
+        if(board.get().getUser()!=user){
+            throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
+        }
+        return board.get();
     }
 }
