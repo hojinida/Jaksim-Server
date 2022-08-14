@@ -10,15 +10,20 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
     private String email;
     private String name;
-    private String homeGround;
+    private String image;
     private Role role;
-
+    private Boolean privacyPolity;
+    private Boolean termsOfService;
+    private Boolean receivePolity;
 
     @Builder
-    public UserResponseDto(String email, String name,String homeGround ,Role role) {
+    public UserResponseDto(String email, String name, String image, Role role, Boolean privacyPolity, Boolean termsOfService, Boolean receivePolity) {
         this.email = email;
         this.name = name;
-        this.homeGround=homeGround;
+        this.image = image;
         this.role = role;
+        this.privacyPolity = privacyPolity;
+        this.termsOfService = termsOfService;
+        this.receivePolity = receivePolity;
     }
 }

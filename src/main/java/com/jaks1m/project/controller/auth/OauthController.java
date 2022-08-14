@@ -25,12 +25,14 @@ public class OauthController {
 
     @PostMapping("/login")
     @ApiOperation(value = "사용자 로그인")
-    public void login(@RequestBody @Validated LoginUserRequestDto request, HttpServletResponse response) throws Exception {
+    public ResponseEntity<BaseResponse<UserDto>> login(@RequestBody @Validated LoginUserRequestDto request, HttpServletResponse response) throws Exception {
         UserDto userDto=authService.login(request);
-        response.sendRedirect(UriComponentsBuilder.fromUriString("/auth/me")
-                .queryParam("accessToken",userDto.getAccessToken())
-                .queryParam("refreshToken",userDto.getRefreshToken())
-                .build().toUriString());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(BaseResponse.<UserDto>builder()
+                        .status(200)
+                        .body(userDto)
+                        .build());
     }
 
     @PostMapping("/reissue")

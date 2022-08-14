@@ -1,9 +1,10 @@
 package com.jaks1m.project.controller.community;
-
-import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
+;
+import com.jaks1m.project.dto.community.request.BoardAddRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
-import com.jaks1m.project.repository.func.BoardRepository;
+import com.jaks1m.project.dto.community.response.ImageDto;
+import com.jaks1m.project.service.aws.AwsS3Service;
 import com.jaks1m.project.service.community.BoardService;
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +25,7 @@ import java.util.List;
 @RequestMapping("/api/v1/boards")
 public class BoardController {
     private final BoardService boardService;
+    private final AwsS3Service awsS3Service;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
     public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5) Pageable pageable){
@@ -45,9 +49,13 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public Boolean addBoard(@RequestBody @Validated BoardPostRequestDto request){
-        boardService.addBoard(request);
-        return true;
+    public ResponseEntity<BaseResponse<BoardResponse>> addBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart(value = "boardAddRequestDto") @Validated BoardAddRequestDto request) throws IOException {
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
+        return ResponseEntity.status(200)
+                .body(BaseResponse.<BoardResponse>builder()
+                        .body(boardService.addBoard(images,request))
+                        .build());
     }
 
     @GetMapping("/list/{id}")
@@ -61,10 +69,12 @@ public class BoardController {
 
     @PutMapping("/list/{id}")
     @ApiOperation(value = "게시글 수정")
-    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestBody @Validated BoardPostRequestDto request,@PathVariable Long id){
+    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart(value = "boardAddRequestDto") @Validated BoardAddRequestDto request, @PathVariable Long id) throws IOException {
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.editBoard(request,id))
+                        .body(boardService.editBoard(images,request,id))
                         .build());
     }
 

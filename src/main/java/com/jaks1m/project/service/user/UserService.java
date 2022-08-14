@@ -1,6 +1,7 @@
 package com.jaks1m.project.service.user;
 
 
+import com.jaks1m.project.dto.community.response.ImageDto;
 import com.jaks1m.project.dto.user.edit.EditUserDto;
 import com.jaks1m.project.dto.user.edit.EditUserPasswordDto;
 import com.jaks1m.project.domain.entity.aws.S3Image;
@@ -27,6 +28,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -72,8 +74,11 @@ public class UserService{
         return UserResponseDto.builder()
                 .email(user.getEmail())
                 .name(user.getName().getName())
-                .homeGround(user.getHomeGround())
+                .image(user.getS3Image().getImagePath())
                 .role(user.getRole())
+                .privacyPolity(user.getPrivacyPolity().getPrivacyPolity())
+                .termsOfService(user.getTermsOfService().getTermsOfService())
+                .receivePolity(user.getReceivePolity().getReceivePolity())
                 .build();
     }
 
@@ -128,6 +133,20 @@ public class UserService{
                 .expiredTime(jwtTokenProvider.getExpiration(accessToken).getTime()-(date.getTime()))
                 .value("logout")
                 .build());
+    }
+
+    @Transactional
+    public void addImage(List<ImageDto> imageDto){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        imageDto.forEach(imageDto1 -> user.updateImage(imageDto1.getKey(),imageDto1.getPath()));
+    }
+
+    @Transactional
+    public void deleteImage(){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        user.updateImage(null,null);
     }
     private void validateDuplicateUser(String email){
         Optional<User> findUser = userRepository.findByEmail(email);
