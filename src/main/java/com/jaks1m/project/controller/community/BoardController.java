@@ -1,6 +1,6 @@
 package com.jaks1m.project.controller.community;
 ;
-import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
+import com.jaks1m.project.dto.community.request.BoardAddRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
 import com.jaks1m.project.dto.community.response.ImageDto;
@@ -50,8 +50,8 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public ResponseEntity<String> addBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
-            @RequestPart @Validated BoardPostRequestDto request) throws IOException {
+    public ResponseEntity<String> addBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart(value = "boardAddRequestDto") @Validated BoardAddRequestDto request) throws IOException {
         List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         boardService.addBoard(images,request);
         return ResponseEntity.status(200).body("게시글 등록 성공");
@@ -68,8 +68,8 @@ public class BoardController {
 
     @PutMapping("/list/{id}")
     @ApiOperation(value = "게시글 수정")
-    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
-            @RequestPart @Validated BoardPostRequestDto request,@PathVariable Long id) throws IOException {
+    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+            @RequestPart(value = "boardAddRequestDto") @Validated BoardAddRequestDto request, @PathVariable Long id) throws IOException {
         List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()

@@ -1,7 +1,7 @@
 package com.jaks1m.project.service.community;
 
 import com.jaks1m.project.domain.entity.aws.S3Image;
-import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
+import com.jaks1m.project.dto.community.request.BoardAddRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.community.BoardType;
@@ -32,7 +32,7 @@ public class BoardService {
     private final UserRepository userRepository;
     private final S3ImageRepository s3ImageRepository;
     @Transactional
-    public void addBoard(List<ImageDto> imageDto, BoardPostRequestDto request){
+    public void addBoard(List<ImageDto> imageDto, BoardAddRequestDto request){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Board board=Board.builder().user(user).boardType(request.getBoardType()).content(request.getContent())
@@ -50,7 +50,7 @@ public class BoardService {
         return board.get().toBoardResponse();
     }
     @Transactional
-    public BoardResponse editBoard(List<ImageDto> imageDto,BoardPostRequestDto request,Long id){
+    public BoardResponse editBoard(List<ImageDto> imageDto, BoardAddRequestDto request, Long id){
         Optional<Board> board = boardRepository.findById(id);
         if(board.isEmpty()){
             throw new CustomException(ErrorCode.NOT_FOUND_BOARD);

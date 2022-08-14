@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-public class BoardPostRequestDto {
+public class BoardAddRequestDto {
     @NotEmpty
     @Column(length = 100)
     private String title;
