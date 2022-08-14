@@ -37,8 +37,8 @@ public class OauthController {
 
     @PostMapping("/reissue")
     @ApiOperation(value = "토큰 재발급")
-    public ResponseEntity<BaseResponse<UserDto>> reissue(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        UserDto userDto = authService.reissue(request, response);
+    public ResponseEntity<BaseResponse<UserDto>> reissue(HttpServletRequest request) throws IOException {
+        UserDto userDto = authService.reissue(request);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(BaseResponse.<UserDto>builder()
@@ -56,8 +56,7 @@ public class OauthController {
                         .status(200)
                         .body(UserDto.builder()
                                 .accessToken(accessToken)
-                                .refreshToken(RefreshToken.builder()
-                                        .value(refreshToken).build())
+                                .refreshToken(RefreshToken.builder().key(refreshToken).build())
                                 .build())
                         .build());
     }
