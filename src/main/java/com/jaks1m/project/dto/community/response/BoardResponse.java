@@ -16,9 +16,9 @@ public class BoardResponse {
     private String content;
     private Long visit;
     private List<String> images;
-    private List<CommentResponseDto> comments;
     private LocalDateTime createdData;
     private LocalDateTime lastModifiedDate;
+    private List<CommentResponseDto> comments;
 
     @Builder
     public BoardResponse(Long boardId, String userName, String title, String content, Long visit, List<String> images, List<CommentResponseDto> comments, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
