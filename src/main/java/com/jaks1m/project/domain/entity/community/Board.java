@@ -26,7 +26,7 @@ public class Board extends BaseEntity {
     @Lob
     private String content;
 
-    @Transient
+    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<S3Image> s3Images=new ArrayList<>();
     private Long countVisit;
     @Enumerated(EnumType.STRING)
@@ -54,6 +54,12 @@ public class Board extends BaseEntity {
         List<String> images=new ArrayList<>();
         s3Images.forEach(s3Image -> images.add(s3Image.getImagePath()));
         return images;
+    }
+
+    public List<String> getKeys(){
+        List<String> keys=new ArrayList<>();
+        s3Images.forEach(s3Image -> keys.add(s3Image.getImageKey()));
+        return keys;
     }
     @Builder
     public Board(String title, String content, List<S3Image> s3Images, Long countVisit, BoardType boardType, User user) {

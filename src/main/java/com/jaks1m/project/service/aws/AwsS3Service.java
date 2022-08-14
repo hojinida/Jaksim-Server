@@ -3,9 +3,11 @@ package com.jaks1m.project.service.aws;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.domain.entity.aws.S3Image;
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.user.User;
+import com.jaks1m.project.dto.community.response.ImageDto;
 import com.jaks1m.project.repository.user.UserRepository;
 import com.jaks1m.project.config.security.SecurityUtil;
 import com.jaks1m.project.domain.error.ErrorCode;
@@ -31,21 +33,15 @@ public class AwsS3Service {
     private final UserRepository userRepository;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-
     @Transactional
-    public void upload(MultipartFile multipartFile, String dirName) throws IOException {
-        File file = convertMultipartFileToFile(multipartFile)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_CONVERT_FILE));
-        upload(file, dirName);
-    }
-
-    @Transactional
-    public void upload(List<MultipartFile> multipartFiles, String dirName,Board board) throws IOException {
+    public List<ImageDto> upload(List<MultipartFile> multipartFiles, String dirName, Category category) throws IOException {
+        List<ImageDto> images=new ArrayList<>();
         for(MultipartFile multipartFile:multipartFiles){
             File file = convertMultipartFileToFile(multipartFile)
                     .orElseThrow(() -> new CustomException(ErrorCode.NOT_CONVERT_FILE));
-            upload(file, dirName,board);
+            images.add(upload(file, dirName,category));
         }
+        return images;
     }
     @Transactional
     public void remove() {
@@ -63,8 +59,8 @@ public class AwsS3Service {
     }
     @Transactional
     public void remove(Board board) {
-        List<String> images = board.getImages();
-        for(String key:images){
+        List<String> keys = board.getKeys();
+        for(String key:keys){
             if (!amazonS3.doesObjectExist(bucket,key)) {
                 throw new CustomException(ErrorCode.IMAGE_NOT_FOUND);
             }
@@ -80,24 +76,21 @@ public class AwsS3Service {
         }
     }
 
-    private void upload(File file, String dirName) {
+    private ImageDto upload(File file, String dirName, Category category) {
         String key = randomFileName(file, dirName);
         String path = putS3(file, key);
-        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
-                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        if(user.getS3Image().getImagePath()!=null){
-            remove();
+        if(category==Category.USER) {
+            User user = userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                    .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+            if (user.getS3Image().getImagePath() != null) {
+                remove();
+            }
+            user.updateImage(key, path);
         }
-        user.updateImage(key,path);
         removeFile(file);
+        return ImageDto.builder().key(key).path(path).build();
     }
 
-    private void upload(File file, String dirName, Board board) {
-        String key = randomFileName(file, dirName);
-        String path = putS3(file, key);
-        S3Image.builder().imageKey(key).imagePath(path).board(board).build();
-        removeFile(file);
-    }
     private String randomFileName(File file, String dirName) {
         return dirName + "/" + UUID.randomUUID() + file.getName();
     }

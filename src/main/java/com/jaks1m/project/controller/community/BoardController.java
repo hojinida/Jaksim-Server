@@ -1,8 +1,11 @@
 package com.jaks1m.project.controller.community;
 
+import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.dto.community.request.BoardPostRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;
+import com.jaks1m.project.dto.community.response.ImageDto;
+import com.jaks1m.project.service.aws.AwsS3Service;
 import com.jaks1m.project.service.community.BoardService;
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +27,8 @@ import java.util.List;
 @RequestMapping("/api/v1/boards")
 public class BoardController {
     private final BoardService boardService;
+
+    private final AwsS3Service awsS3Service;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
     public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5) Pageable pageable){
@@ -47,10 +52,13 @@ public class BoardController {
 
     @PostMapping("/list")
     @ApiOperation(value = "게시글 등록")
-    public Boolean addBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+    public ResponseEntity<BaseResponse<BoardResponse>> addBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
             @RequestPart @Validated BoardPostRequestDto request) throws IOException {
-        boardService.addBoard(multipartFiles,request);
-        return true;
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload", Category.BOARD);
+        return ResponseEntity.status(200)
+                .body(BaseResponse.<BoardResponse>builder()
+                        .body(boardService.addBoard(images,request))
+                        .build());
     }
 
     @GetMapping("/list/{id}")
@@ -65,10 +73,11 @@ public class BoardController {
     @PutMapping("/list/{id}")
     @ApiOperation(value = "게시글 수정")
     public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
-            @RequestPart @Validated BoardPostRequestDto request,@PathVariable Long id){
+            @RequestPart @Validated BoardPostRequestDto request,@PathVariable Long id) throws IOException {
+        List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload", Category.BOARD);
         return ResponseEntity.status(200)
                 .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.editBoard(multipartFiles,request,id))
+                        .body(boardService.editBoard(images,request,id))
                         .build());
     }
 
