@@ -4,7 +4,6 @@ import com.jaks1m.project.dto.user.request.LoginUserRequestDto;
 import com.jaks1m.project.dto.user.response.UserDto;
 import com.jaks1m.project.domain.common.response.BaseResponse;
 import com.jaks1m.project.service.auth.AuthService;
-import com.jaks1m.project.domain.entity.token.RefreshToken;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,20 +40,6 @@ public class OauthController {
                 .body(BaseResponse.<UserDto>builder()
                         .status(200)
                         .body(userDto)
-                        .build());
-    }
-
-    @GetMapping("/me")
-    @ApiOperation(value = "로그인 성공")
-    public ResponseEntity<BaseResponse<UserDto>> loginSuccess(@RequestParam String accessToken,@RequestParam String refreshToken){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.<UserDto>builder()
-                        .status(200)
-                        .body(UserDto.builder()
-                                .accessToken(accessToken)
-                                .refreshToken(RefreshToken.builder().value(refreshToken).build())
-                                .build())
                         .build());
     }
 }

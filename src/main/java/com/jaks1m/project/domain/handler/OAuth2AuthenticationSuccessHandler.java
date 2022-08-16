@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,9 +31,10 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final RedisRepository redisRepository;
     private final UserRepository userRepository;
 
+    private final RedirectStrategy redirectStrategy;
+
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-    {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         SocialUserDto socialUserDto = userRequestMapper.toDto(oAuth2User);
 
@@ -42,10 +44,10 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             RefreshToken refreshToken = jwtTokenProvider.createRefreshToken(user.get());
 
             redisRepository.save(refreshToken);
-
             response.setStatus(200);
-            response.setHeader("ACCESS_TOKEN", accessToken);
-            response.setHeader("REFRESH_TOKEN", refreshToken.getValue());
+            response.setHeader("accessToken",accessToken);
+            response.setHeader("refreshToken",accessToken);
+            redirectStrategy.sendRedirect(request,response,"/");
         }
     }
 }
