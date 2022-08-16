@@ -11,10 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,7 +34,7 @@ public class OauthController {
 
     @PostMapping("/reissue")
     @ApiOperation(value = "토큰 재발급")
-    public ResponseEntity<BaseResponse<UserDto>> reissue(HttpServletRequest request) throws IOException {
+    public ResponseEntity<BaseResponse<UserDto>> reissue(HttpServletRequest request) {
         UserDto userDto = authService.reissue(request);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -55,7 +53,7 @@ public class OauthController {
                         .status(200)
                         .body(UserDto.builder()
                                 .accessToken(accessToken)
-                                .refreshToken(RefreshToken.builder().key(refreshToken).build())
+                                .refreshToken(RefreshToken.builder().value(refreshToken).build())
                                 .build())
                         .build());
     }
