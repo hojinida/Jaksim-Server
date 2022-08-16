@@ -92,20 +92,14 @@ public class UserService{
         user.updateReceivePolity(request.getReceivePolity());
     }
     @Transactional
-    public void logoutUser(HttpServletRequest request){
+    public void logoutUser(HttpServletRequest request,String refreshToken){
         String accessToken=jwtTokenProvider.resolveToken(request);
+        
+        RefreshToken findRefreshToken = redisRepository.findById(refreshToken)
+                .orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
 
-        if(StringUtils.hasText(accessToken)&&jwtTokenProvider.validateToken(accessToken)){
-            String email= jwtTokenProvider.getUserEmail(accessToken);
-            Optional<RefreshToken> refreshToken = redisRepository.findByValue(email);
-            refreshToken.orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
-
-            redisRepository.deleteById(refreshToken.get().getKey());
-            addBlacklist(accessToken);
-        }else{
-            log.error("로그아웃 실패");
-            throw new CustomException(ErrorCode.JWT_UNAUTHORIZED);
-        }
+        redisRepository.deleteById(findRefreshToken.getKey());
+        addBlacklist(accessToken);
     }
     @Transactional
     public void findPassword(FindUserPasswordDto request){
