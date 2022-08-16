@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             response.setStatus(200);
             response.sendRedirect(UriComponentsBuilder.fromUriString("/good")
                     .queryParam("accessToken",accessToken)
-                    .queryParam("refreshToken",refreshToken).toUriString());
+                    .queryParam("refreshToken",refreshToken.getValue()).toUriString());
         }
     }
 }
