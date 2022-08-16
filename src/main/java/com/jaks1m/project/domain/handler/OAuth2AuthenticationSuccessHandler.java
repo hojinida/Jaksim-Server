@@ -42,9 +42,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
             redisRepository.save(refreshToken);
             response.setStatus(200);
-            response.setHeader("accessToken",accessToken);
-            response.setHeader("refreshToken",accessToken);
-            response.sendRedirect(UriComponentsBuilder.fromUriString("https://jaks1m.shop/login").toUriString());
+            response.sendRedirect(UriComponentsBuilder.fromUriString("/good")
+                    .queryParam("accessToken",accessToken)
+                    .queryParam("refreshToken",refreshToken).toUriString());
         }
     }
 }
