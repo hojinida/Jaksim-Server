@@ -97,10 +97,10 @@ public class UserService{
 
         if(StringUtils.hasText(accessToken)&&jwtTokenProvider.validateToken(accessToken)){
             String email= jwtTokenProvider.getUserEmail(accessToken);
-            Optional<RefreshToken> refreshToken = redisRepository.findById(email);
+            Optional<RefreshToken> refreshToken = redisRepository.findByValue(email);
             refreshToken.orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
 
-            redisRepository.deleteById(email);
+            redisRepository.deleteById(refreshToken.get().getKey());
             addBlacklist(accessToken);
         }else{
             log.error("로그아웃 실패");
