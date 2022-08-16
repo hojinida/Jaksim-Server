@@ -42,7 +42,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             response.setStatus(200);
             response.setHeader("accessToken",accessToken);
             response.setHeader("refreshToken",accessToken);
-            response.sendRedirect("/");
+            response.sendRedirect("/login");
         }
     }
 }
