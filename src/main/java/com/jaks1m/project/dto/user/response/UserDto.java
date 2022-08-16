@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserDto {
     private String accessToken;
     private String refreshToken;
-
     @Builder
     public UserDto(String accessToken, RefreshToken refreshToken) {
         this.accessToken = accessToken;
