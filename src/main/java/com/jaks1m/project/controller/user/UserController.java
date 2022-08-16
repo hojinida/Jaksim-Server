@@ -41,9 +41,8 @@ public class UserController {
 
     @DeleteMapping("/me/logout")
     @ApiOperation(value = "사용자 로그아웃")
-    public ResponseEntity<String> logout(HttpServletRequest request,@RequestBody String refreshToken){
-        System.out.println(refreshToken);
-        userService.logoutUser(request,refreshToken);
+    public ResponseEntity<String> logout(HttpServletRequest request){
+        userService.logoutUser(request);
         return ResponseEntity.status(200).body("사용자 로그아웃 성공");
     }
 
@@ -101,6 +100,4 @@ public class UserController {
         userService.editPassword(request);
         return ResponseEntity.status(200).body("사용자 비밀번호 변경 성공");
     }
-
-
 }
