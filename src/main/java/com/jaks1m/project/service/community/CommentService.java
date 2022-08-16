@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -32,5 +31,27 @@ public class CommentService {
         Board board = boardRepository.findById(id)
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_BOARD));
         commentRepository.save(Comment.builder().comment(request.getComment()).board(board).user(user).build());
+    }
+
+    @Transactional
+    public void editComment(CommentAddRequestDto request,Long commentId){
+        Comment comment = checkUnauthorizedAccess(commentId);
+        comment.updateComment(request.getComment());
+    }
+
+    @Transactional
+    public void deleteComment(Long commentId){
+        Comment comment = checkUnauthorizedAccess(commentId);
+        commentRepository.delete(comment);
+    }
+    private Comment checkUnauthorizedAccess(Long id){
+        User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
+                .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Comment comment= commentRepository.findById(id)
+                .orElseThrow(()->new CustomException(ErrorCode.NOT_FOUND_COMMENT));
+        if(comment.getUser()!=user){
+            throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
+        }
+        return comment;
     }
 }

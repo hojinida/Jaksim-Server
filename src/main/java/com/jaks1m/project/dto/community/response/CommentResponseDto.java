@@ -9,13 +9,15 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class CommentResponseDto {
+    private Long id;
     private String name;
     private String image;
     private String comment;
     private LocalDateTime createdData;
     private LocalDateTime lastModifiedDate;
     @Builder
-    public CommentResponseDto(String name, String image, String comment, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
+    public CommentResponseDto(Long id,String name, String image, String comment, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
+        this.id=id;
         this.name = name;
         this.image = image;
         this.comment = comment;

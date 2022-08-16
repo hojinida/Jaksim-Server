@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.Date;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -55,7 +56,7 @@ public class JwtTokenProvider {
     }
 
     public RefreshToken createRefreshToken(User user) {
-        Claims claims = Jwts.claims().setSubject(user.getUsername());
+        Claims claims = Jwts.claims().setSubject(UUID.randomUUID().toString());
         Date now = new Date();
 
         String token = Jwts.builder()
@@ -66,8 +67,8 @@ public class JwtTokenProvider {
                 .compact();
 
         return RefreshToken.builder()
-                .key(user.getUsername())
-                .value(token)
+                .key(token)
+                .value(user.getUsername())
                 .expiredTime(refreshTokenValidTime)
                 .build();
     }

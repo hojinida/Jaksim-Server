@@ -27,6 +27,9 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
+    public void updateComment(String comment){
+        this.comment=comment;
+    }
     @Builder
     public Comment(String comment, User user, Board board) {
         this.comment = comment;

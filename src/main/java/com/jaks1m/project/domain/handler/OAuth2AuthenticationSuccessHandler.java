@@ -50,7 +50,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
         return UriComponentsBuilder.fromUriString("/auth/me")
                 .queryParam("accessToken",accessToken)
-                .queryParam("refreshToken",refreshToken.getValue())
+                .queryParam("refreshToken",refreshToken.getKey())
                 .build().toUriString();
     }
 }

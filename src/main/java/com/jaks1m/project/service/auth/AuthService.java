@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 import java.util.Optional;
 
 @Slf4j
@@ -32,7 +30,7 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDto login(LoginUserRequestDto request) throws Exception{
+    public UserDto login(LoginUserRequestDto request){
         Optional<User> user = userRepository.findByEmail(request.getEmail());
 
         if(user.isEmpty()){
@@ -56,13 +54,12 @@ public class AuthService {
                 .build();
     }
 
-    public UserDto reissue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public UserDto reissue(HttpServletRequest request) {
         try {
             String token = jwtTokenProvider.resolveToken(request);
-            String email=jwtTokenProvider.getUserEmail(token);
 
             // Redis에 저장된 Refresh Token을 찾고 만일 없다면 401 에러를 내려줍니다
-            Optional<RefreshToken> refreshToken = redisRepository.findById(email);
+            Optional<RefreshToken> refreshToken = redisRepository.findById(token);
 
             if(refreshToken.isEmpty()){
                 log.info("로그아웃된 유저입니다.");
@@ -70,11 +67,11 @@ public class AuthService {
             }
 
             // Refresh Token이 만료가 된 토큰인지 확인합니다
-            boolean isTokenValid = jwtTokenProvider.validateToken(refreshToken.get().getValue());
+            boolean isTokenValid = jwtTokenProvider.validateToken(refreshToken.get().getKey());
 
             // Refresh Token이 만료가 되지 않은 경우
             if(isTokenValid) {
-                Optional<User> user = userRepository.findByEmail(email);
+                Optional<User> user = userRepository.findByEmail(refreshToken.get().getValue());
 
                 if(user.isPresent()) {
                     // Access Token과 Refresh Token을 둘 다 새로 발급하여 Refresh Token은 새로 Redis에 저장

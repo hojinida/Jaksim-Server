@@ -21,9 +21,9 @@ public class RefreshToken {
     private Long expiredTime;
 
     @Builder
-    public RefreshToken(String key, String value, Long expiredTime) {
+    public RefreshToken(String key,String value,Long expiredTime) {
         this.key = key;
-        this.value = value;
+        this.value=value;
         this.expiredTime = expiredTime;
     }
 }
