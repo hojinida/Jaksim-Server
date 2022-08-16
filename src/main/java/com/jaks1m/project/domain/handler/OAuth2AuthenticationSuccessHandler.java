@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             response.setStatus(200);
             response.setHeader("accessToken",accessToken);
             response.setHeader("refreshToken",accessToken);
-            response.sendRedirect(UriComponentsBuilder.fromUriString("/login").toUriString());
+            response.sendRedirect(UriComponentsBuilder.fromUriString("https://jaks1m.shop/login").toUriString());
         }
     }
 }
