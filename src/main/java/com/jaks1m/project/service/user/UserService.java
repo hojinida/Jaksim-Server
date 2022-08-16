@@ -94,7 +94,7 @@ public class UserService{
     @Transactional
     public void logoutUser(HttpServletRequest request,String refreshToken){
         String accessToken=jwtTokenProvider.resolveToken(request);
-        
+
         RefreshToken findRefreshToken = redisRepository.findById(refreshToken)
                 .orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
 

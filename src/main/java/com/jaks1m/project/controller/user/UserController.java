@@ -1,6 +1,5 @@
 package com.jaks1m.project.controller.user;
 
-import com.jaks1m.project.domain.entity.aws.Category;
 import com.jaks1m.project.dto.community.response.ImageDto;
 import com.jaks1m.project.dto.user.edit.EditUserDto;
 import com.jaks1m.project.dto.user.edit.EditUserPasswordDto;
@@ -43,6 +42,7 @@ public class UserController {
     @DeleteMapping("/me/logout")
     @ApiOperation(value = "사용자 로그아웃")
     public ResponseEntity<String> logout(HttpServletRequest request,@RequestBody String refreshToken){
+        System.out.println(refreshToken);
         userService.logoutUser(request,refreshToken);
         return ResponseEntity.status(200).body("사용자 로그아웃 성공");
     }
