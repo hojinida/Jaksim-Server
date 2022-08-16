@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -30,9 +29,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final RedisRepository redisRepository;
     private final UserRepository userRepository;
 
+
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-    {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         SocialUserDto socialUserDto = userRequestMapper.toDto(oAuth2User);
 
@@ -42,10 +41,10 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             RefreshToken refreshToken = jwtTokenProvider.createRefreshToken(user.get());
 
             redisRepository.save(refreshToken);
-
             response.setStatus(200);
-            response.setHeader("ACCESS_TOKEN", accessToken);
-            response.setHeader("REFRESH_TOKEN", refreshToken.getValue());
+            response.setHeader("accessToken",accessToken);
+            response.setHeader("refreshToken",accessToken);
+            response.sendRedirect(UriComponentsBuilder.fromUriString("/").toUriString());
         }
     }
 }
