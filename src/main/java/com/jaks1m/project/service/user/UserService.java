@@ -29,6 +29,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -92,14 +93,20 @@ public class UserService{
         user.updateReceivePolity(request.getReceivePolity());
     }
     @Transactional
-    public void logoutUser(HttpServletRequest request,String refreshToken){
+    public void logoutUser(HttpServletRequest request){
         String accessToken=jwtTokenProvider.resolveToken(request);
-        
-        RefreshToken findRefreshToken = redisRepository.findById(refreshToken)
-                .orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
+        String refreshToken=jwtTokenProvider.resolveRefreshToken(request);
 
-        redisRepository.deleteById(findRefreshToken.getKey());
-        addBlacklist(accessToken);
+        String email = jwtTokenProvider.getUserEmail(accessToken);
+
+        RefreshToken findRefreshToken = redisRepository.findById(email)
+                .orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
+        if(!Objects.equals(refreshToken, findRefreshToken.getValue())) {
+            redisRepository.deleteById(findRefreshToken.getKey());
+            addBlacklist(accessToken);
+        }else{
+            throw new CustomException(ErrorCode.JWT_UNAUTHORIZED);
+        }
     }
     @Transactional
     public void findPassword(FindUserPasswordDto request){

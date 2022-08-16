@@ -14,6 +14,6 @@ public class UserDto {
     @Builder
     public UserDto(String accessToken, RefreshToken refreshToken) {
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken.getKey();
+        this.refreshToken = refreshToken.getValue();
     }
 }

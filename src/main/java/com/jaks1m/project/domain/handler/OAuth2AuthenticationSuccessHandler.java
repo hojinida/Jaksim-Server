@@ -32,25 +32,20 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
-        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+    {
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         SocialUserDto socialUserDto = userRequestMapper.toDto(oAuth2User);
 
         Optional<User> user = userRepository.findByEmail(socialUserDto.getEmail());
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             String accessToken = jwtTokenProvider.createAccessToken(user.get());
-            RefreshToken refreshToken=jwtTokenProvider.createRefreshToken(user.get());
+            RefreshToken refreshToken = jwtTokenProvider.createRefreshToken(user.get());
 
             redisRepository.save(refreshToken);
 
-            String uri=makeRedirectUrl(accessToken,refreshToken);
-            response.sendRedirect(uri);
+            response.setStatus(200);
+            response.setHeader("ACCESS_TOKEN", accessToken);
+            response.setHeader("REFRESH_TOKEN", refreshToken.getValue());
         }
-    }
-    private String makeRedirectUrl (String accessToken,RefreshToken refreshToken){
-        return UriComponentsBuilder.fromUriString("/auth/me")
-                .queryParam("accessToken",accessToken)
-                .queryParam("refreshToken",refreshToken.getKey())
-                .build().toUriString();
     }
 }

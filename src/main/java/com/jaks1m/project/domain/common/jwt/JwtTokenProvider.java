@@ -67,8 +67,8 @@ public class JwtTokenProvider {
                 .compact();
 
         return RefreshToken.builder()
-                .key(token)
-                .value(user.getUsername())
+                .key(user.getUsername())
+                .value(token)
                 .expiredTime(refreshTokenValidTime)
                 .build();
     }
@@ -87,6 +87,14 @@ public class JwtTokenProvider {
     // GET ACCESS TOKEN BY HEADER
     public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(jwtHeader);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtTokenPrefix)) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+    public String resolveRefreshToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("refreshToken");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtTokenPrefix)) {
             return bearerToken.substring(7);
         }

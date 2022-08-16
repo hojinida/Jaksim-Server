@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -56,28 +57,23 @@ public class AuthService {
 
     public UserDto reissue(HttpServletRequest request) {
         try {
-            String token = jwtTokenProvider.resolveToken(request);
+            String accessToken = jwtTokenProvider.resolveToken(request);
+            String refreshToken = jwtTokenProvider.resolveRefreshToken(request);
+
+            String email= jwtTokenProvider.getUserEmail(accessToken);
 
             // Redis에 저장된 Refresh Token을 찾고 만일 없다면 401 에러를 내려줍니다
-            Optional<RefreshToken> refreshToken = redisRepository.findById(token);
+            RefreshToken findRefreshToken = redisRepository.findById(email)
+                    .orElseThrow(()->new CustomException(ErrorCode.JWT_REFRESH_TOKEN_EXPIRED));
 
-            if(refreshToken.isEmpty()){
-                log.info("로그아웃된 유저입니다.");
-                throw new CustomException(ErrorCode.LOGOUT_USER);
-            }
+            if(Objects.equals(refreshToken, findRefreshToken.getValue())) {
+                // Refresh Token이 만료가 되지 않은 경우
+                Optional<User> user = userRepository.findByEmail(email);
 
-            // Refresh Token이 만료가 된 토큰인지 확인합니다
-            boolean isTokenValid = jwtTokenProvider.validateToken(refreshToken.get().getKey());
-
-            // Refresh Token이 만료가 되지 않은 경우
-            if(isTokenValid) {
-                Optional<User> user = userRepository.findByEmail(refreshToken.get().getValue());
-
-                if(user.isPresent()) {
+                if (user.isPresent()) {
                     // Access Token과 Refresh Token을 둘 다 새로 발급하여 Refresh Token은 새로 Redis에 저장
                     String newAccessToken = jwtTokenProvider.createAccessToken(user.get());
                     RefreshToken newRefreshToken = jwtTokenProvider.createRefreshToken(user.get());
-
                     redisRepository.save(newRefreshToken);
 
                     return UserDto.builder()
@@ -85,6 +81,8 @@ public class AuthService {
                             .refreshToken(newRefreshToken)
                             .build();
                 }
+            }else{
+                throw new CustomException(ErrorCode.JWT_UNAUTHORIZED);
             }
         } catch(ExpiredJwtException e) {
             // Refresh Token 만료 Exception
