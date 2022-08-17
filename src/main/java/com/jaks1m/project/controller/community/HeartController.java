@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -24,7 +21,7 @@ public class HeartController {
         return ResponseEntity.status(200).body("게시글 좋아요 등록 성공");
     }
 
-    @PostMapping("/{boardId}")
+    @DeleteMapping("/{boardId}")
     @ApiOperation("게시글 좋아요 삭제")
     public ResponseEntity<String> deleteHeart(@PathVariable Long boardId){
         heartService.deleteHeart(boardId);
