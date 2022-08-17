@@ -19,9 +19,9 @@ public class EmailController {
     @ApiOperation(value = "이메일 인증 발송")
     @PostMapping("/email")
     @ResponseBody
-    public String sendEmail(@RequestBody @Validated UserEmailRequestDto request){
+    public ResponseEntity<String> sendEmail(@RequestBody @Validated UserEmailRequestDto request){
         emailService.createEmailToken(request.getEmail());
-        return "ok";
+        return ResponseEntity.status(200).body("이메일 발송 성공");
     }
 
     @ApiOperation(value = "이메일 인증 검증")
