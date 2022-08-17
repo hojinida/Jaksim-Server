@@ -32,6 +32,9 @@ public class Board extends BaseEntity {
 
     @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<Comment> comments=new ArrayList<>();
+
+    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
+    private List<Heart> hearts=new ArrayList<>();
     private Long countVisit;
     @Enumerated(EnumType.STRING)
     private BoardType boardType;

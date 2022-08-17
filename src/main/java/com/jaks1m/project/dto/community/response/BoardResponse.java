@@ -1,5 +1,6 @@
 package com.jaks1m.project.dto.community.response;
 
+import com.jaks1m.project.domain.entity.community.Heart;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,19 +15,21 @@ public class BoardResponse {
     private String userName;
     private String title;
     private String content;
-    private Long visit;
+    private Long visits;
+    private Long hearts;
     private List<String> images;
     private LocalDateTime createdData;
     private LocalDateTime lastModifiedDate;
     private List<CommentResponseDto> comments;
 
     @Builder
-    public BoardResponse(Long boardId, String userName, String title, String content, Long visit, List<String> images, List<CommentResponseDto> comments, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
+    public BoardResponse(Long boardId, String userName, String title, String content, Long visits,Long hearts, List<String> images, List<CommentResponseDto> comments, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
         this.boardId = boardId;
         this.userName = userName;
         this.title = title;
         this.content = content;
-        this.visit = visit;
+        this.visits = visits;
+        this.hearts=hearts;
         this.images = images;
         this.comments = comments;
         this.createdData = createdData;
