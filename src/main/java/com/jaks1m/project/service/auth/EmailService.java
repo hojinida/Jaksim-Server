@@ -24,12 +24,10 @@ public class EmailService {
     @Transactional
     public void verifyEmail(String token) throws CustomException {
         deleteExpiredToken();
-        Optional<EmailToken> emailToken = emailTokenRepository
-                .findByEmailTokenAndExpirationDateAfter(token, LocalDateTime.now());
-
-        // 토큰이 없다면 예외 발생
-        emailToken.orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
-        emailTokenRepository.delete(emailToken.get());
+        EmailToken emailToken = emailTokenRepository.findByEmailToken(token)
+                .orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
+        
+        emailTokenRepository.delete(emailToken);
     }
 
     @Transactional
