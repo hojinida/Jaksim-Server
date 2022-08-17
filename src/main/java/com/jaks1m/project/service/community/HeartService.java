@@ -2,7 +2,6 @@ package com.jaks1m.project.service.community;
 
 import com.jaks1m.project.config.security.SecurityUtil;
 import com.jaks1m.project.domain.entity.community.Board;
-import com.jaks1m.project.domain.entity.community.Comment;
 import com.jaks1m.project.domain.entity.community.Heart;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
@@ -42,7 +41,9 @@ public class HeartService {
     private Heart checkUnauthorizedAccess(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Heart heart = heartRepository.findById(id)
+        Board board= boardRepository.findById(id)
+                .orElseThrow(()->new CustomException(ErrorCode.NOT_FOUND_BOARD));
+        Heart heart = heartRepository.findByBoardAndUser(board,user)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_HEART));
         if(heart.getUser()!=user){
             throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
