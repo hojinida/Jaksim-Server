@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Slf4j
@@ -23,7 +22,7 @@ public class EmailService {
     private final EmailSenderService emailSenderService;
     @Transactional
     public void verifyEmail(String token) throws CustomException {
-        emailTokenRepository.deleteAllByExpirationDateAfter(LocalDateTime.now());
+        emailTokenRepository.deleteAllByExpirationDateBefore(LocalDateTime.now());
         System.out.println(token);
         EmailToken emailToken = emailTokenRepository.findByToken(token)
                 .orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
