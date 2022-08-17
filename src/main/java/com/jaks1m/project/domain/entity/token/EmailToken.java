@@ -20,22 +20,22 @@ public class EmailToken {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "EMAIL_TOKEN_SEQ_GENERATOR")
     private Long id;
 
-    private String emailToken;
+    private String token;
 
     private LocalDateTime expirationDate;
 
     // 이메일 인증 토큰 생성
     public static EmailToken createEmailToken() {
         return EmailToken.builder()
-                .emailToken(RandomStringUtils.randomAlphanumeric(EMAIL_TOKEN_LENGTH))
+                .token(RandomStringUtils.randomAlphanumeric(EMAIL_TOKEN_LENGTH))
                 .expirationDate(LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME_VALUE))
                 .build();
     }
 
     @Builder
-    public EmailToken(Long id, String emailToken, LocalDateTime expirationDate) {
+    public EmailToken(Long id, String token, LocalDateTime expirationDate) {
         this.id = id;
-        this.emailToken = emailToken;
+        this.token = token;
         this.expirationDate = expirationDate;
     }
 }

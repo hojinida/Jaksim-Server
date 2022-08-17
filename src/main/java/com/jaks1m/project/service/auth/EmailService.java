@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @Slf4j
 @Service
@@ -23,10 +23,11 @@ public class EmailService {
     private final EmailSenderService emailSenderService;
     @Transactional
     public void verifyEmail(String token) throws CustomException {
-        deleteExpiredToken();
-        EmailToken emailToken = emailTokenRepository.findByEmailToken(token)
+        emailTokenRepository.deleteAllByExpirationDateAfter(LocalDateTime.now());
+        System.out.println(token);
+        EmailToken emailToken = emailTokenRepository.findByToken(token)
                 .orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
-        
+
         emailTokenRepository.delete(emailToken);
     }
 
@@ -40,14 +41,7 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("https://jaks1m.shop/auth/confirm-email?token="+emailToken.getEmailToken());
+        mailMessage.setText("https://jaks1m.shop/auth/confirm-email?token="+emailToken.getToken());
         emailSenderService.sendEmail(mailMessage);
     }
-
-    @Transactional
-    public void deleteExpiredToken(){
-        List<EmailToken> emailTokens = emailTokenRepository.findAllByExpirationDateAfter(LocalDateTime.now());
-        emailTokenRepository.deleteAll(emailTokens);
-    }
-
 }
