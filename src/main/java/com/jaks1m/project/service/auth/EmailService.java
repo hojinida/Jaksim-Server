@@ -42,7 +42,7 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("http://localhost:8080/auth/confirm-email?token="+emailToken.getEmailToken());
+        mailMessage.setText("https://jaks1m/auth/confirm-email?token="+emailToken.getEmailToken());
         emailSenderService.sendEmail(mailMessage);
     }
 
