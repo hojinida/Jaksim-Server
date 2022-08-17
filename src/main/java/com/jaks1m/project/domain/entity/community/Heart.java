@@ -14,11 +14,9 @@ import javax.persistence.*;
 @Getter
 @RequiredArgsConstructor
 @SequenceGenerator(name = "COMMUNITY_SEQ_GENERATOR", sequenceName = "COMMUNITY_SEQ")
-@Where(clause = "status='ACTIVE'")
 public class Heart extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "COMMUNITY_SEQ_GENERATOR")
-    @Column(name = "BOARD_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
