@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/good","/login","/api/v1/user","/auth/**", "/oauth2/**","/login/oauth2/code/**").permitAll()
+                    .antMatchers("/login","/api/v1/user","/auth/**", "/oauth2/**","/login/oauth2/code/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login()
@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/","/good","/configuration/**","/webjars/**","/swagger*","/swagger*/**","/v2/api-docs");
+        web.ignoring().antMatchers("/","/configuration/**","/webjars/**","/swagger*","/swagger*/**","/v2/api-docs");
     }
 
     @Bean
