@@ -16,7 +16,7 @@ import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,7 +74,8 @@ public class BoardService {
         return responses;
     }
     public List<BoardResponse> getBoards(BoardType boardType, Pageable pageable){
-        Page<Board> boards=boardRepository.findByBoardType(boardType,pageable);
+        PageRequest pageRequest=PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),pageable.getSort());
+        List<Board> boards=boardRepository.findByBoardType(boardType,pageRequest);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
             response.add(createBoardResponse(board));
