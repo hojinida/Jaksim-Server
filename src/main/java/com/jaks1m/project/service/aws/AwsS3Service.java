@@ -28,13 +28,17 @@ public class AwsS3Service {
     private String bucket;
     @Transactional
     public List<ImageDto> upload(List<MultipartFile> multipartFiles, String dirName) throws IOException {
-        List<ImageDto> images=new ArrayList<>();
-        for(MultipartFile multipartFile:multipartFiles){
-            File file = convertMultipartFileToFile(multipartFile)
-                    .orElseThrow(() -> new CustomException(ErrorCode.NOT_CONVERT_FILE));
-            images.add(upload(file, dirName));
+        if(multipartFiles!=null) {
+            List<ImageDto> images = new ArrayList<>();
+            for (MultipartFile multipartFile : multipartFiles) {
+                File file = convertMultipartFileToFile(multipartFile)
+                        .orElseThrow(() -> new CustomException(ErrorCode.NOT_CONVERT_FILE));
+                images.add(upload(file, dirName));
+            }
+            return images;
+        }else{
+            return null;
         }
-        return images;
     }
 
     private void removeFile(File file) {
