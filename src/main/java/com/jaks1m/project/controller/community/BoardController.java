@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -28,7 +29,7 @@ public class BoardController {
     private final AwsS3Service awsS3Service;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5) Pageable pageable){
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5,sort = "board_id",direction = Sort.Direction.DESC) Pageable pageable){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()
                         .status(200)
@@ -38,7 +39,7 @@ public class BoardController {
 
     @GetMapping("/list")
     @ApiOperation(value = "게시판 상세")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoards(@PageableDefault(size = 5) Pageable pageable
+    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoards(@PageableDefault(size = 5,sort = "board_id",direction = Sort.Direction.DESC) Pageable pageable
             ,@RequestParam @Validated BoardType boardType){
         return ResponseEntity.status(200)
                 .body(BaseResponse.<List<BoardResponse>>builder()

@@ -13,20 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth/email")
 public class EmailController {
     private final EmailService emailService;
 
     @ApiOperation(value = "이메일 인증 발송")
-    @PostMapping("/email")
-    @ResponseBody
+    @PostMapping
     public ResponseEntity<String> sendEmail(@RequestBody @Validated UserEmailRequestDto request){
         emailService.createEmailToken(request.getEmail());
         return ResponseEntity.status(200).body("이메일 발송 성공");
     }
 
     @ApiOperation(value = "이메일 인증 검증")
-    @GetMapping("/email")
+    @PostMapping("/auth")
     public ResponseEntity<String> authEmail(@RequestBody @Validated EmailTokenRequestDto request) {
         emailService.verifyEmail(request);
         return ResponseEntity.status(200).body("이메일 인증 성공");
