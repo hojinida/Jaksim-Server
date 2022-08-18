@@ -74,7 +74,7 @@ public class BoardService {
         return responses;
     }
     public List<BoardResponse> getBoards(BoardType boardType, Pageable pageable){
-        Page<Board> boards=boardRepository.findAllByBoardType(boardType,pageable);
+        Page<Board> boards=boardRepository.findByBoardType(boardType,pageable);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
             response.add(createBoardResponse(board));
