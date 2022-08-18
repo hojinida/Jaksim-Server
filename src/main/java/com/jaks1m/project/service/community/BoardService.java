@@ -74,7 +74,7 @@ public class BoardService {
         return responses;
     }
     public List<BoardResponse> getBoards(BoardType boardType, Pageable pageable){
-        Page<Board> boards=boardRepository.findAllByBoardType(boardType,pageable);
+        Page<Board> boards=boardRepository.findByBoardType(boardType,pageable);
         List<BoardResponse> response=new ArrayList<>();
         for(Board board:boards){
             response.add(createBoardResponse(board));
@@ -83,7 +83,7 @@ public class BoardService {
     }
 
     private void saveS3Image(List<ImageDto> imageDto,Board board){
-        if(!imageDto.isEmpty()) {
+        if(imageDto!=null) {
             List<S3Image> s3Images = new ArrayList<>();
             for (ImageDto image : imageDto) {
                 s3Images.add(S3Image.builder().imageKey(image.getKey()).imagePath(image.getPath()).board(board).build());
