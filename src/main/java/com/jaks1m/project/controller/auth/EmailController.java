@@ -1,5 +1,6 @@
 package com.jaks1m.project.controller.auth;
 
+import com.jaks1m.project.dto.user.request.EmailTokenRequestDto;
 import com.jaks1m.project.dto.user.request.UserEmailRequestDto;
 import com.jaks1m.project.service.auth.EmailService;
 import io.swagger.annotations.ApiOperation;
@@ -25,9 +26,9 @@ public class EmailController {
     }
 
     @ApiOperation(value = "이메일 인증 검증")
-    @GetMapping("/confirm-email")
-    public ResponseEntity<String> authEmail(@RequestParam @Validated String token) {
-        emailService.verifyEmail(token);
+    @GetMapping("/email")
+    public ResponseEntity<String> authEmail(@RequestBody @Validated EmailTokenRequestDto request) {
+        emailService.verifyEmail(request);
         return ResponseEntity.status(200).body("이메일 인증 성공");
     }
 }

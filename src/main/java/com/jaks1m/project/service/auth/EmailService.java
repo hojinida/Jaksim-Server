@@ -3,6 +3,7 @@ package com.jaks1m.project.service.auth;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.domain.entity.token.EmailToken;
+import com.jaks1m.project.dto.user.request.EmailTokenRequestDto;
 import com.jaks1m.project.repository.auth.EmailTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +22,9 @@ public class EmailService {
     private final EmailTokenRepository emailTokenRepository;
     private final EmailSenderService emailSenderService;
     @Transactional
-    public void verifyEmail(String token) throws CustomException {
+    public void verifyEmail(EmailTokenRequestDto request) throws CustomException {
         emailTokenRepository.deleteAllByExpirationDateBefore(LocalDateTime.now());
-        System.out.println(token);
-        EmailToken emailToken = emailTokenRepository.findByToken(token)
+        EmailToken emailToken = emailTokenRepository.findByToken(request.getToken())
                 .orElseThrow(() -> new CustomException(ErrorCode.EMAIL_TOKEN_NOT_FOUND));
 
         emailTokenRepository.delete(emailToken);
@@ -40,7 +40,7 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("https://jaks1m.shop/auth/confirm-email?token="+emailToken.getToken());
+        mailMessage.setText(emailToken.getToken());
         emailSenderService.sendEmail(mailMessage);
     }
 }
