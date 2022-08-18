@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface EmailTokenRepository extends JpaRepository<EmailToken,Long> {// redis 사용가능
-    Optional<EmailToken> findByEmailTokenAndExpirationDateAfter(String emailToken,LocalDateTime now);
-    List<EmailToken> findAllByExpirationDateAfter(LocalDateTime now);
+    Optional<EmailToken> findByToken(String emailToken);
+    void deleteAllByExpirationDateBefore(LocalDateTime now);
 }
