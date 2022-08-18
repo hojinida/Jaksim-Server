@@ -83,7 +83,7 @@ public class BoardService {
     }
 
     private void saveS3Image(List<ImageDto> imageDto,Board board){
-        if(!imageDto.isEmpty()) {
+        if(imageDto!=null) {
             List<S3Image> s3Images = new ArrayList<>();
             for (ImageDto image : imageDto) {
                 s3Images.add(S3Image.builder().imageKey(image.getKey()).imagePath(image.getPath()).board(board).build());
