@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.common.jwt;
 
-import com.jaks1m.project.domain.common.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
