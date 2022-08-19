@@ -25,6 +25,12 @@ public class NotificationService {
         notificationRepository.delete(notification);
     }
 
+    @Transactional
+    public void check(Long notificationId){
+        Notification notification = checkUnauthorizedAccess(notificationId);
+        notification.updateChecked();
+    }
+
     private Notification checkUnauthorizedAccess(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
@@ -32,7 +38,7 @@ public class NotificationService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NOTIFICATION));
         if(notification.getUser()!=user){
             throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
-        }..
+        }
         return notification;
     }
 }

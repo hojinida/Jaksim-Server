@@ -24,6 +24,10 @@ public class Notification extends BaseEntity {
     private User user;
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
+
+    public void updateChecked(){
+        this.checked=true;
+    }
     @Builder
     public Notification(String message, boolean checked, User user,Long valueId ,NotificationType notificationType) {
         this.message = message;
