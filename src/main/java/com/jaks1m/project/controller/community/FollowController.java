@@ -48,5 +48,4 @@ public class FollowController {
         followService.deleteFollower(id);
         return ResponseEntity.status(200).body("follower 삭제 성공");
     }
-
 }

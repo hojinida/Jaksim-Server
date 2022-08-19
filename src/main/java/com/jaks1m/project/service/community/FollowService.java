@@ -3,10 +3,13 @@ package com.jaks1m.project.service.community;
 
 import com.jaks1m.project.config.security.SecurityUtil;
 import com.jaks1m.project.domain.entity.follow.Follow;
+import com.jaks1m.project.domain.entity.notification.Notification;
+import com.jaks1m.project.domain.entity.notification.NotificationType;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.dto.community.response.FriendResponseDto;
+import com.jaks1m.project.repository.notification.NotificationRepository;
 import com.jaks1m.project.repository.user.FollowRepository;
 import com.jaks1m.project.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ import java.util.List;
 public class FollowService {
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
+    private final NotificationRepository notificationRepository;
     @Transactional
     public void addFollow(Long id){
         User fromUser=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
@@ -34,6 +38,9 @@ public class FollowService {
         }
         Follow follow=Follow.builder().fromUser(fromUser).toUser(toUser).build();
         followRepository.save(follow);
+
+        notificationRepository.save(Notification.builder().user(toUser).checked(false).value(fromUser)
+                .message(fromUser.getName().getName()+"님이 회원님을 팔로우 했습니다.").notificationType(NotificationType.FOLLOW).build());
     }
 
     public List<FriendResponseDto> getFollowers(){
