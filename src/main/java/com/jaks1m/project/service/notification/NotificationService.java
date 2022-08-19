@@ -32,7 +32,7 @@ public class NotificationService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NOTIFICATION));
         if(notification.getUser()!=user){
             throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
-        }
+        }..
         return notification;
     }
 }
