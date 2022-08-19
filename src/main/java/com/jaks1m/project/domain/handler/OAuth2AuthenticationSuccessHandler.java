@@ -42,9 +42,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
             redisRepository.save(refreshToken);
             response.setStatus(200);
-            response.setHeader("accessToken",accessToken);
-            response.setHeader("refreshToken",refreshToken.getValue());
-            response.sendRedirect(UriComponentsBuilder.fromUriString("https://jaks1m.netlify.app/oauth2/redirect").toUriString());
+            response.sendRedirect(UriComponentsBuilder.fromUriString("https://jaks1m.netlify.app/oauth2/redirect")
+                    .queryParam("accessToken",accessToken)
+                    .queryParam("refreshToken",refreshToken.getValue()).toUriString());
         }
     }
 }
