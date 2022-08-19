@@ -3,11 +3,14 @@ package com.jaks1m.project.service.community;
 import com.jaks1m.project.config.security.SecurityUtil;
 import com.jaks1m.project.domain.entity.community.Board;
 import com.jaks1m.project.domain.entity.community.Heart;
+import com.jaks1m.project.domain.entity.notification.Notification;
+import com.jaks1m.project.domain.entity.notification.NotificationType;
 import com.jaks1m.project.domain.entity.user.User;
 import com.jaks1m.project.domain.error.ErrorCode;
 import com.jaks1m.project.domain.exception.CustomException;
 import com.jaks1m.project.repository.community.BoardRepository;
 import com.jaks1m.project.repository.community.HeartRepository;
+import com.jaks1m.project.repository.notification.NotificationRepository;
 import com.jaks1m.project.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,8 @@ public class HeartService {
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
 
+    private final NotificationRepository notificationRepository;
+
     @Transactional
     public void addHeart(Long boardId){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
@@ -30,6 +35,8 @@ public class HeartService {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_BOARD));
         heartRepository.save(Heart.builder().board(board).user(user).build());
+        notificationRepository.save(Notification.builder().user(board.getUser()).checked(false).notificationType(NotificationType.HEART)
+                .value(board).message(user.getName().getName()+"님이 회원님의 게시물을 좋아합니다.").build());
     }
 
     @Transactional
