@@ -39,7 +39,7 @@ public class FollowService {
         Follow follow=Follow.builder().fromUser(fromUser).toUser(toUser).build();
         followRepository.save(follow);
 
-        notificationRepository.save(Notification.builder().user(toUser).checked(false).value(fromUser)
+        notificationRepository.save(Notification.builder().user(toUser).checked(false).valueId(fromUser.getId())
                 .message(fromUser.getName().getName()+"님이 회원님을 팔로우 했습니다.").notificationType(NotificationType.FOLLOW).build());
     }
 

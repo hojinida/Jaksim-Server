@@ -36,7 +36,7 @@ public class CommentService {
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_BOARD));
         commentRepository.save(Comment.builder().comment(request.getComment()).board(board).user(user).build());
         notificationRepository.save(Notification.builder().user(user).checked(false).notificationType(NotificationType.COMMENT)
-                .value(board).message("회원님의 게시물의 댓글이 등록되었습니다.").build());
+                .valueId(board.getId()).message("회원님의 게시물의 댓글이 등록되었습니다.").build());
     }
 
     @Transactional
