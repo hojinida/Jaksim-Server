@@ -36,7 +36,7 @@ public class HeartService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_BOARD));
         heartRepository.save(Heart.builder().board(board).user(user).build());
         notificationRepository.save(Notification.builder().user(board.getUser()).checked(false).notificationType(NotificationType.HEART)
-                .value(board).message(user.getName().getName()+"님이 회원님의 게시물을 좋아합니다.").build());
+                .valueId(board.getId()).message(user.getName().getName()+"님이 회원님의 게시물을 좋아합니다.").build());
     }
 
     @Transactional

@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @SequenceGenerator(name = "NOTICE_SEQ_GENERATOR", sequenceName = "NOTICE_SEQ")
-public class Notification<T> extends BaseEntity {
+public class Notification extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "NOTICE_SEQ_GENERATOR")
     private Long id;
     private String message;
-    private T value;
+    private Long valueId;
     private boolean checked;
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
@@ -25,11 +25,11 @@ public class Notification<T> extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
     @Builder
-    public Notification(String message, boolean checked, User user,T value ,NotificationType notificationType) {
+    public Notification(String message, boolean checked, User user,Long valueId ,NotificationType notificationType) {
         this.message = message;
         this.checked = checked;
         this.user = user;
-        this.value=value;
+        this.valueId=valueId;
         this.notificationType = notificationType;
     }
 }

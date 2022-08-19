@@ -21,14 +21,14 @@ public class NotificationService {
     private final UserRepository userRepository;
     @Transactional
     public void deleteNotification(Long notificationId){
-        Notification<Object> notification = checkUnauthorizedAccess(notificationId);
+        Notification notification = checkUnauthorizedAccess(notificationId);
         notificationRepository.delete(notification);
     }
 
-    private Notification<Object> checkUnauthorizedAccess(Long id){
+    private Notification checkUnauthorizedAccess(Long id){
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
-        Notification<Object> notification = notificationRepository.findById(id)
+        Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NOTIFICATION));
         if(notification.getUser()!=user){
             throw new CustomException(ErrorCode.UNAUTHORIZED_USER);
