@@ -29,7 +29,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final RedisRepository redisRepository;
     private final UserRepository userRepository;
 
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
@@ -42,7 +41,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
             redisRepository.save(refreshToken);
             response.setStatus(200);
-            response.sendRedirect(UriComponentsBuilder.fromUriString("https://jaks1m.netlify.app/oauth2/redirect")
+            response.sendRedirect(UriComponentsBuilder.fromUriString("/auth/success")
                     .queryParam("accessToken",accessToken)
                     .queryParam("refreshToken",refreshToken.getValue()).toUriString());
         }

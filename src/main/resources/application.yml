@@ -1,3 +1,7 @@
+server:
+  tomcat:
+    use-relative-redirects: true
+
 spring:
   profiles:
     include: oauth, aws
