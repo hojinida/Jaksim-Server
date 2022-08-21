@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/notification/{notificationId")
+@RequestMapping("/api/v1/notification/{notificationId}")
 public class NotificationController {
     private final NotificationService notificationService;
     @DeleteMapping

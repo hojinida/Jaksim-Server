@@ -14,8 +14,4 @@ public class UserRequestMapper {
                 .picture((String)attributes.get("picture"))
                 .build();
     }
-
-//    public UserFindRequest toFindDto(SocialUserDto userDto) {
-//        return new UserFindRequest(userDto.getEmail());
-//    }
 }
