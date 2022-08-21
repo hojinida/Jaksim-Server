@@ -46,5 +46,4 @@ public class OauthController {
     public ResponseEntity<String> loginSuccess(){
         return ResponseEntity.status(200).body("");
     }
-
 }
