@@ -1,5 +1,5 @@
 package com.jaks1m.project.controller.community;
-;
+
 import com.jaks1m.project.dto.community.request.BoardAddRequestDto;
 import com.jaks1m.project.dto.community.response.BoardResponse;
 import com.jaks1m.project.domain.entity.community.BoardType;

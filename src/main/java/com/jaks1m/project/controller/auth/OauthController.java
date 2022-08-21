@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class OauthController {
 
     @PostMapping("/login")
     @ApiOperation(value = "사용자 로그인")
-    public ResponseEntity<BaseResponse<UserDto>> login(@RequestBody @Validated LoginUserRequestDto request, HttpServletResponse response) throws Exception {
+    public ResponseEntity<BaseResponse<UserDto>> login(@RequestBody @Validated LoginUserRequestDto request){
         UserDto userDto=authService.login(request);
         return ResponseEntity
                 .status(HttpStatus.OK)
