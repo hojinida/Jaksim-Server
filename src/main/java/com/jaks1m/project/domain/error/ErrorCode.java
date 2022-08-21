@@ -34,7 +34,6 @@ public enum ErrorCode {
 
     UNAUTHORIZED_USER(404,"U008","UNAUTHORIZED USER");
 
-    @Builder
     ErrorCode(int status,String code,String message) {
         this.status=status;
         this.code=code;
