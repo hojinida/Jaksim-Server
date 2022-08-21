@@ -1,6 +1,5 @@
 package com.jaks1m.project.domain.error;
 
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter

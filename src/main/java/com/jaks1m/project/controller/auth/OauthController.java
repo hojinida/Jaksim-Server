@@ -29,7 +29,6 @@ public class OauthController {
                         .body(userDto)
                         .build());
     }
-
     @PostMapping("/reissue")
     @ApiOperation(value = "토큰 재발급")
     public ResponseEntity<BaseResponse<UserDto>> reissue(HttpServletRequest request) {
@@ -41,4 +40,11 @@ public class OauthController {
                         .body(userDto)
                         .build());
     }
+
+    @GetMapping("/success")
+    @ApiOperation(value = "소셜 로그인 성공")
+    public ResponseEntity<String> loginSuccess(){
+        return ResponseEntity.status(200).body("");
+    }
+
 }
