@@ -14,6 +14,7 @@ public class BoardResponse {
     private Long boardId;
     private String userName;
     private String title;
+    private String bracket;
     private String content;
     private Long visits;
     private Long hearts;
@@ -23,10 +24,11 @@ public class BoardResponse {
     private List<CommentResponseDto> comments;
 
     @Builder
-    public BoardResponse(Long boardId, String userName, String title, String content, Long visits,Long hearts, List<String> images, List<CommentResponseDto> comments, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
+    public BoardResponse(Long boardId, String userName, String title,String bracket, String content, Long visits,Long hearts, List<String> images, List<CommentResponseDto> comments, LocalDateTime createdData, LocalDateTime lastModifiedDate) {
         this.boardId = boardId;
         this.userName = userName;
         this.title = title;
+        this.bracket=bracket;
         this.content = content;
         this.visits = visits;
         this.hearts=hearts;

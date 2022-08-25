@@ -17,6 +17,8 @@ public class BoardAddRequestDto {
     @NotEmpty
     @Column(length = 100)
     private String title;
+    @NotEmpty
+    private String bracket;
     @Lob
     @NotEmpty
     private String content;
