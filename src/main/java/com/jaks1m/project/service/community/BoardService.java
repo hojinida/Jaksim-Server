@@ -37,7 +37,7 @@ public class BoardService {
         User user=userRepository.findByEmail(SecurityUtil.getCurrentUserEmail())
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_USER));
         Board board=Board.builder().user(user).boardType(request.getBoardType()).content(request.getContent())
-                .title(request.getTitle()).countVisit(0L).build();
+                .title(request.getTitle()).bracket(request.getBracket()).countVisit(0L).build();
         boardRepository.save(board);
         saveS3Image(imageDto,board);
     }
@@ -53,7 +53,7 @@ public class BoardService {
     @Transactional
     public BoardResponse editBoard(List<ImageDto> imageDto, BoardAddRequestDto request, Long id){
         Board board = checkUnauthorizedAccess(id);
-        board.updateBoard(request.getTitle(), request.getContent(), request.getBoardType());
+        board.updateBoard(request.getTitle(), request.getBracket(),request.getContent(), request.getBoardType());
         s3ImageRepository.deleteAll(board.getS3Images());
         saveS3Image(imageDto,board);
 
@@ -68,9 +68,9 @@ public class BoardService {
 
     public List<BoardResponse> getBoardList(Pageable pageable){
         List<BoardResponse> responses=new ArrayList<>();
+        responses.addAll(getBoards(BoardType.NOTICE,pageable));
         responses.addAll(getBoards(BoardType.FREE,pageable));
-        responses.addAll(getBoards(BoardType.GROUP,pageable));
-        responses.addAll(getBoards(BoardType.QNA,pageable));
+        responses.addAll(getBoards(BoardType.FRIEND,pageable));
         return responses;
     }
     public List<BoardResponse> getBoards(BoardType boardType, Pageable pageable){
@@ -97,6 +97,7 @@ public class BoardService {
         return BoardResponse.builder()
                 .boardId(board.getId())
                 .title(board.getTitle())
+                .bracket(board.getBracket())
                 .content(board.getContent())
                 .userName(board.getUser().getName().getName())
                 .visits(board.getCountVisit())

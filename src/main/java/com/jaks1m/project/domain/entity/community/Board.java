@@ -24,6 +24,8 @@ public class Board extends BaseEntity {
     @Column(name = "BOARD_ID")
     private Long id;
     private String title;
+
+    private String bracket;
     @Lob
     private String content;
 
@@ -43,8 +45,9 @@ public class Board extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public void updateBoard(String title, String content, BoardType boardType){
+    public void updateBoard(String title,String bracket , String content, BoardType boardType){
         this.title = title;
+        this.bracket=bracket;
         this.content = content;
         this.boardType = boardType;
     }
@@ -74,8 +77,9 @@ public class Board extends BaseEntity {
         return commentDto;
     }
     @Builder
-    public Board(String title, String content, List<S3Image> s3Images, Long countVisit, BoardType boardType, User user) {
+    public Board(String title, String bracket , String content, List<S3Image> s3Images, Long countVisit, BoardType boardType, User user) {
         this.title = title;
+        this.bracket=bracket;
         this.content = content;
         this.s3Images = s3Images;
         this.countVisit = countVisit;
