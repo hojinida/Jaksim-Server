@@ -32,7 +32,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// jackson localtime
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4'
 	//Mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
