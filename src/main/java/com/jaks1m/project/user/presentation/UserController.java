@@ -27,7 +27,9 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final AwsS3Service awsS3Service;
-    @PostMapping()
+
+
+    @PostMapping
     @ApiOperation(value = "사용자 회원가입")
     public ResponseEntity<BaseResponse<UserCreateResponse>> join(@RequestBody @Validated UserCreateRequest request) {
         UserCreateResponse userCreateResponse = userService.joinUser(request);
