@@ -6,7 +6,6 @@ import com.jaks1m.project.board.domain.BoardType;
 import com.jaks1m.project.aws.application.dto.ImageDto;
 import com.jaks1m.project.aws.application.AwsS3Service;
 import com.jaks1m.project.board.application.BoardService;
-import com.jaks1m.project.common.domain.BaseResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,23 +28,17 @@ public class BoardController {
     private final AwsS3Service awsS3Service;
     @GetMapping
     @ApiOperation(value = "게시판 목록")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> getListBoard(@PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+    public ResponseEntity<List<BoardResponse>> getListBoard(@PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
         return ResponseEntity.status(200)
-                .body(BaseResponse.<List<BoardResponse>>builder()
-                        .status(200)
-                        .body(boardService.getBoardList(pageable))
-                        .build());
+                .body(boardService.getBoardList(pageable));
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "게시판 상세")
-    public ResponseEntity<BaseResponse<List<BoardResponse>>> getBoards(@PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC) Pageable pageable
+    public ResponseEntity<List<BoardResponse>> getBoards(@PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC) Pageable pageable
             ,@RequestParam @Validated BoardType boardType){
         return ResponseEntity.status(200)
-                .body(BaseResponse.<List<BoardResponse>>builder()
-                        .status(200)
-                        .body(boardService.getBoards(boardType,pageable))
-                        .build());
+                .body(boardService.getBoards(boardType,pageable));
     }
 
     @PostMapping("/list")
@@ -59,22 +52,18 @@ public class BoardController {
 
     @GetMapping("/list/{id}")
     @ApiOperation(value = "게시글 상세")
-    public ResponseEntity<BaseResponse<BoardResponse>> getBoard(@PathVariable Long id){
+    public ResponseEntity<BoardResponse> getBoard(@PathVariable Long id){
         return ResponseEntity.status(200)
-                .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.getBoard(id))
-                        .build());
+                .body(boardService.getBoard(id));
     }
 
     @PutMapping("/list/{id}")
     @ApiOperation(value = "게시글 수정")
-    public ResponseEntity<BaseResponse<BoardResponse>> editBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
+    public ResponseEntity<BoardResponse> editBoard(@RequestPart(value = "files",required = false) List<MultipartFile> multipartFiles,
                                                                  @RequestPart(value = "boardAddRequestDto") @Validated BoardCreateRequest request, @PathVariable Long id) throws IOException {
         List<ImageDto> images=awsS3Service.upload(multipartFiles,"upload");
         return ResponseEntity.status(200)
-                .body(BaseResponse.<BoardResponse>builder()
-                        .body(boardService.editBoard(images,request,id))
-                        .build());
+                .body(boardService.editBoard(images,request,id));
     }
 
     @PatchMapping("/list/{id}")

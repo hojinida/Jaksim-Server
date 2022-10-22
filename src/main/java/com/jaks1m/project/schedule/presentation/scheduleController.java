@@ -1,6 +1,5 @@
 package com.jaks1m.project.schedule.presentation;
 
-import com.jaks1m.project.common.domain.BaseResponse;
 import com.jaks1m.project.schedule.presentation.dto.ScheduleCreateRequest;
 import com.jaks1m.project.schedule.presentation.dto.ScheduleEditContentRequest;
 import com.jaks1m.project.schedule.presentation.dto.ScheduleEditTimeRequest;
@@ -32,12 +31,9 @@ public class scheduleController {
 
     @GetMapping
     @ApiOperation(value = "schedule 조회")
-    public ResponseEntity<BaseResponse<List<ScheduleResponse>>> addTodo(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate localDate){
+    public ResponseEntity<List<ScheduleResponse>> addTodo(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate localDate){
         return ResponseEntity.status(200).
-                body(BaseResponse.<List<ScheduleResponse>>builder()
-                        .status(200)
-                        .message("schedule 조회 성공")
-                        .body(scheduleService.getSchedule(localDate)).build());
+                body(scheduleService.getSchedule(localDate));
     }
 
     @PatchMapping("/{id}/time")
