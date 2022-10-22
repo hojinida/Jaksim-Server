@@ -1,6 +1,5 @@
 package com.jaks1m.project.todo.presentation;
 
-import com.jaks1m.project.common.domain.BaseResponse;
 import com.jaks1m.project.todo.presentation.dto.TodoEditCompletedRequest;
 import com.jaks1m.project.todo.presentation.dto.TodoEditTitleRequest;
 import com.jaks1m.project.todo.presentation.dto.TodoCreateRequest;
@@ -32,12 +31,9 @@ public class TodoController {
 
     @GetMapping
     @ApiOperation(value = "todo 조회")
-    public ResponseEntity<BaseResponse<List<TodoResponse>>> getTodo(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate){
+    public ResponseEntity<List<TodoResponse>> getTodo(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate){
         return ResponseEntity.status(200)
-                .body(BaseResponse.<List<TodoResponse>>builder()
-                        .status(200)
-                        .message("Todo 조회 성공")
-                        .body(todoService.getTodo(localDate)).build());
+                .body(todoService.getTodo(localDate));
     }
 
     @PatchMapping("/{id}/title")

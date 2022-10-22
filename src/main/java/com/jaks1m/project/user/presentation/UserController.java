@@ -7,7 +7,6 @@ import com.jaks1m.project.user.presentation.dto.UserFindPasswordRequest;
 import com.jaks1m.project.user.presentation.dto.UserCreateRequest;
 import com.jaks1m.project.user.application.dto.UserCreateResponse;
 import com.jaks1m.project.user.application.dto.UserResponse;
-import com.jaks1m.project.common.domain.BaseResponse;
 import com.jaks1m.project.aws.application.AwsS3Service;
 import com.jaks1m.project.user.application.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -31,14 +30,10 @@ public class UserController {
 
     @PostMapping
     @ApiOperation(value = "사용자 회원가입")
-    public ResponseEntity<BaseResponse<UserCreateResponse>> join(@RequestBody @Validated UserCreateRequest request) {
-        UserCreateResponse userCreateResponse = userService.joinUser(request);
+    public ResponseEntity<UserCreateResponse> join(@RequestBody @Validated UserCreateRequest request) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.<UserCreateResponse>builder()
-                        .status(200)
-                        .body(userCreateResponse)
-                        .build());
+                .body(userService.joinUser(request));
     }
 
     @DeleteMapping("/me/logout")
@@ -50,13 +45,9 @@ public class UserController {
 
     @GetMapping("/me")
     @ApiOperation(value = "사용자 정보조회")
-    public ResponseEntity<BaseResponse<UserResponse>> findUser(){
-        UserResponse userResponse =userService.findUser();
+    public ResponseEntity<UserResponse> findUser(){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(BaseResponse.<UserResponse>builder()
-                        .status(200)
-                        .body(userResponse)
-                        .build());
+                .body(userService.findUser());
     }
 
     @PatchMapping("/me")
