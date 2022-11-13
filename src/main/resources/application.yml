@@ -40,6 +40,9 @@ spring:
     multipart:
       max-request-size: 20MB
       max-file-size: 20MB
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
 jwt:
   secret:
   response:
