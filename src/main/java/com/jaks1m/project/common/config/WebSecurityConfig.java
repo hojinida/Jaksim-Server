@@ -68,7 +68,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().antMatchers("/","/configuration/**","/webjars/**","/swagger*","/swagger*/**","/v2/api-docs");
+        return web -> web.ignoring().antMatchers("/configuration/**","/webjars/**","/swagger*","/swagger*/**","/v2/api-docs");
     }
 
     @Bean
